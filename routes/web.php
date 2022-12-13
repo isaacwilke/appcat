@@ -16,9 +16,7 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LoginController::class,'show'])->name('login');
 Route::get('/login',[LoginController::class,'show'])->name('login');
 Route::post('/login',[LoginController::class,'login'])->name('login.performed');
 Route::get('/register',[RegisterController::class,'create'])->name('register');
