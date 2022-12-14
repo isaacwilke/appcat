@@ -20,8 +20,9 @@
                                     <p class="mb-0">Set a new password for your email</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" method="POST" action="">
+                                    <form role="form" method="POST" action="{{route('reset.password.post')}}">
                                         @csrf
+                                            <input type="hidden" name="token" value="{{ $token }}">
 
                                         <div class="flex flex-col mb-3">
                                             <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" value="{{ old('email') }}" aria-label="Email">

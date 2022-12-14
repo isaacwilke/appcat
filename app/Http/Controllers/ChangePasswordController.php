@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+Use Hash;
+Use DB;
 class ChangePasswordController extends Controller
 {
     //
@@ -18,27 +20,37 @@ class ChangePasswordController extends Controller
         $this->user = User::find($id);
     }
 
-    public function show()
+    public function show($token)
     {
-        return view('auth.change-password');
+        return view('auth.change-password',['token' => $token]);
     }
 
     public function update(Request $request)
     {
-        $attributes = $request->validate([
-            'email' => ['required'],
-            'password' => ['required', 'min:5'],
-            'confirm-password' => ['same:password']
+        // dd($request->all());
+        $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|string|min:6',
+            'confirm-password' => 'required|same:password'
         ]);
 
-        $existingUser = User::where('email', $attributes['email'])->first();
-        if ($existingUser) {
-            $existingUser->update([
-                'password' => $attributes['password']
-            ]);
-            return redirect('login');
-        } else {
-            return back()->with('error', 'Your email does not match the email who requested the password change');
+        $updatePassword = DB::table('password_resets')
+                            ->where([
+                              'email' => $request->email, 
+                              'token' => $request->token
+                            ])
+                            ->first();
+
+        if(!$updatePassword){
+            return back()->withInput()->with('error', 'Invalid token!');
         }
+
+        $user = User::where('email', $request->email)
+                    ->update(['password' => Hash::make($request->password)]);
+
+        DB::table('password_resets')->where(['email'=> $request->email])->delete();
+
+        return redirect('/login')->with('success', 'Your password has been changed!');
+    
     }
 }
