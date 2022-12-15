@@ -21,6 +21,7 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
+            @if(Session::has("one"))
             <li class="nav-item mt-3 d-flex align-items-center">
                 <div class="ps-4">
                     <i class="fab fa-laravel" style="color: #f4645f;"></i>
@@ -65,6 +66,8 @@
                     <span class="nav-link-text ms-1">Billing</span>
                 </a>
             </li>
+            @endif 
+            @if(Session::has('two'))
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="#">
                     <div
@@ -113,6 +116,7 @@
                     <span class="nav-link-text ms-1">Sign Up</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
     <div class="sidenav-footer mx-3 ">

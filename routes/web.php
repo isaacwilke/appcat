@@ -25,7 +25,7 @@ Route::get('/register',[RegisterController::class,'create'])->name('register');
    
 Route::post('/register',[RegisterController::class,'store'])->name('register.performed');
 Route::get('dashboard',[HomeController::class,'index'])->name('home');
-Route::get('/login/api',[LoginController::class,'api'])->name('api');
+
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
 Route::get('reset-password',[ResetPasswordController::class,'show'])->name('reset.password');
 Route::post('forget-password', [ResetPasswordController::class,'send'])->name('reset.performed'); 
