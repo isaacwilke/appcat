@@ -34,14 +34,19 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
        
-       
-       
-            return view('api',compact('credentials'));
+        $user = User::where("email", $request->email)->first();
+        if(!empty($user)){
+            if(Hash::check($request->password, $user->password)){
+                $request->session()->regenerate();
+                return view('api',compact('credentials'));
+            }else{
+                return back()->with('error' ,'Incorrect password.');
+            }
+        }else{
+            return back()->with('error' ,'invalid user.'); 
+        }     
           
     }
-
-       
-    
 
     public function logout(Request $request)
     {
@@ -52,33 +57,26 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+    
     public function api(){
         return view('api');
     }
+    
     public function updateapi(Request $request){
-    //    dd($request->all());
-    // Griffin Rock CAT Retreat - Your Cat's Vacation oasis
-        $user = User::where("email", $request->email)->first();
-        if(!empty($user)){
-            if(Hash::check($request->password, $user->password)){
-                if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            
-                    $request->session()->regenerate();
-                    if($request->site=="Whisker And Soda - Where Cats and Relax Collide"){
-                        $request->session()->put('one', $request->site);
-                    }
-                    if($request->site=="Griffin Rock CAT Retreat - Your Cat's Vacation oasis"){
-                        $request->session()->put('two', $request->site);
-                    }
 
-                    return redirect()->intended('dashboard');
-                } 
-            }else{
-                return back()->with('error' ,'Incorrect password.');
+      
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+
+            $request->session()->regenerate();
+            if($request->site=="Whisker And Soda - Where Cats and Relax Collide"){
+                $request->session()->put('one', $request->site);
             }
-        }else{
-            return back()->with('error' ,'invalid user.');
-        }
+            if($request->site=="Griffin Rock CAT Retreat - Your Cat's Vacation oasis"){
+                $request->session()->put('two', $request->site);
+            }
+            return redirect()->intended('dashboard');
+        } 
+           
         
     }
 }
