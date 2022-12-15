@@ -29,6 +29,6 @@ Route::get('/login/api',[LoginController::class,'api'])->name('api');
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
 Route::get('reset-password',[ResetPasswordController::class,'show'])->name('reset.password');
 Route::post('forget-password', [ResetPasswordController::class,'send'])->name('reset.performed'); 
-Route::get('reset-password/{token}', [ChangePasswordController::class, 'show'])->name('reset.password.get');
-Route::post('reset-password', [ChangePasswordController::class, 'update'])->name('reset.password.post');
+Route::get('reset-password/{token}/{email}', [ChangePasswordController::class, 'show'])->name('reset.password.get');
+Route::post('password', [ChangePasswordController::class, 'update'])->name('reset.password.post');
 Route::post('api/update', [LoginController::class, 'updateapi'])->name('api.performed');

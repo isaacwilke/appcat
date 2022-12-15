@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 Use Hash;
 Use DB;
+use Illuminate\Support\Facades\Crypt;
+
 class ChangePasswordController extends Controller
 {
     //
@@ -20,9 +22,11 @@ class ChangePasswordController extends Controller
         $this->user = User::find($id);
     }
 
-    public function show($token)
+    public function show($token, $email)
     {
-        return view('auth.change-password',['token' => $token]);
+        $decrypt= Crypt::decryptString($email);
+      
+        return view('auth.change-password',['token' => $token,'email' => $decrypt]);
     }
 
     public function update(Request $request)
@@ -49,8 +53,8 @@ class ChangePasswordController extends Controller
                     ->update(['password' => Hash::make($request->password)]);
 
         DB::table('password_resets')->where(['email'=> $request->email])->delete();
-
-        return redirect('/login')->with('success', 'Your password has been changed!');
+        return redirect()->route('login')->with('succes', 'Your password has been changed!');
+        // return redirect('/login')->with('success', '');
     
     }
 }
