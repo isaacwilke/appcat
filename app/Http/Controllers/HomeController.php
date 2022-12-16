@@ -31,4 +31,14 @@ class HomeController extends Controller
             return redirect()->route('login');
         }
     }
+
+    public function index1()
+    {
+        if(Auth::user()){
+            return view('pages.griffin-dashboard');
+
+        }else{
+            return redirect()->route('login');
+        }
+    }
 }
