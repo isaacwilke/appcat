@@ -16,7 +16,9 @@ return [
     |
     */
 
-    'connection' => 'wordpress',
+    'connection' => [
+        'griffin',
+        'whiskey'],
 
     /*
     |--------------------------------------------------------------------------
@@ -32,7 +34,7 @@ return [
     */
 
     'post_types' => [
-//        'video' => App\Models\Video::class,
+    //    'post' => App\Models\Post::class,
     ],
 
     /*

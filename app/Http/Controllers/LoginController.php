@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
-use Illuminate\Validation\ValidationException;
-use App\Models\User;
 use Hash;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\UserWhiskey;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Password;
-// use Illuminate\Routing\Controller;
+use Illuminate\Validation\ValidationException;
+
 
 class LoginController extends Controller
 {
@@ -102,7 +105,8 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
        
-        $user = User::where("email", $request->email)->first();
+        $user = User::where("user_email", $request->email)->first();
+        
         if(!empty($user)){
             if(Hash::check($request->password, $user->password)){
                 
@@ -125,5 +129,17 @@ class LoginController extends Controller
             return back()->with('error' ,'invalid user.'); 
         }     
         
+    }
+    public function demo(){
+        $posts = User::all();
+        
+      
+        return view('posts.index', ["posts"=>$posts]);
+    }
+    public function demo1(){
+        $posts = UserWhiskey::all();
+        
+      
+        return view('posts.index1', ["posts"=>$posts]);
     }
 }

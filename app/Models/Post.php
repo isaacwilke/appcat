@@ -9,7 +9,8 @@ use Corcel\Model\Post as Corcel;
 class Post extends Corcel
 {
     // use HasFactory;
-    protected $connection = 'foo-bar';
+    protected $connection = 'griffin';
+   
     public function customMethod() {
         //
     }
