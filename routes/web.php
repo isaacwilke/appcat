@@ -25,7 +25,7 @@ Route::post('/login',[LoginController::class,'login'])->name('login.performed');
 Route::get('/register',[RegisterController::class,'create'])->name('register');
    
 Route::post('/register',[RegisterController::class,'store'])->name('register.performed');
-Route::get('dashboard',[HomeController::class,'index'])->name('home');
+Route::get('dashboard',[HomeController::class,'index'])->name('dashboard');
 Route::get('griffin-dashboard',[HomeController::class,'index1'])->name('home');
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
 Route::get('reset-password',[ResetPasswordController::class,'show'])->name('reset.password');
