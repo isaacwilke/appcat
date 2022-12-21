@@ -32,31 +32,33 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         
-            $credentials = $request->validate([
-                'email' => ['required'],
-                'password' => ['required'],
-            ]);
+        $credentials = $request->validate([
+            'email' => ['required'],
+            'password' => ['required'],
+        ]);
 
-            $client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client();
+
+        try {
+        
             $response = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/api/v1/token', [
                 'form_params' => [
                     'username' => $request->email,
                     'password' => $request->password,
                 ]
             ]);
-
-            $result = $response->getBody()->getContents();
-
-            $result = json_decode($result);
         
-            $client = new \GuzzleHttp\Client();
+            $result = $response->getBody()->getContents();
+                
+            $result = json_decode($result);
+    
             $response2 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/api/v1/token-validate', [
                 'headers' =>
                 [
                     'Authorization' => "Bearer {$result->jwt_token}"
                 ]
             ]);
-    
+
             $result1 = $response2->getBody()->getContents();
             $result1 = json_decode($result1);
             
@@ -71,36 +73,41 @@ class LoginController extends Controller
                 //         'password' => 'admin@3338',
                 //     ]
                 // ]);
-    
+
                 // $result2= $response->getBody()->getContents();
-                $client = new \GuzzleHttp\Client();
+                
                 $response3 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/users?search=Test admin', [
                     'headers' =>
                     [
                         'Authorization' => "Bearer {$result->jwt_token}"
                     ],
                 ]);
-              
+            
                 $user = $response3->getBody()->getContents();
- 
+
                 $decoded_json = json_decode($user);
                 // dd($decoded_json);
-               
+                
                     $request->session()->regenerate();
                     if($request->site=="Whisker And Soda - Where Cats and Relax Collide"){
                         $request->session()->put('one', $request->site);
                     }
-                  
+                    
                 return redirect()->route('dashboard');
-                
-                
+            
+            
             }
-       
-        
 
-   
         }
-    
+        catch (\GuzzleHttp\Exception\ClientException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+
+            $responseBodyAsString = json_decode($responseBodyAsString,true);
+            return back()->with('error', $responseBodyAsString['error_description']);
+        }
+    }
+
 
     public function logout(Request $request)
     {
@@ -149,64 +156,72 @@ class LoginController extends Controller
             'password' => ['required'],
         ]); 
         $client = new \GuzzleHttp\Client();
-        $response = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/api/v1/token', [
-            'form_params' => [
-                'username' => $request->email,
-                'password' => $request->password,
-            ]
-        ]);
+        try {
+            $response = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/api/v1/token', [
+                'form_params' => [
+                    'username' => $request->email,
+                    'password' => $request->password,
+                ]
+            ]);
 
-        $result = $response->getBody()->getContents();
+            $result = $response->getBody()->getContents();
 
-        $result = json_decode($result);
-    
-        $client = new \GuzzleHttp\Client();
-        $response2 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/api/v1/token-validate', [
-            'headers' =>
-            [
-                'Authorization' => "Bearer {$result->jwt_token}"
-            ]
-        ]);
-
-        $result1 = $response2->getBody()->getContents();
-        $result1 = json_decode($result1);
-
-        if ($result1->message == "VALID_TOKEN") {
-            // Post api
-            // $client = new \GuzzleHttp\Client();
-            // $response = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/posts', ['headers' => 
-            //     [
-            //         'Authorization' => "Bearer {$result->jwt_token}"
-            //     ],'form_params' => [
-            //         'username' => 'admin',
-            //         'password' => 'admin@3338',
-            //     ]
-            // ]);
-
-            // $result2= $response->getBody()->getContents();
-            $client = new \GuzzleHttp\Client();
-            $response3 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/users?search=Test admin', [
+            $result = json_decode($result);
+        
+       
+            $response2 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/api/v1/token-validate', [
                 'headers' =>
                 [
                     'Authorization' => "Bearer {$result->jwt_token}"
-                ],
+                ]
             ]);
-          
-            $user = $response3->getBody()->getContents();
 
-            $decoded_json = json_decode($user);
-            // dd($decoded_json);
-           
+            $result1 = $response2->getBody()->getContents();
+            $result1 = json_decode($result1);
+
+            if ($result1->message == "VALID_TOKEN") {
+                // Post api
+                // $client = new \GuzzleHttp\Client();
+                // $response = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/posts', ['headers' => 
+                //     [
+                //         'Authorization' => "Bearer {$result->jwt_token}"
+                //     ],'form_params' => [
+                //         'username' => 'admin',
+                //         'password' => 'admin@3338',
+                //     ]
+                // ]);
+
+                // $result2= $response->getBody()->getContents();
+            
+                $response3 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/users?search=Test admin', [
+                    'headers' =>
+                    [
+                        'Authorization' => "Bearer {$result->jwt_token}"
+                    ],
+                ]);
+            
+                $user = $response3->getBody()->getContents();
+
+                $decoded_json = json_decode($user);
+                // dd($decoded_json);
+            
                 $request->session()->regenerate();
                 if ($request->site == "Griffin Rock CAT Retreat - Your Cat's Vacation oasis") {
                     $request->session()->put('two', $request->site);
                 } 
-              
+                
                 return redirect()->intended('griffin-dashboard');
             
             
+            }
         }
-        
+        catch (\GuzzleHttp\Exception\ClientException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+
+            $responseBodyAsString = json_decode($responseBodyAsString,true);
+            return back()->with('error', $responseBodyAsString['error_description']);
+        }
     }
     public function demo()
     {
