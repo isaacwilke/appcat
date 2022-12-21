@@ -51,7 +51,7 @@ class LoginController extends Controller
             $result = $response->getBody()->getContents();
                 
             $result = json_decode($result);
-    dd( $result);
+    dd( $result->data);
             $response2 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token/validate', [
                 'headers' =>
                 [
