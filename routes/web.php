@@ -21,7 +21,7 @@ use App\Http\Controllers\ChangePasswordController;
 Route::get('/', [LoginController::class,'show'])->name('login');
 
 Route::get('/login',[LoginController::class,'show'])->name('login');
-Route::post('/login',[LoginController::class,'login'])->name('login.performed');
+
 Route::get('/register',[RegisterController::class,'create'])->name('register');
    
 Route::post('/register',[RegisterController::class,'store'])->name('register.performed');
@@ -33,7 +33,7 @@ Route::post('forget-password', [ResetPasswordController::class,'send'])->name('r
 Route::get('reset-password/{token}/{email}', [ChangePasswordController::class, 'show'])->name('reset.password.get');
 Route::post('password', [ChangePasswordController::class, 'update'])->name('reset.password.post');
 Route::post('api/update', [LoginController::class, 'updateapi'])->name('api.performed');
-
+Route::post('/login',[LoginController::class,'login'])->name('login.performed');
 Route::get('/login1', [LoginController::class,'Display'])->name('griffin');
 Route::post('login-griffin', [LoginController::class,"store"])->name('login.griffin');
 Route::get('/demo',[LoginController::class,'demo']);

@@ -24,21 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::user()){
+        
             return view('pages.dashboard');
 
-        }else{
-            return redirect()->route('login');
-        }
+       
     }
 
     public function index1()
     {
-        if(Auth::user()){
+       
             return view('pages.griffin-dashboard');
 
-        }else{
-            return redirect()->route('login');
-        }
+       
     }
 }

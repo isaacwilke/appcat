@@ -195,9 +195,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Corcel\Laravel\CorcelServiceProvider::class,
-        // Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
-
-
     ],
 
     /*
@@ -213,8 +210,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        // 'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
-        // 'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ])->toArray(),
 
 ];
