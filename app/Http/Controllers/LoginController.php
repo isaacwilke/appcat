@@ -51,17 +51,17 @@ class LoginController extends Controller
             $result = $response->getBody()->getContents();
                 
             $result = json_decode($result);
-    dd( $result->data);
             $response2 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token/validate', [
                 'headers' =>
                 [
-                    'Authorization' => "Bearer {$result->jwt_token}"
+                    'Authorization' => "Bearer {$result->data->token}"
                 ]
             ]);
 
             $result1 = $response2->getBody()->getContents();
             $result1 = json_decode($result1);
             
+    dd($result1 );
             if ($result1->message == "VALID_TOKEN") {
                 // Post api
                 // $client = new \GuzzleHttp\Client();
