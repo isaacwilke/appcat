@@ -41,7 +41,7 @@ class LoginController extends Controller
 
         try {
         
-            $response = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/api/v1/token', [
+            $response = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token', [
                 'form_params' => [
                     'username' => $request->email,
                     'password' => $request->password,
@@ -51,8 +51,8 @@ class LoginController extends Controller
             $result = $response->getBody()->getContents();
                 
             $result = json_decode($result);
-    
-            $response2 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/api/v1/token-validate', [
+    dd( $result);
+            $response2 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token/validate', [
                 'headers' =>
                 [
                     'Authorization' => "Bearer {$result->jwt_token}"
