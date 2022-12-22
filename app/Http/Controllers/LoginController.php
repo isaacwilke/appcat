@@ -49,9 +49,9 @@ class LoginController extends Controller
             ]);
         
             $result = $response->getBody()->getContents();
-                echo $result->data->token;die;
+                
             $result = json_decode($result);
-            $response2 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token/validate', [
+            $response2 = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token/validate', [
                 'headers' =>
                 [
                     'Authorization' => "Bearer {$result->data->token}"
@@ -61,29 +61,19 @@ class LoginController extends Controller
             $result1 = $response2->getBody()->getContents();
             $result1 = json_decode($result1);
             
-    dd($result1 );
-            if ($result1->message == "VALID_TOKEN") {
-                // Post api
-                // $client = new \GuzzleHttp\Client();
-                // $response = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/posts', ['headers' => 
-                //     [
-                //         'Authorization' => "Bearer {$result->jwt_token}"
-                //     ],'form_params' => [
-                //         'username' => 'admin',
-                //         'password' => 'admin@3338',
-                //     ]
-                // ]);
-
-                // $result2= $response->getBody()->getContents();
-                
-                $response3 = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/users?search=Test admin', [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result->jwt_token}"
-                    ],
+            if ($result1->message == "Token is valid") {
+               
+               /*
+                $response = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/posts', ['headers' => 
+                [
+                    'Authorization' => "Bearer {$result->data->token}"
+                ]
                 ]);
-            
-                $user = $response3->getBody()->getContents();
+    
+                $result2= $response->getBody()->getContents();
+                dd(json_decode($result2));
+                
+               */
 
                 $decoded_json = json_decode($user);
                 // dd($decoded_json);
@@ -104,6 +94,7 @@ class LoginController extends Controller
             $responseBodyAsString = $response->getBody()->getContents();
 
             $responseBodyAsString = json_decode($responseBodyAsString,true);
+            
             return back()->with('error', $responseBodyAsString['error_description']);
         }
     }
