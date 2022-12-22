@@ -19,8 +19,12 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group">
-                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                    <input type="text" class="form-control" placeholder="Type here...">
+                  @if(Session::has("one"))
+                     <a href="{{ route('profile')}}" class="nav-link text-white font-weight-bold px-0">
+                            <i class="ni ni-circle-08 fa-2x"></i>
+                            <span class="d-sm-inline d-none"></span>
+                        </a>
+                    @endif    
                 </div>
             </div>
             <ul class="navbar-nav  justify-content-end">
@@ -30,7 +34,7 @@
                         <a href="#"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="nav-link text-white font-weight-bold px-0">
-                            <i class="fa fa-user me-sm-1"></i>
+                            <i class="ni ni-button-power me-sm-1"></i>
                             <span class="d-sm-inline d-none">Log out</span>
                         </a>
                     </form>

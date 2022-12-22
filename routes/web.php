@@ -38,3 +38,4 @@ Route::get('/login1', [LoginController::class,'Display'])->name('griffin');
 Route::post('login-griffin', [LoginController::class,"store"])->name('login.griffin');
 Route::get('/demo',[LoginController::class,'demo']);
 Route::get('/demo1',[LoginController::class,'demo1']);
+Route::get('/profile',[LoginController::class,'Getprofile'])->name('profile');
