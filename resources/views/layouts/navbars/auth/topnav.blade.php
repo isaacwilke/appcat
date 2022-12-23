@@ -24,6 +24,12 @@
                             <i class="ni ni-circle-08 fa-2x"></i>
                             <span class="d-sm-inline d-none"></span>
                         </a>
+                    @endif   
+                     @if(Session::has("two"))
+                     <a href="{{ route('griffin-profile')}}" class="nav-link text-white font-weight-bold px-0">
+                            <i class="ni ni-circle-08 fa-2x"></i>
+                            <span class="d-sm-inline d-none"></span>
+                        </a>
                     @endif    
                 </div>
             </div>

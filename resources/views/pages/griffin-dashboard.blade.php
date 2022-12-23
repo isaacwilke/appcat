@@ -10,7 +10,7 @@
                         $user = Session::get('griffin_user'); 
                     @endphp
                     <div class="card-body p-3">
-                        <p class="text-sm mb-0 font-weight-bold">{{$user->name}}</p> 
+                        <p class="text-sm mb-0 font-weight-bold">{{$user['name']}}</p> 
                     </div>
                 @endif
             </div>

@@ -40,7 +40,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <form role="form" method="POST" action="{{route('update')}}" enctype="multipart/form-data">
+                    <form role="form" method="POST" action="{{route('update-griffin-profile')}}" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header">
                             <div class="d-flex align-items-center">

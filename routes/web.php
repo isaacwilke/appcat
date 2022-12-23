@@ -38,4 +38,8 @@ Route::get('/login1', [LoginController::class,'Display'])->name('griffin');
 Route::post('login-griffin', [LoginController::class,"store"])->name('login.griffin');
 Route::get('/demo',[LoginController::class,'demo']);
 Route::get('/demo1',[LoginController::class,'demo1']);
-Route::get('/profile',[LoginController::class,'Getprofile'])->name('profile');
+Route::get('/profile',[LoginController::class,'getProfile'])->name('profile');
+Route::post('/update/profile', [LoginController::class,"updateProfile"])->name('update');
+Route::get('/griffin-profile',[LoginController::class,'getGriffinProfile'])->name('griffin-profile');
+Route::post('griffin/update/profile', [LoginController::class,"updateGriffinProfile"])->name('update-griffin-profile');
+// griffin-profile
