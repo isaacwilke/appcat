@@ -23,11 +23,11 @@
 
 <body class="{{ $class ?? '' }}">
 
-    @guest
+  @if(!(Session::has('user')|| Session::has('griffin_user')))
         @yield('content')
-    @endguest
+    @endif
 
-    @auth
+    @if(Session::has('user')|| Session::has('griffin_user'))
         @if (in_array(request()->route()->getName(), ['sign-in-static', 'sign-up-static', 'login', 'register', 'recover-password', 'rtl', 'virtual-reality']))
             @yield('content')
         @else
@@ -44,7 +44,7 @@
                 </main>
             @include('components.fixed-plugin')
         @endif
-    @endauth
+    @endif
 
     <!--   Core JS Files   -->
   

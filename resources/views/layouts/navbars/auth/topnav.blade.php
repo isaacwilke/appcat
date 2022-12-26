@@ -1,39 +1,71 @@
 <!-- Navbar -->
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl
-        {{ str_contains(Request::url(), 'virtual-reality') == true ? ' mt-3 mx-3 bg-primary' : 'mt-3 mx-3 bg-primary' }}" id="navbarBlur"
+        {{ str_contains(Request::url(), 'virtual-reality') == true ? ' mt-3 mx-3 bg-primary' : '' }}" id="navbarBlur"
         data-scroll="false">
     <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             @if(Session::has("one"))
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('dashboard')}}">Pages</a></li>
                 <li class="breadcrumb-item text-sm text-white active" aria-current="page">{{ Session::get('one') }}</li>
                 @endif
                 @if(Session::has("two"))
-                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+                <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="{{route('home')}}">Pages</a></li>
                 <li class="breadcrumb-item text-sm text-white active" aria-current="page">{{ Session::get("two") }}</li>
                 @endif
             </ol>
             <h6 class="font-weight-bolder text-white mb-0">{{ $title }}</h6>
         </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group">
-                  @if(Session::has("one"))
-                     <a href="{{ route('profile')}}" class="nav-link text-white font-weight-bold px-0">
-                            <i class="ni ni-circle-08 fa-2x"></i>
-                            <span class="d-sm-inline d-none"></span>
+     
+         
+            <div class="dropdown">
+                @if(Session::has("user"))
+                    @php $username = Session::get('user');@endphp
+                    <span class="dropdown-toggle  text-white"  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ $username['username']}}
+                    </span>
+                @elseif (Session::has("griffin_user"))
+                @php $username = Session::get('griffin_user');@endphp
+                    <span class="dropdown-toggle text-white"  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ $username['username']}}
+                    </span>
+                @endif
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @if(Session::has("one"))
+                        <li><a class="dropdown-item" href="{{ route('profile')}}">Update Profile</a></li>
+        
+                        {{-- <li>
+                            <form method="get" class=" dropdown-item" action="{{route('switch')}}" id="myForm">
+                                <label class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input" name="checkbox" value="dark"  onclick="document.getElementById('myForm').submit();"> 
+                                 Griffin</label>
+                            </form>
+                        </li> --}}
+                        {{-- <li><a class="dropdown-item" href="{{ route('switch')}}">Switch To Griffin</a></li> --}}
+                    @elseif (Session::has("two"))
+                        <li><a class="dropdown-item" href="{{ route('griffin-profile')}}">Update Profile</a></li>
+                         {{-- <li>
+                            <form method="get" class="dropdown-item " action="{{ route('switch.whisker')}}" id="myForm">
+                                <label class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input" name="checkbox" value="dark"  onclick="document.getElementById('myForm').submit();"> 
+                                 Whisker</label>
+                            </form>
+                        </li> --}}
+                        {{-- <li><a class="dropdown-item" href="{{ route('switch.whisker')}}">Switch To Whisker</a></li> --}}
+                    @endif
+                    <li><form role="form" method="post" action="{{route('logout')}}" id="logout-form">
+                        @csrf
+                        <a href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="dropdown-item">
+                           
+                            <span class="d-sm-inline d-none">Log out</span>
                         </a>
-                    @endif   
-                     @if(Session::has("two"))
-                     <a href="{{ route('griffin-profile')}}" class="nav-link text-white font-weight-bold px-0">
-                            <i class="ni ni-circle-08 fa-2x"></i>
-                            <span class="d-sm-inline d-none"></span>
-                        </a>
-                    @endif    
-                </div>
+                    </form></li>
+                </ul>
+            
             </div>
-            <ul class="navbar-nav  justify-content-end">
+            {{-- <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-flex align-items-center">
                     <form role="form" method="post" action="{{route('logout')}}" id="logout-form">
                         @csrf
@@ -142,8 +174,8 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
-        </div>
+            </ul> --}}
+      
     </div>
 </nav>
 <!-- End Navbar -->

@@ -26,15 +26,19 @@ class HomeController extends Controller
     {
         if($request->session()->has('user')){
             return view('pages.dashboard');
+        }elseif($request->session()->has('griffin_user')){
+            return redirect()->route('home');
         }else{
             return redirect()->route('login');
-        }  
+        }
     }
 
     public function index1(Request $request)
     {
         if($request->session()->has('griffin_user')){
             return view('pages.griffin-dashboard');
+        }elseif($request->session()->has('user')){
+            return redirect()->route('dashboard');
         }else{
             return redirect()->route('griffin');
         }

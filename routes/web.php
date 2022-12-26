@@ -42,4 +42,5 @@ Route::get('/profile',[LoginController::class,'getProfile'])->name('profile');
 Route::post('/update/profile', [LoginController::class,"updateProfile"])->name('update');
 Route::get('/griffin-profile',[LoginController::class,'getGriffinProfile'])->name('griffin-profile');
 Route::post('griffin/update/profile', [LoginController::class,"updateGriffinProfile"])->name('update-griffin-profile');
-// griffin-profile
+Route::get('griffin' , [LoginController::class, "switchToGriffin"])->name('switch');
+Route::get('whisker' , [LoginController::class, "switchToWhisker"])->name('switch.whisker');
