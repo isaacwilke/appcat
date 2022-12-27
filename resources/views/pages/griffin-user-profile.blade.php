@@ -36,7 +36,7 @@
     </div>
   
 
-    <div class="container-fluid py-2">
+    <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -79,6 +79,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Email Address</label>
                                         <input class="form-control" type="email" readonly name="email" value="{{ $user['user']['email']}}">
+                                        @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                     </div>
                                 </div>
                                 <div class="col-md-6">

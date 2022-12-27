@@ -21,13 +21,15 @@
             <div class="dropdown">
                 @if(Session::has("user"))
                     @php $username = Session::get('user');@endphp
+                     <i class="ni ni-single-02 text-white"></i>
                     <span class="dropdown-toggle  text-white"  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ $username['username']}}
+                        {{ $username['first_name']}}
                     </span>
                 @elseif (Session::has("griffin_user"))
                 @php $username = Session::get('griffin_user');@endphp
+                    <i class="ni ni-single-02 text-white"></i>
                     <span class="dropdown-toggle text-white"  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ $username['username']}}
+                        {{ $username['first_name']}}
                     </span>
                 @endif
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">

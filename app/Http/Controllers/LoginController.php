@@ -52,17 +52,18 @@ class LoginController extends Controller
             $result = $response->getBody()->getContents();
                 
             $result = json_decode($result,true);
-            // dd($result['data']['token']);
+          
 
-            // $newuser = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token', [
+            $newuser = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token', [
             
-            //     'form_params' => [
-            //         'username' => $credentials['email'],
-            //         'password' => $credentials['password'],
-            //     ]
-            // ]);
-            // $second_token = $newuser->getBody()->getContents();
-            // $second_token= json_decode($second_token,true);
+                'form_params' => [
+                    'username' => 'admin2',
+                    'password' => 'admin2@3338',
+                ]
+            ]);
+            $second_token = $newuser->getBody()->getContents();
+            $second_token= json_decode($second_token,true);
+          
 
             $response2 = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token/validate', [
                 'headers' =>
@@ -85,20 +86,24 @@ class LoginController extends Controller
                 $result2= $response->getBody()->getContents();
                 $user = json_decode($result2, true);
                 
-                // $exisiting = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/wp/v2/users/'.$second_token['data']['id'], ['headers' => 
-                // [
-                //     'Authorization' => "Bearer {$second_token['data']['token']}"
-                // ]
-                // ]);
+                $exisiting = $client->request('GET', 'https://exceledunet.com/wordpress2/wp-json/wp/v2/users?search='.$request->email, ['headers' => 
+                [
+                    'Authorization' => "Bearer {$second_token['data']['token']}"
+                ]
+                ]);
     
-                // $existinguser= $exisiting->getBody()->getContents();
-                // $existinguser = json_decode($existinguser, true);
-                //   dd($existinguser);            
+                $existinguser= $exisiting->getBody()->getContents();
+                $existinguser = json_decode($existinguser, true);
+                       
                 if($user['roles']['0']=="customer"){
                     $request->session()->regenerate();
                     $request->session()->put('user_credentials', $credentials);
+                    if(!empty($existinguser)){
+                        $request->session()->put("existing_user", $existinguser);
+                        $request->session()->put("griffin_token", $second_token['data']['token']);
+                    }
                     $request->session()->put('user', $user);
-                    // $request->session()->put('existing_user', $existinguser);
+                    
                     $request->session()->put('token', $result['data']);
                   
                     if($request->site=="Whisker And Soda - Where Cats and Relax Collide"){
@@ -169,7 +174,7 @@ class LoginController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
+      
         $credentials = $request->validate([
             'email' => ['required'],
             'password' => ['required'],
@@ -198,9 +203,29 @@ class LoginController extends Controller
 
             $result1 = $response2->getBody()->getContents();
             $result1 = json_decode($result1,true);
+
+            $newuser = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token', [
+            
+                'form_params' => [
+                    'username' => 'admin',
+                    'password' => 'admin@3338',
+                ]
+            ]);
+            $second_token = $newuser->getBody()->getContents();
+            $second_token= json_decode($second_token,true);
            
             if ($result1['message'] == "Token is valid") {
-               
+ 
+                $exisiting = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wp/v2/users?search='.$request->email, ['headers' => 
+                [
+                    'Authorization' => "Bearer {$second_token['data']['token']}"
+                ]
+                ]);
+    
+                $existinguser= $exisiting->getBody()->getContents();
+                $existinguser = json_decode($existinguser, true);    
+                // dd($existinguser);   
+              
                 $response3 =  $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/wp/v2/users/'.$result['data']['id'], [
                     'headers' =>
                     [
@@ -212,13 +237,18 @@ class LoginController extends Controller
 
                 $user= json_decode($user,true);
              
-                
+                // dd($user);
                 if($user['roles']['0']=='customer'){
 
                     $request->session()->regenerate();
-                     $request->session()->put('griffin_user', $user);
+                    $request->session()->put('griffin_user', $user);
                     $request->session()->put('token', $result['data']);
                     $request->session()->put('user_credentials', $credentials);
+                    // dd( $second_token['data']['token']);
+                    if(!empty($existinguser)){
+                        $request->session()->put("existing_user", $existinguser);
+                        $request->session()->put("whisker_token", $second_token['data']['token']);
+                    }
                     if ($request->site == "Griffin Rock CAT Retreat - Your Cat's Vacation oasis") {
                         $request->session()->put('two', $request->site);
                     } 
@@ -226,8 +256,7 @@ class LoginController extends Controller
                     return redirect()->intended('griffin-dashboard');
                 }else{
                     throw new \Exception("user is not a customer", 401);
-                }
-                
+                } 
             
             }
         }catch (\GuzzleHttp\Exception\ClientException $e) {
@@ -235,7 +264,7 @@ class LoginController extends Controller
             $responseBodyAsString = $response->getBody()->getContents();
     
             $responseBodyAsString = json_decode($responseBodyAsString,true);
-            //    dd($responseBodyAsString);
+           
             return back()->with('error', $responseBodyAsString['message']);
         }
         catch (\Throwable $th) {
@@ -259,9 +288,9 @@ class LoginController extends Controller
 
 
     public function updateProfile(Request $request){
-       
+     
         if(Session::has('one') && Session::has('user') && Session::has('token')){
-       
+      
             $credentials = $request->validate([
                 'email' => ['required'],
                 'firstname' => ['required'],
@@ -290,6 +319,7 @@ class LoginController extends Controller
                         'username' => $request->username,
                         'first_name' =>$request->firstname,
                         'last_name'=>$request->lastname,
+                        'email'=>$request->email,
                         'description'=>$request->description,
                     ]
                 ]);
@@ -297,6 +327,26 @@ class LoginController extends Controller
                 $user = $userobj ->getBody()->getContents();
 
                 $user= json_decode($user,true);
+                if(Session::has('existing_user') && Session::has('griffin_token')){
+                    $griffinuser = Session::get('existing_user');
+                  
+                    $token = Session::get('griffin_token');
+                   
+                    $griffinobj =  $clientObj->request('POST', 'https://exceledunet.com/wordpress2/wp-json/wp/v2/users/'.$griffinuser['0']['id'], [
+                        'headers' =>
+                        [
+                            'Authorization' => "Bearer {$token}"
+                        ],'form_params' => [
+                            
+                            'email'=>$request->email,
+                            
+                        ]
+                    ]);
+                
+                    $griffin = $griffinobj ->getBody()->getContents();
+                   
+                    
+                }
                 $request->session()->put('user', $user);
 
                 return redirect()->route('profile')->with('succes', "User profile updated successfully..!");
@@ -355,12 +405,28 @@ class LoginController extends Controller
                         'username' => $request->username,
                         'first_name' =>$request->firstname,
                         'last_name'=>$request->lastname,
+                        'email'=>$request->email,
                         'description'=>$request->description,
                     ]
                 ]);
             
                 $user = $userobj ->getBody()->getContents();
-
+                // dd(Session::all());
+                if(Session::has('existing_user') && Session::has('whisker_token')){
+                    $whiskeruser = Session::get('existing_user');
+                    $token = Session::get('whisker_token');
+                    
+                    $whiskerobj =  $clientObj->request('POST', 'https://exceledunet.com/wordpress/wp-json/wp/v2/users/'.$whiskeruser['0']['id'], [
+                        'headers' =>
+                        [
+                            'Authorization' => "Bearer {$token}"
+                        ],'form_params' => [
+                            'email'=>$request->email, 
+                        ]
+                    ]);
+                
+                    $whisker = $whiskerobj ->getBody()->getContents();
+                }
                 $user= json_decode($user,true);
                 $request->session()->put('griffin_user', $user);
 
@@ -376,18 +442,20 @@ class LoginController extends Controller
     public function switchToGriffin(Request $request){
         if($request->session()->has('user')){
             $credentials = $request->session()->get('user_credentials');
+            $userr1 = Session::get('user');
+           ;
             $client = new \GuzzleHttp\Client();
             try {
                 $response = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token', [
             
                     'form_params' => [
-                        'username' => $credentials['email'],
+                        'username' => $userr1['email'],
                         'password' => $credentials['password'],
                     ]
                 ]);
                 $result = $response->getBody()->getContents();
                 $result = json_decode($result,true);
-            
+                
                 $response2 = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token/validate', [
                     'headers' =>
                     [
@@ -411,9 +479,11 @@ class LoginController extends Controller
                     $user= json_decode($user,true);
                 
                     if($user['roles']['0']=='customer'){
+                        $token1= Session::get('token');
+        
+                        $request->session()->put('site_token', $token1['token']);
                         $request->session()->forget(['one','user','token']);
-                       
-                        
+                    
                         $request->session()->put('griffin_user', $user);
                         $request->session()->put('token', $result['data']);
                         $request->session()->put('two', "Griffin Rock CAT Retreat - Your Cat's Vacation oasis");
@@ -439,13 +509,14 @@ class LoginController extends Controller
          
         if($request->session()->has('griffin_user')){
             $credentials = $request->session()->get('user_credentials');
-            // dd($credentials);
+            $user = Session::get('griffin_user');
+         
             $client = new \GuzzleHttp\Client();
             try {
                 $response = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token', [
             
                     'form_params' => [
-                        'username' => $credentials['email'],
+                        'username' => $user['email'],
                         'password' => $credentials['password'],
                     ]
                 ]);
@@ -476,7 +547,9 @@ class LoginController extends Controller
                     $user = $response3->getBody()->getContents();
                     $user= json_decode($user,true);
                     if($user['roles']['0']=='customer'){
-                      
+                        $token1= Session::get('token');
+                        
+                        $request->session()->put('site_token', $token1['token']);
                         $request->session()->forget(['two','griffin_user','token']);
                         $request->session()->put('user', $user);
                         $request->session()->put('token', $result['data']);
