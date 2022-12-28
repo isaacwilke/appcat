@@ -80,7 +80,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Email Address</label>
-                                        <input class="form-control" type="email" readonly name="email" value="{{ $user['user']['email']}}">
+                                        <input class="form-control" type="email"  name="email" value="{{ $user['user']['email']}}">
                                          @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                     </div>
                                 </div>
