@@ -344,7 +344,7 @@ class LoginController extends Controller
                     // dd(Session::all());
                     if(Session::has('existing_user') && Session::has('whisker_token')){
                         $griffinuser = Session::get('existing_user');
-                        dd($griffinuser);
+                        // dd($griffinuser);
                         $user_id = 0;
                         if (isset($griffinuser['0']['id'])) {
                             $user_id = $griffinuser['0']['id'];
@@ -373,7 +373,7 @@ class LoginController extends Controller
                     
                         $griffin = $griffinobj ->getBody()->getContents();
                     
-                        dd($griffin);
+                        // dd($griffin);
                     }
 
                    
