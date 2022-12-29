@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('argon/img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('argon/img/favicon.png')}}">
     <title>
-        Argon Dashboard 2 by Creative Tim
+        {{-- Argon Dashboard 2 by Creative Tim --}}
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -39,13 +39,13 @@
                 </div>
             @endif --}}
             @include('layouts.navbars.auth.sidenav')
-                <main class="main-content border-radius-lg">
-                <div class="min-height-300 bg-primary position-absolute w-100"></div>
+                <main class="main-content">
+                <div class="min-height-300 position-absolute  w-100 bg-primary"></div>
                     @yield('content')
             
 
                 </main>
-            @include('components.fixed-plugin')
+          
         {{-- @endif --}}
     @endif
 
@@ -58,9 +58,9 @@
     <script src="{{asset('argon/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     
     <script src="{{asset('argon/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-    <!-- <script src="{{asset('argon/assets/js/argon-dashboard.js') }}"></script> -->
-    <script src="{{asset('argon/assets/js/custom.js') }}"></script>
-    <script>
+    <script src="{{asset('argon/assets/js/argon-dashboard.js') }}"></script>
+    {{-- <script src="{{asset('argon/assets/js/custom.js') }}"></script> --}}
+    {{-- <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
             var options = {
@@ -68,7 +68,7 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-    </script>
+    </script> --}}
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

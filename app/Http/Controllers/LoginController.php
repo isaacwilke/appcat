@@ -514,7 +514,7 @@ class LoginController extends Controller
                 $credentials = $request->session()->get('user_credentials');
                 
                 $userr1 = Session::get('user');
-                
+                // dd($userr1);
                 $client = new \GuzzleHttp\Client();
          
                 $response = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token', [
