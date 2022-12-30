@@ -46,4 +46,7 @@ Route::post('griffin/update/profile', [LoginController::class,"updateGriffinProf
 Route::get('griffin' , [LoginController::class, "switchToGriffin"])->name('switch');
 Route::get('whisker' , [LoginController::class, "switchToWhisker"])->name('switch.whisker');
 
-Route::get('griffin-billing',[BillingController::class,'griffin_billing'])->name('griffin-billing');
+Route::get('griffin-billing',[BillingController::class,'griffinBilling'])->name('griffin-billing');
+Route::post('grifin-update-profile',[BillingController::class, 'storeGriffinBilling'])->name('billing.stored');
+Route::get('whisker-billing',[BillingController::class,'whiskerBilling'])->name('whisker-billing');
+Route::post('whisker-update-profile',[BillingController::class, 'storeWhiskerBilling'])->name('whisker.stored');
