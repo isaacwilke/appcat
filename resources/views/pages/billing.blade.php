@@ -4,8 +4,8 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Billing And Shipping Details'])
     <style>
         .spinner{
-           height:150px;
-           width:150px; 
+           height:100px;
+           width:100px; 
           
         }
     </style>
@@ -207,7 +207,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                 
+                               
                             </div>
                         </div>
                     </div>
@@ -221,10 +221,13 @@
     </div>
 @endsection
 @push('js')
-<script src="{{asset('argon/assets/js/plugins/multistep-form.js')}}" type="text/javascript"></script>
-<script src="" type="text/javascript"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" type="text/javascript">
 
 
+ 
+
+</script>
 
     
 

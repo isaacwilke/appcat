@@ -58,9 +58,10 @@
     <script src="{{asset('argon/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     
     <script src="{{asset('argon/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-    <script src="{{asset('argon/assets/js/argon-dashboard.js') }}"></script>
-    {{-- <script src="{{asset('argon/assets/js/custom.js') }}"></script> --}}
-    {{-- <script>
+    {{-- <script src="{{asset('argon/assets/js/argon-dashboard.js') }}"></script> --}}
+    <script src="{{asset('argon/assets/js/plugins/multistep-form.js')}}" type="text/javascript"></script>
+    {{-- <script src="{{asset('argon/assets/js/custom.js') }}"></script>
+    <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
             var options = {

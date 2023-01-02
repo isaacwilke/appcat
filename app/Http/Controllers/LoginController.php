@@ -23,9 +23,11 @@ class LoginController extends Controller
      */
     public function show()
     {
-        if (Auth::user()) {
+       if(session::has('user')){
             return redirect()->route('dashboard');
-        } else {
+        } elseif(Session::has('griffin_user')) {
+            return redirect()->route('home'); 
+        }else{
             return view('auth.login');
         }
     }
