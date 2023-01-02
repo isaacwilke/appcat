@@ -1,8 +1,15 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gary-100'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Billing And Shipping Details'])
-   <div class="container-fluid py-4 pt-4 mt-4">
+    <style>
+        .spinner{
+           height:150px;
+           width:150px; 
+          
+        }
+    </style>
+   <div class="container-fluid pt-4 mt-4">
       <div id="alert">
             @include('components.alert')
         </div>
@@ -200,20 +207,25 @@
                                         </form>
                                     </div>
                                 </div>
+                                 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>    
-        <script src="" type="text/javascript"></script>
+          
+        </div>  
+        
+         @include('layouts.footers.auth.footer')  
 
-
-
-        <script src="{{asset('argon/assets/js/plugins/multistep-form.js')}}" type="text/javascript"></script>
-
-
-
-        @include('layouts.footers.auth.footer')
     </div>
 @endsection
+@push('js')
+<script src="{{asset('argon/assets/js/plugins/multistep-form.js')}}" type="text/javascript"></script>
+<script src="" type="text/javascript"></script>
+
+
+
+    
+
+@endpush
