@@ -178,7 +178,7 @@ class LoginController extends Controller
 
     public function Display()
     {
-        return view('auth.login1');
+        return view('auth.Login1');
     }
     public function store(Request $request)
     {
