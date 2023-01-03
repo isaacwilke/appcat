@@ -35,6 +35,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     @if(Session::has("one"))
                         <li><a class="dropdown-item" href="{{ route('profile')}}">Update Profile</a></li>
+                          <li><a class="dropdown-item" href="{{ route('changepassword')}}">change Password</a></li>
         
                         {{-- <li>
                             <form method="get" class=" dropdown-item" action="{{route('switch')}}" id="myForm">
@@ -46,6 +47,7 @@
                         {{-- <li><a class="dropdown-item" href="{{ route('switch')}}">Switch To Griffin</a></li> --}}
                     @elseif (Session::has("two"))
                         <li><a class="dropdown-item" href="{{ route('griffin-profile')}}">Update Profile</a></li>
+                          <li><a class="dropdown-item" href="{{ route('changepassword1')}}">Change Password</a></li>
                          {{-- <li>
                             <form method="get" class="dropdown-item " action="{{ route('switch.whisker')}}" id="myForm">
                                 <label class="form-check form-switch">

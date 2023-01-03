@@ -326,11 +326,12 @@ class LoginController extends Controller
                         [
                             'Authorization' => "Bearer {$request->auth_token}"
                         ],'form_params' => [
-                            'username' => $request->username,
-                            'first_name' =>$request->firstname,
-                            'last_name'=>$request->lastname,
-                            'email'=>$request->email,
-                            'description'=>$request->description,
+                            'username' => !empty($request->username)?$request->username:'',
+                            'first_name' =>!empty($request->firstname)?$request->firstname :'',
+                            'last_name'=>!empty($request->lastname)?$request->lastname:"",
+                            'email'=>!empty($request->email)?$request->email:'',
+                            'description'=>!empty($request->description)?$request->description:'',
+                            
                         ]
                     ]);
                 
@@ -338,7 +339,7 @@ class LoginController extends Controller
 
                     $user= json_decode($user,true);
                     $request->session()->put('user', $user);
-
+                    
                      
                     $whishkerUser = Session::get('user');
                    
@@ -442,17 +443,21 @@ class LoginController extends Controller
                         [
                             'Authorization' => "Bearer {$request->auth_token}"
                         ],'form_params' => [
-                            'username' => $request->username,
-                            'first_name' =>$request->firstname,
-                            'last_name'=>$request->lastname,
-                            'email'=>$request->email,
-                            'description'=>$request->description,
+                            'username' => !empty($request->username)?$request->username:'',
+                            'first_name' =>!empty($request->firstname)?$request->firstname :'',
+                            'last_name'=>!empty($request->lastname)?$request->lastname:"",
+                            'email'=>!empty($request->email)?$request->email:'',
+                            'description'=>!empty($request->description)?$request->description:'',
+                            
                         ]
                     ]);
                 
+                 
                     $user = $userobj ->getBody()->getContents();
-                   
-                
+
+                    $user= json_decode($user,true);
+                     
+                    
                     if(Session::has('existing_user') && Session::has('whisker_token')){
                    
                         $whiskeruser = Session::get('existing_user');
@@ -478,9 +483,9 @@ class LoginController extends Controller
                         $whisker = $whiskerobj ->getBody()->getContents();
                        
                     }
-                    $user= json_decode($user,true);
-                  
+                    
                     $request->session()->put('griffin_user', $user);
+                    
 
                     return redirect()->route('griffin-profile')->with('succes', "User profile updated successfully..!");
                     
@@ -661,6 +666,118 @@ class LoginController extends Controller
         }
         catch (\Throwable $th) {
             return back()->with('error',  $th->getMessage());
+        }
+    }
+
+    public function griffinchangepassword(Request $request){
+        if(Session::has('griffin_user') && Session::has('token')){
+          
+            return view('pages.griffin-user-password');
+        }
+        
+    }
+
+    public function whiskerchangepassword(Request $request){
+        if(Session::has('user') && Session::has('token')){
+          
+            return view('pages.user-password');
+        }
+        
+    }
+
+    public function griffinpasswordchange(Request $request){
+        if(Session::has('griffin_user') && Session::has('token')){
+          
+          try{
+            $password = Session::get('user_credentials');
+            $client = new \GuzzleHttp\Client();
+            $response = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token', [
+                
+                    'form_params' => [
+                        'username' => $password['email'],
+                        'password' => $password['password'],
+                    ]
+                ]);
+
+                $result = $response->getBody()->getContents();
+
+                $result = json_decode($result,true);
+            
+                $userobj =  $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/wp/v2/users/'.$result['data']['id'], [
+                    'headers' =>
+                    [
+                        'Authorization' => "Bearer {$result['data']['token']}"
+                    ],'form_params' => [
+                    
+                        'password'=>!empty($request->password)?$request->password:'',
+                        
+                    ]
+                ]);
+                $user = $userobj->getBody()->getContents();
+                    
+                $user= json_decode($user,true);
+                if(!empty($user)){
+                    return redirect()->route('logout');
+                }
+            }catch (\GuzzleHttp\Exception\ClientException $e) {
+                $response = $e->getResponse();
+                $responseBodyAsString = $response->getBody()->getContents();
+                $responseBodyAsString = json_decode($responseBodyAsString,true);
+                return back()->with('error', $responseBodyAsString['message']);
+            }
+            catch (\Throwable $th) {
+                return back()->with('error',  $th->getMessage());
+            }
+        }
+    }
+
+    public function whiskerpasswordchange(Request $request){
+        if(Session::has('user') && Session::has('token')){
+          
+           $password = Session::get('user_credentials');
+           $client = new \GuzzleHttp\Client();
+           try{
+
+          
+                $response = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token', [
+                
+                    'form_params' => [
+                        'username' => $password['email'],
+                        'password' => $password['password'],
+                    ]
+                ]);
+
+                $result = $response->getBody()->getContents();
+
+                $result = json_decode($result,true);
+            
+                $userobj =  $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/wp/v2/users/'.$result['data']['id'], [
+                    'headers' =>
+                    [
+                        'Authorization' => "Bearer {$result['data']['token']}"
+                    ],'form_params' => [
+                    
+                        'password'=>!empty($request->password)?$request->password:'',
+                        
+                    ]
+                ]);
+                $user = $userobj->getBody()->getContents();
+                    
+                $user= json_decode($user,true);
+                if(!empty($user)){
+                    return redirect()->route('logout');
+                }
+            
+       
+            }catch (\GuzzleHttp\Exception\ClientException $e) {
+                $response = $e->getResponse();
+                $responseBodyAsString = $response->getBody()->getContents();
+                $responseBodyAsString = json_decode($responseBodyAsString,true);
+                return back()->with('error', $responseBodyAsString['message']);
+            }
+            catch (\Throwable $th) {
+                return back()->with('error',  $th->getMessage());
+            }
         }
     }
 }

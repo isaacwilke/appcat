@@ -56,3 +56,9 @@ Route::get('grffin-set-password',[ChangePasswordController::class,'griffinDispla
 Route::post('grffin-password',[ChangePasswordController::class,'griffinSetPassword'])->name('griffin.postpassword');
 Route::get('whisker-set-password',[ChangePasswordController::class,'whiskerDisplayPassword'])->name('whisker.set');
 Route::post('whisker-password',[ChangePasswordController::class,'whiskerSetPassword'])->name('whisker.postpassword');
+Route::get('whisker-change-password',[LoginController::class,'whiskerchangepassword'])->name('changepassword');
+Route::get('griffin-change-password',[LoginController::class,'griffinchangepassword'])->name('changepassword1');
+
+Route::post('griffin-password-change',[LoginController::class,'griffinpasswordchange'])->name('update-griffin-password');
+Route::post('whisker-password-change',[LoginController::class,'whiskerpasswordchange'])->name('update-whisker-password');
+Route::get('logout',[LoginController::class,'logout'])->name('logout');

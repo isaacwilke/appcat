@@ -43,13 +43,13 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <form method="get" class="nav-link" action="#" id="myForm">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-info text-sm opacity-10"></i>
-                            </div>
-                                <span class="nav-link-text ms-1">Register</span>
-                        </form>
+                    <a class="nav-link" href="https://griffinrockcatretreat.com/">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Griffin Rock CAT Retreat</span>
+                    </a>
+                       
                         
                     </li>
                   
@@ -124,14 +124,14 @@
                             
                     </li>
                 @else
-                    <li class="nav-item">
-                       <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="#">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-info text-sm opacity-10"></i>
-                            </div>
-                                <span class="nav-link-text ms-1">Register</span>
-                        </a>
+                  <li class="nav-item">
+                    <a class="nav-link" href="https://whiskersandsoda.com/">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">whisker and soda</span>
+                    </a>
+                       
                         
                     </li>
                 @endif
