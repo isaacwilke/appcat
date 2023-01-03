@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="container position-sticky z-index-sticky top-0">
-      
+        <div class="row">
+            <div class="col-12">
+                @include('layouts.navbars.guest.navbar')
+            </div>
+        </div>
         <div id="alert">
             @include('components.alert')
         </div>
@@ -14,15 +18,16 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
-                                  <img src="{{asset('argon/img/whiskerlogo.png')}}" class="h-50" alt="main_logo"/>
+                                 <img src="{{asset('argon/img/griffinlogo.png')}}" class="bg-warning h-50" alt="main_logo"/>
                                 <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Change password</h4>
-                                    <p class="mb-0">Set a new password for your email</p>
+                                    <h4 class="font-weight-bolder">Change Password</h4>
+                                    <p class="mb-0">Fill below details to set your password</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" method="POST" action="{{route('whisker.postpassword')}}">
+                                    <form role="form" method="POST" action="{{route('griffin.postpassword')}}">
                                         @csrf
-                                         <div class ="row">
+                                            
+                                        <div class ="row">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                                 <input type="email" name="email" class="form-control" placeholder="Email"  value="" aria-label="Email">
@@ -45,10 +50,10 @@
                                             <div class="text-center">
                                                 <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Submit</button>
                                             </div>
-                                        </div> 
+                                        </div>    
                                     </form>
                                 </div>
-                                
+                               
                             </div>
                         </div>
                         <div

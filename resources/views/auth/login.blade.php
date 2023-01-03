@@ -47,12 +47,12 @@
                                         </div>
                                     </form>
                                 </div>
-                                {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-1 text-sm mx-auto">
-                                        Forgot you password? Reset your password
-                                        <a href="{{route('reset.password')}}" class="text-primary text-gradient font-weight-bold">here</a>
+                                        Forgot you password? 
+                                        <a href="{{route('whisker.reset')}}" class="text-primary text-gradient font-weight-bold">Reset your password</a>
                                     </p>
-                                </div> --}}
+                                </div>
                                 {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
                                         Don't have an account?
@@ -79,3 +79,12 @@
         </section>
     </main>
     @endsection
+@push('js')
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#alert').fadeOut(5000);
+        });
+    </script>
+@endpush

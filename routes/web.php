@@ -29,10 +29,7 @@ Route::post('/register',[RegisterController::class,'store'])->name('register.per
 Route::get('/dashboard',[HomeController::class,'index'])->name('dashboard');
 Route::get('/griffin-dashboard',[HomeController::class,'index1'])->name('home');
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
-Route::get('reset-password',[ResetPasswordController::class,'show'])->name('reset.password');
-Route::post('forget-password', [ResetPasswordController::class,'send'])->name('reset.performed'); 
-Route::get('reset-password/{token}/{email}', [ChangePasswordController::class, 'show'])->name('reset.password.get');
-Route::post('password', [ChangePasswordController::class, 'update'])->name('reset.password.post');
+
 Route::post('api/update', [LoginController::class, 'updateapi'])->name('api.performed');
 Route::post('/whisker-login',[LoginController::class,'login'])->name('login.performed');
 Route::get('/griffin-login', [LoginController::class,'Display'])->name('griffin');
@@ -50,3 +47,12 @@ Route::get('griffin-billing',[BillingController::class,'griffinBilling'])->name(
 Route::post('grifin-update-profile',[BillingController::class, 'storeGriffinBilling'])->name('billing.stored');
 Route::get('whisker-billing',[BillingController::class,'whiskerBilling'])->name('whisker-billing');
 Route::post('whisker-update-profile',[BillingController::class, 'storeWhiskerBilling'])->name('whisker.stored');
+
+Route::get('griffin-reset-password',[ResetPasswordController::class,'griffinReset'])->name('griffin.reset');
+Route::get('whisker-reset-password',[ResetPasswordController::class,'whiskerReset'])->name('whisker.reset');
+Route::post('griffin-password',[ResetPasswordController::class,'griffinPassword'])->name('griffin.password');
+Route::post('whisker-set-password',[ResetPasswordController::class,'whiskerPassword'])->name('whisker.password');
+Route::get('grffin-set-password',[ChangePasswordController::class,'griffinDisplayPassword'])->name('griffin.set');
+Route::post('grffin-password',[ChangePasswordController::class,'griffinSetPassword'])->name('griffin.postpassword');
+Route::get('whisker-set-password',[ChangePasswordController::class,'whiskerDisplayPassword'])->name('whisker.set');
+Route::post('whisker-password',[ChangePasswordController::class,'whiskerSetPassword'])->name('whisker.postpassword');

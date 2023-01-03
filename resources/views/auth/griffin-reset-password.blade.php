@@ -15,13 +15,13 @@
                     <div class="row">
                         <div class="col-xl-5 col-lg-6 col-md-8 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
-                                 <img src="{{asset('argon/img/whiskerlogo.png')}}" class="h-50" alt="main_logo"/>
+                                 <img src="{{asset('argon/img/griffinlogo.png')}}" class="bg-warning h-50" alt="main_logo"/>
                                 <div class="card-header pb-0 text-start">
                                     <h4 class="font-weight-bolder">Reset your password</h4>
                                     <p class="mb-0">Enter your email to Reset your Password</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" method="POST" action="{{route('whisker.password')}}">
+                                    <form role="form" method="POST" action="{{route('griffin.password')}}">
                                         @csrf
                                         @method('post')
                                         <div class="flex flex-col mb-3">
@@ -53,8 +53,6 @@
             </div>
         </section>
     </main>
-    
-     
 @endsection
 @push('js')
   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>

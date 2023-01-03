@@ -221,14 +221,11 @@
     </div>
 @endsection
 @push('js')
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" type="text/javascript">
-
-
- 
-
-</script>
-
-    
-
+    <script>
+        $(document).ready(function(){
+            $('#alert').fadeOut(5000);
+        });
+    </script>
 @endpush

@@ -115,3 +115,12 @@
         @include('layouts.footers.auth.footer')
     </div>
 @endsection
+@push('js')
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#alert').fadeOut(5000);
+        });
+    </script>
+@endpush
