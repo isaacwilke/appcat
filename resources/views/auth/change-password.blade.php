@@ -1,6 +1,63 @@
 @extends('layouts.app')
 
 @section('content')
+<style type="text/css">
+.pass-checking-text {
+    margin-top: 22px;
+    font-size: 13px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: -0.3px;
+    color: #2d2d2d;
+    justify-content: center;
+    display: flex;
+}
+.pass-checklist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+  text-align: left;
+  color: #6a707e;
+}
+.pass-checklist ul li{
+  padding-bottom: 4px;
+}
+
+.pass-checklist ul li.ccross:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00d";
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+}
+.pass-checklist ul li.ctick:before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00c";
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+}
+.pass-checklist ul li.ctick {
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+  text-align: left;
+  color: #2ED47A;
+}
+.changepass-submit-btn-two:disabled {
+  opacity: 0.4;
+}
+</style>
     <div class="container position-sticky z-index-sticky top-0">
       
         <div id="alert">
@@ -25,25 +82,36 @@
                                          <div class ="row">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                                <input type="email" name="email" class="form-control" placeholder="Email"  value="" aria-label="Email">
+                                                <input type="email" name="email" required class="form-control" placeholder="Email"  value="" aria-label="Email">
                                                 @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                                                <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" >
+                                                <input type="password" id ="password" name="password" class="form-control" placeholder="Password" aria-label="Password" >
                                                 @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                             </div>
-                                            {{-- <div class="flex flex-col mb-3">
-                                                <input type="password" name="confirm-password" class="form-control form-control-lg" placeholder="Password" aria-label="Password"  >
+                                              <p class="passwordhint">Password Requirements: </p>
+                                                <div class="pass-checklist">
+                                                    <ul>
+                                                    <li class="condition-one ccross" id="character_length">Must contain at least 12 characters</li>
+                                                    <li class="condition-one ccross" id="uppercase_latter">Must contain at least one uppercase letter</li>
+                                                    <li class="condition-one ccross" id="lowercase_latter">Must contain at least one lowercase letter</li>
+                                                    <li class="condition-one ccross" id="one_number">Must contain at least one number</li>
+                                                    <li class="condition-one ccross" id="special_character">Must contain at least one special character</li>
+                                                    </ul>
+                                                </div>
+                                            <div class="input-group mb-3 mt-1">
+                                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                                <input type="password" required id="confirm-password" name="confirm-password" class="form-control form-control-lg" placeholder="Confirm-Password" aria-label="Password">
                                                 @error('confirm-password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
-                                            </div> --}}
+                                            </div>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text"><i class="ni ni-key-25"></i></span>
                                                 <input type="text" name="code" class="form-control" placeholder="code" aria-label="code">
                                                 @error('code') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                             </div>
                                             <div class="text-center">
-                                                <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Submit</button>
+                                                <button type="submit" id="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Submit</button>
                                             </div>
                                         </div> 
                                     </form>
@@ -75,6 +143,84 @@
     <script>
         $(document).ready(function(){
             $('#alert').fadeOut(5000);
+            $("#confirm-password").on('blur',function (){
+
+               var pass = $('#password').val();
+        
+                var confirmpass = $('#confirm-password').val();
+                if($('.ctick').length ==5 && pass == confirmpass) {
+                    $('#submit').removeAttr('disabled',true);
+                }else{
+                    alert('password and confirm password not matched');
+                    $('#submit').attr('disabled',true);
+            
+                }
+   
+            });
+        });
+        $(document).on('keyup', '#password', function () {
+            let password = $("#password").val();
+            var confirmpass = $('#confirm-password').val();
+            password_length = password.length;
+            if (password === '') {
+                
+                password_is_valid = false;
+            
+
+            }if(password.length==12){
+                var password1 = true;
+                
+            }
+            if(password.length < 12) {
+                $("#character_length").removeClass('ctick').addClass('ccross');
+                password_is_valid = false;
+                
+            } else {
+                $("#character_length").removeClass('ccross').addClass('ctick');
+                var character = true;
+                
+            }
+            if (!password.match(/[A-Z]/)) {
+                $("#uppercase_latter").removeClass('ctick').addClass('ccross');
+                password_is_valid = false;
+                
+            } else {
+                $("#uppercase_latter").removeClass('ccross').addClass('ctick');
+                var uppercase = true;
+                
+            }
+            if (!password.match(/[a-z]/)) {
+                $("#lowercase_latter").removeClass('ctick').addClass('ccross');
+                password_is_valid = false;
+                
+            } else {
+                $("#lowercase_latter").removeClass('ccross').addClass('ctick');
+                var lowercase= true;
+                
+            }
+            if (!password.match(/[0-9]/)) {
+                $("#one_number").removeClass('ctick').addClass('ccross');
+                password_is_valid = false;
+            
+            } else {
+                $("#one_number").removeClass('ccross').addClass('ctick');
+                var number = true;
+                
+            }
+            if (!password.match(/[!@#$%^&*]/)) {
+                $("#special_character").removeClass('ctick').addClass('ccross');
+                password_is_valid = false;
+                
+            } else {
+                $("#special_character").removeClass('ccross').addClass('ctick');
+                var special_character = true;
+
+                
+            }
+            if(password != confirmpass) {
+                alert('password and confirm password not matched');
+                $('#submit').attr('disabled',true);
+            }
         });
     </script>
 @endpush
