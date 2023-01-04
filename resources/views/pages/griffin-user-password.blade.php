@@ -30,7 +30,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">password</label>
                                         @php $password = Session::get('user_credentials');@endphp
-                                        <input class="form-control" type="type" name="password"  value="{{$password["password"]}}">
+                                        <input class="form-control" type="password" name="password"  value="{{$password["password"]}}">
                                     
                                     </div>
                                 </div>
