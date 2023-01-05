@@ -3,11 +3,7 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Billing And Shipping Details'])
     <style>
-        .spinner{
-           height:100px;
-           width:100px; 
-          
-        }
+       
     </style>
    <div class="container-fluid pt-4 mt-4">
       <div id="alert">
@@ -222,7 +218,7 @@
 @endsection
 @push('js')
   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-
+  <script src="{{asset('argon/assets/js/plugins/multistep-form.js')}}" type="text/javascript"></script>
     <script>
         $(document).ready(function(){
             $('#alert').fadeOut(5000);

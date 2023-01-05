@@ -30,9 +30,8 @@
                 @if(Session::has('existing_user'))
             
                     <li class="nav-item">
-                        <form method="get" class="nav-link" action="{{route('switch')}}" id="myForm">
-                            <div
-                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <form method="get"  class="nav-link" action="{{route('switch')}}" id="myForm">
+                            <div class="icon icon-shape icon-sm  text-center d-flex align-items-center justify-content-center">
                             <label class="form-check form-switch">
                                 <input type="checkbox" class="form-check-input" name="checkbox" value="dark"  onclick="document.getElementById('myForm').submit();"> 
                                 </label>
@@ -61,6 +60,15 @@
                             <i class="ni-2x ni ni-credit-card  text-dark  opacity-10"></i>
                         </div>
                         <span class="nav-link-text text-xl ms-2">Billing And Shipping Details</span>
+                    </a>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'whisker.order' ? 'active' : '' }}" href="{{route('whisker.order')}}">
+                        <div
+                            class="icon border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni-2x ni ni-bag-17  text-dark  opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text text-xl ms-2">Order Details</span>
                     </a>
                 </li>
                 {{-- <li class="nav-item mt-3 d-flex align-items-center">

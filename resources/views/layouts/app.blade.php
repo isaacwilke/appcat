@@ -28,25 +28,16 @@
     @endif
 
     @if(Session::has('user')|| Session::has('griffin_user'))
-        {{-- @if (in_array(request()->route()->getName(), ['sign-in-static', 'sign-up-static', 'login', 'register', 'recover-password', 'rtl', 'virtual-reality']))
-            @yield('content')
-        @else
-            @if (!in_array(request()->route()->getName(), ['1', 'profile-static']))
-                <div class="min-height-300 bg-primary position-absolute w-100"></div>
-            @elseif (in_array(request()->route()->getName(), ['profile-static', '1']))
-                <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
-                    <span class="mask bg-primary opacity-6"></span>
-                </div>
-            @endif --}}
+     
             @include('layouts.navbars.auth.sidenav')
                 <main class="main-content">
-                <div class="min-height-300 position-absolute  w-100 bg-primary"></div>
+                <div class="min-height-200 position-absolute  w-100 bg-primary"></div>
                     @yield('content')
             
 
                 </main>
           
-        {{-- @endif --}}
+       
     @endif
 
     <!--   Core JS Files   -->
@@ -59,7 +50,6 @@
     
     <script src="{{asset('argon/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
     {{-- <script src="{{asset('argon/assets/js/argon-dashboard.js') }}"></script> --}}
-    <script src="{{asset('argon/assets/js/plugins/multistep-form.js')}}" type="text/javascript"></script>
     {{-- <script src="{{asset('argon/assets/js/custom.js') }}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;

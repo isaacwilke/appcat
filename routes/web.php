@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\BillingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\BillingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ChangePasswordController;
@@ -62,3 +63,8 @@ Route::get('griffin-change-password',[LoginController::class,'griffinchangepassw
 Route::post('griffin-password-change',[LoginController::class,'griffinpasswordchange'])->name('update-griffin-password');
 Route::post('whisker-password-change',[LoginController::class,'whiskerpasswordchange'])->name('update-whisker-password');
 Route::get('logout',[LoginController::class,'logout'])->name('logout');
+
+Route::get('whisker-orders',[OrderController::class,'getWhiskerOrder'])->name('whisker.order');
+Route::get('whisker-orders/{id}',[OrderController::class,'editWhiskerOrder'])->name('whisker.edit');
+Route::post('whisker-order-store',[OrderController::class,'storeWhskerOrder'])->name('whisker.orderstore');
+
