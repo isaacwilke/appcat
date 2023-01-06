@@ -109,7 +109,7 @@
                                            {{$order['date_paid']}}   
                                         </td> 
                                         <td class="align-middle">
-                                            <a href="{{route('whisker.edit',['id'=>$order['id']])}}" class="text-secondary font-weight-bold text-xs"
+                                            <a href="{{route('griffin.edit',['id'=>$order['id']])}}" class="text-secondary font-weight-bold text-xs"
                                                 data-toggle="tooltip" data-original-title="Edit order">
                                                 {{__('Edit')}}
                                             </a>

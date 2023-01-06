@@ -68,3 +68,6 @@ Route::get('whisker-orders',[OrderController::class,'getWhiskerOrder'])->name('w
 Route::get('whisker-orders/{id}',[OrderController::class,'editWhiskerOrder'])->name('whisker.edit');
 Route::post('whisker-order-store',[OrderController::class,'storeWhskerOrder'])->name('whisker.orderstore');
 
+Route::get('griffin-orders',[OrderController::class,'getGriffinOrder'])->name('griffin.order');
+Route::get('griffin-orders/{id}',[OrderController::class,'editGriffinOrder'])->name('griffin.edit');
+Route::post('griffin-order-store',[OrderController::class,'storeGriffinOrder'])->name('griffin.orderstore');

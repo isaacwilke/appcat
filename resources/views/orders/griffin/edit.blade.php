@@ -57,7 +57,7 @@
                         
                                 <div class="row">
                                     <div class="col-12 m-auto">
-                                        <form class="multisteps-form__form" id="Billing_form" method="POST" action="{{route('whisker.orderstore')}}">
+                                        <form class="multisteps-form__form" id="Billing_form" method="POST" action="{{route('griffin.orderstore')}}">
                                         @csrf
                                             <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                                 <div class="row text-center">

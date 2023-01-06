@@ -152,6 +152,14 @@
                         <span class="nav-link-text text-xl ms-2">Billing And Shipping Details</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ Route::currentRouteName() == 'griffin.order' ? 'active' : '' }}" href="{{route('griffin.order')}}">
+                        <div class="icon border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni-2x ni ni-bag-17  text-dark  opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text text-xl ms-2">Order Details</span>
+                    </a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="#">
                         <div
