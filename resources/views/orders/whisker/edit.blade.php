@@ -267,52 +267,95 @@
                                                     </div>
                                                 </div>
                                                 <div class="multisteps-form__content">
+                                                      @if(empty($order['shipping_lines']))
                                                     <div class="row text-start">
-                                                      
+                                                         <div class="col-6 col-md-6  mt-3">
+                                                            <label>id</label>
+                                                             
+                                                             <input class="multisteps-form__input form-control" type="text" readonly name="shipping_lines_id[]" value="" placeholder="Eg. 221" />
+                                                       
+                                                        </div>
                                                         <div class="col-6 col-md-6  mt-3">
                                                             <label>Method title</label>
-                                                             @if(!empty($order['shipping_lines']))
-                                                            <input class="multisteps-form__input form-control" type="text" name="shipping_lines_method_title" value="{{$order['shipping_lines']['0']['method_title']}}" placeholder="Eg. 221" />
-                                                            @else
-                                                             <input class="multisteps-form__input form-control" type="text" name="shipping_lines_method_title" value="" placeholder="Eg. 221" />
-                                                            @endif
+                                                             
+                                                             <input class="multisteps-form__input form-control" type="text" name="shipping_lines_method_title[]" value="" placeholder="Eg. 221" />
+                                                       
                                                         </div>
                                                          <div class="col-12 col-md-6  mt-3">
                                                             <label>method_id</label>
-                                                             @if(!empty($order['shipping_lines']))
-                                                            <input class="multisteps-form__input form-control" type="text" name="shipping_lines_method_id" required value="{{$order['shipping_lines']['0']['method_id']}}" placeholder="Eg. 221" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control" type="text" name="shipping_lines_method_id" required value="" placeholder="Eg. 221" />
+                                                          
+                                                            <input class="multisteps-form__input form-control" type="text" name="shipping_lines_method_id[]" required value="" placeholder="Eg. 221" />
 
-                                                            @endif
+                                                           
                                                         </div>
                                                         <div class="col-12 col-md-6 mt-3">
                                                             <label> instance_id</label>
-                                                             @if(!empty($order['shipping_lines']))
-                                                            <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_instance_id" value="{{$order['shipping_lines']['0']['instance_id']}}" placeholder="Eg. Tokyo" />
-                                                             @else
-                                                             <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_instance_id" value="" placeholder="Eg. Tokyo" />
-                                                             @endif
+                                                           
+                                                             <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_instance_id[]" value="" placeholder="Eg. Tokyo" />
+                                                            
                                                         </div>
                                                         <div class="col-12 col-md-6 mt-3">
                                                             <label>total</label>
-                                                            @if (!empty($order['shipping_lines']))
-                                                              <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_total" value="{{$order['shipping_lines']['0']['total']}}" placeholder="Eg. Tokyo" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_total" value="" placeholder="Eg. Tokyo" />  
-                                                            @endif
+                                                           
+                                                            <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_total[]" value="" placeholder="Eg. Tokyo" />  
+                                                            
                                                             
                                                         </div>
                                                          <div class="col-12 col-md-6 mt-3">
                                                             <label> Total Tax</label>
-                                                             @if (!empty($order['shipping_lines']))
-                                                            <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_total_tax" value="{{$order['shipping_lines']['0']['total_tax']}}" placeholder="Eg. Tokyo" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_total_tax" value="" placeholder="Eg. Tokyo" />
-                                                            @endif
+                                                            
+                                                            <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_total_tax[]" value="" placeholder="Eg. Tokyo" />
+                                                         
                                                         </div>
                                                        
                                                     </div>
+                                                    @else
+                                                    @foreach ($order['shipping_lines'] as $shipping)
+                                                    
+                                                       <div class="row text-start">
+                                                         <div class="col-6 col-md-6  mt-3">
+                                                            <label>id</label>
+                                                             
+                                                             <input class="multisteps-form__input form-control" type="text" readonly name="shipping_lines_id[]" value="{{$shipping['id']}}" placeholder="Eg. 221" />
+                                                       
+                                                        </div>
+                                                        <div class="col-6 col-md-6  mt-3">
+                                                            <label>Method title</label>
+                                                             
+                                                             <input class="multisteps-form__input form-control" type="text" name="shipping_lines_method_title[]" value="{{$shipping['method_title']}}" placeholder="Eg. 221" />
+                                                       
+                                                        </div>
+                                                         <div class="col-12 col-md-6  mt-3">
+                                                            <label>method_id</label>
+                                                          
+                                                            <input class="multisteps-form__input form-control" type="text" name="shipping_lines_method_id[]" required value="{{$shipping['method_id']}}" placeholder="Eg. 221" />
+
+                                                           
+                                                        </div>
+                                                        <div class="col-12 col-md-6 mt-3">
+                                                            <label> instance_id</label>
+                                                           
+                                                             <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_instance_id[]" value="{{$shipping['instance_id']}}" placeholder="Eg. Tokyo" />
+                                                            
+                                                        </div>
+                                                        <div class="col-12 col-md-6 mt-3">
+                                                            <label>total</label>
+                                                           
+                                                            <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_total[]" value="{{$shipping['total']}}" placeholder="Eg. Tokyo" />  
+                                                            
+                                                            
+                                                        </div>
+                                                         <div class="col-12 col-md-6 mt-3">
+                                                            <label> Total Tax</label>
+                                                            
+                                                            <input class="multisteps-form__input form-control"  type="text" name="shipping_lines_total_tax[]" value="{{$shipping['total_tax']}}" placeholder="Eg. Tokyo" />
+                                                         
+                                                        </div>
+                                                       
+                                                    </div> 
+                                                    <hr/>
+                                                    @endforeach
+                                                    @endif
                                                     <div class="row">
                                                         <div class="button-row d-flex mt-4 col-12">
                                                             <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
@@ -332,64 +375,118 @@
                                                         <p>One thing I love about the later sunsets is the chance to go for a walk through the neighborhood woods before dinner</p>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="multisteps-form__content">
+                                                @php $feeline = sizeof($order['fee_lines']);
+                                                 @endphp
+                                                @if(empty($order['fee_lines']))
+                                                
                                                     <div class="row text-start">
-                                                        
                                                         <div class="col-6 col-md-6  mt-3">
-                                                            <label> Name</label>
-                                                             @if(!empty($order['fee_lines']))
-                                                            <input class="multisteps-form__input form-control" type="text" required name="fees_line_name" value="{{$order['fee_lines']['0']['name']}}" placeholder="Eg. 221" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control" type="text" required name="fees_line_name" value="" placeholder="Eg. 221" />
+                                                        
+                                                            <label> id</label>
                                                             
-                                                            @endif
+                                                            <input class="multisteps-form__input form-control" type="text" readonly name="fees_line_id[]" value="" placeholder="Eg. 221" />
+                                                            
+                                                           
                                                         </div>
-                                                         <div class="col-12 col-md-4  mt-3">
+                                                        <div class="col-6 col-md-6  mt-3">
+
+                                                            <label> Name</label>
+                                                            
+                                                          
+                                                            <input class="multisteps-form__input form-control" type="text" required name="fees_line_name[]" value="" placeholder="Eg. 221" />
+                                                            
+                                                            
+                                                        </div>
+                                                         <div class="col-12 col-md-6  mt-3">
                                                             <label>tax_class</label>
-                                                            @if(!empty($order['fee_lines']))
-                                                            <input class="multisteps-form__input form-control" type="text" name="fees_line_tax_class"value="{{$order['fee_lines']['0']['tax_class']}}" placeholder="Eg. 221" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control" type="text" name="fees_line_tax_class"value="" placeholder="Eg. 221" />
-                                                            @endif
+                                                           
+                                                            <input class="multisteps-form__input form-control" type="text" name="fees_line_tax_class[]"value="" placeholder="Eg. 221" />
+                                                            
                                                         </div>
-                                                        <div class="col-12 col-md-4 mt-3">
+                                                        <div class="col-12 col-md-6 mt-3">
                                                             <label> tax_status</label>
-                                                            @if(!empty($order['fee_lines']))
-                                                            <input class="multisteps-form__input form-control"  type="text" required name="fees_line_tax_status" value="{{$order['fee_lines']['0']['tax_status']}}" placeholder="Eg. Tokyo" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control"  type="text" required name="fees_line_tax_status" value="{{'taxable'}}" placeholder="Eg. Tokyo" />
+                                                           
+                                                            <input class="multisteps-form__input form-control"  type="text" required name="fees_line_tax_status[]" value="{{'taxable'}}" placeholder="Eg. Tokyo" />
 
-                                                            @endif
+                                                          
                                                         </div>
-                                                        <div class="col-12 col-md-4 mt-3">
+                                                        <div class="col-12 col-md-6 mt-3">
                                                             <label>amount</label>
-                                                            @if(!empty($order['fee_lines']))
-                                                            <input class="multisteps-form__input form-control"  type="text" required name="fees_line_amount" value="{{$order['fee_lines']['0']['amount']}}" placeholder="Eg. Tokyo" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control"  type="text" required name="fees_line_amount" value="" placeholder="Eg. Tokyo" />
+                                                            
+                                                            <input class="multisteps-form__input form-control"  type="text" required name="fees_line_amount[]" value="" placeholder="Eg. Tokyo" />
 
-                                                            @endif
+                                                            
                                                         </div>
                                                          <div class="col-12 col-md-6 mt-3">
                                                             <label> total</label>
-                                                            @if(!empty($order['fee_lines']))
-                                                            <input class="multisteps-form__input form-control" required type="text" name="fees_line_total" value="{{$order['fee_lines']['0']['total']}}" placeholder="Eg. Tokyo" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control" required type="text" name="fees_line_total" value="" placeholder="Eg. Tokyo" />
+                                                          
+                                                            <input class="multisteps-form__input form-control" required type="text" name="fees_line_total[]" value="" placeholder="Eg. Tokyo" />
 
-                                                            @endif
+                                                            
                                                         </div>
                                                          <div class="col-12 col-md-6 mt-3">
                                                             <label> total_tax</label>
-                                                            @if(!empty($order['fee_lines']))
-                                                            <input class="multisteps-form__input form-control" required type="text" name="fees_line_total_tax" value="{{$order['fee_lines']['0']['total_tax']}}" placeholder="Eg. Tokyo" />
-                                                            @else
-                                                            <input class="multisteps-form__input form-control"  required type="text" name="fees_line_total_tax" value="" placeholder="Eg. Tokyo" />
+                                                           
+                                                            <input class="multisteps-form__input form-control"  required type="text" name="fees_line_total_tax[]" value="" placeholder="Eg. Tokyo" />
 
-                                                            @endif
+                                                            
                                                         </div>
                                                         
                                                     </div>
+                                                
+                                                     @else
+                                                        @foreach ($order['fee_lines'] as $fees)
+                                                           <div class="row text-start">
+                                                               <div class="col-6 col-md-6  mt-3">
+                                                        
+                                                            <label> id</label>
+                                                           
+                                                            <input class="multisteps-form__input form-control" type="text" readonly name="fees_line_id[]" value="{{$fees['id']}}" placeholder="Eg. 221" />
+                                                           
+                                                        </div>
+                                                        <div class="col-6 col-md-6  mt-3">
+                                                            <label> Name</label>
+                                                            
+                                                            <input class="multisteps-form__input form-control" type="text" required name="fees_line_name[]" value="{{$fees['name']}}" placeholder="Eg. 221" />
+                                                            
+                                                        </div>
+                                                         <div class="col-12 col-md-6  mt-3">
+                                                            <label>tax_class</label>
+                                                           
+                                                            <input class="multisteps-form__input form-control" type="text" name="fees_line_tax_class[]"value="{{$fees['tax_class']}}" placeholder="Eg. 221" />
+                                                          
+                                                        </div>
+                                                        <div class="col-12 col-md-6 mt-3">
+                                                            <label> tax_status</label>
+                                                          
+                                                            <input class="multisteps-form__input form-control"  type="text" required name="fees_line_tax_status[]" value="{{$fees['tax_status']}}" placeholder="Eg. Tokyo" />
+                                                            
+                                                        </div>
+                                                        <div class="col-12 col-md-6 mt-3">
+                                                            <label>amount</label>
+                                                            
+                                                            <input class="multisteps-form__input form-control"  type="text" required name="fees_line_amount[]" value="{{$fees['amount']}}" placeholder="Eg. Tokyo" />
+                                                           
+                                                        </div>
+                                                         <div class="col-12 col-md-6 mt-3">
+                                                            <label> total</label>
+                                                           
+                                                            <input class="multisteps-form__input form-control" required type="text" name="fees_line_total[]" value="{{$fees['total']}}" placeholder="Eg. Tokyo" />
+                                                           
+                                                        </div>
+                                                         <div class="col-12 col-md-6 mt-3">
+                                                            <label> total_tax</label>
+                                                          
+                                                            <input class="multisteps-form__input form-control" required type="text" name="fees_line_total_tax[]" value="{{$fees['total_tax']}}" placeholder="Eg. Tokyo" />
+                                                          
+                                                        </div>
+                                                       
+                                                    </div> 
+                                                     <hr> 
+                                                        @endforeach
+                                                    @endif
                                                     <div class="row">
                                                         <div class="button-row d-flex mt-4 col-12">
                                                             <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Prev</button>

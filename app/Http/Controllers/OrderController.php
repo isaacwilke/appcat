@@ -92,7 +92,51 @@ class OrderController extends Controller
     }
     public function storeWhskerOrder(Request $request){
         if(Session::has('user') && Session::has('token')){
+            
+            $shipping_line = array();
+            foreach($request->shipping_lines_id as $key=>$id){
+                $shipping_line[$key]['id']=$id;
+            }
+            foreach($request->shipping_lines_method_title as $key=>$method_title){
+                $shipping_line[$key]['method_title']=$method_title;
+            }
+            foreach($request->shipping_lines_method_id as $key=>$method_id){
+                $shipping_line[$key]['method_id']=$method_id;
+            }
+            foreach($request->shipping_lines_instance_id as $key=>$instance_id){
+                $shipping_line[$key]['instance_id']=$instance_id;
+            }
+            foreach($request->shipping_lines_total as $key=>$total){
+                $shipping_line[$key]['total']=$total;
+            }
+            foreach($request->shipping_lines_total_tax as $key=>$total_tax){
+                $shipping_line[$key]['total_tax']=$total_tax;
+            }
            
+           
+            $feeline = array();
+            foreach($request->fees_line_id as $key=>$id){
+                $feeline[$key]['id']=$id;
+            }
+            foreach($request->fees_line_name as $key=>$name){
+                $feeline[$key]['name']=$name;
+            }
+            foreach($request->fees_line_tax_class as $key=>$tax_class){
+                $feeline[$key]['tax_class']=$tax_class;
+            }
+            foreach($request->fees_line_tax_status as $key=>$tax_status){
+                $feeline[$key]['tax_status']=$tax_status;
+            }
+            foreach($request->fees_line_amount as $key=>$amount){
+                $feeline[$key]['amount']=$amount;
+            }
+            foreach($request->fees_line_total as $key=>$total){
+                $feeline[$key]['total']=$total;
+            }
+            foreach($request->fees_line_total_tax as $key=>$total_tax){
+                $feeline[$key]['total_tax']=$total_tax;
+            }
+            // dd( $feeline);
             $data = [
                 'transaction_id'=>!empty($request->transaction_id)?$request->transaction_id:'',
                 'payment_method' =>!empty($request->payment_method) ?$request->payment_method:'',
@@ -134,29 +178,10 @@ class OrderController extends Controller
                     'state'=>!empty($request->shipping_state)?$request->shipping_state:'',
                     'phone'=>!empty($request->shipping_phone)?$request->shipping_phone:'',
                 ],
-                "shipping_lines" =>[
-               [
-                
-                  "method_title" => !empty($request->shipping_lines_method_title)?$request->shipping_lines_method_title:'',
-                  "method_id" => !empty($request->shipping_lines_method_id)?$request->shipping_lines_method_id:'',
-                  "instance_id" => !empty($request->shipping_lines_instance_id)?$request->shipping_lines_instance_id:'',
-                  "total" => !empty($request->shipping_lines_total)?$request->shipping_lines_total:'',
-                  "total_tax" => !empty($request->shipping_lines_total_tax)?$request->shipping_lines_total_tax:'',
-                ]],
-              "fee_lines" =>[
-                [
-                 
-                  "name" => !empty($request->fees_line_name)?$request->fees_line_name:'',
-                  "tax_class" => !empty($request->fees_line_tax_class)?$request->fees_line_tax_class:'',
-                  "tax_status" => !empty($request->fees_line_tax_status)?$request->fees_line_tax_status:'',
-                  "amount" => !empty($request->fees_line_amount)?$request->fees_line_amount:'',
-                  "total" => !empty($request->fees_line_total)?$request->fees_line_total:'',
-                  "total_tax" => !empty($request->fees_line_total_tax)?$request->fees_line_total_tax:'',
-                 
-                
-                ]],
+                "shipping_lines" =>$shipping_line,
+              "fee_lines" =>$feeline,
             ];
-            
+            // dd($data);
            
             $client = new \GuzzleHttp\Client();
             try{
@@ -280,6 +305,49 @@ class OrderController extends Controller
     public function storeGriffinOrder(Request $request){
         if(Session::has('griffin_user') && Session::has('token')){
            
+            $shipping_line = array();
+            foreach($request->shipping_lines_id as $key=>$id){
+                $shipping_line[$key]['id']=$id;
+            }
+            foreach($request->shipping_lines_method_title as $key=>$method_title){
+                $shipping_line[$key]['method_title']=$method_title;
+            }
+            foreach($request->shipping_lines_method_id as $key=>$method_id){
+                $shipping_line[$key]['method_id']=$method_id;
+            }
+            foreach($request->shipping_lines_instance_id as $key=>$instance_id){
+                $shipping_line[$key]['instance_id']=$instance_id;
+            }
+            foreach($request->shipping_lines_total as $key=>$total){
+                $shipping_line[$key]['total']=$total;
+            }
+            foreach($request->shipping_lines_total_tax as $key=>$total_tax){
+                $shipping_line[$key]['total_tax']=$total_tax;
+            }
+           
+           
+            $feeline = array();
+            foreach($request->fees_line_id as $key=>$id){
+                $feeline[$key]['id']=$id;
+            }
+            foreach($request->fees_line_name as $key=>$name){
+                $feeline[$key]['name']=$name;
+            }
+            foreach($request->fees_line_tax_class as $key=>$tax_class){
+                $feeline[$key]['tax_class']=$tax_class;
+            }
+            foreach($request->fees_line_tax_status as $key=>$tax_status){
+                $feeline[$key]['tax_status']=$tax_status;
+            }
+            foreach($request->fees_line_amount as $key=>$amount){
+                $feeline[$key]['amount']=$amount;
+            }
+            foreach($request->fees_line_total as $key=>$total){
+                $feeline[$key]['total']=$total;
+            }
+            foreach($request->fees_line_total_tax as $key=>$total_tax){
+                $feeline[$key]['total_tax']=$total_tax;
+            }
             $data = [
                 'transaction_id'=>!empty($request->transaction_id)?$request->transaction_id:'',
                 'payment_method' =>!empty($request->payment_method) ?$request->payment_method:'',
@@ -320,27 +388,9 @@ class OrderController extends Controller
                     'state'=>!empty($request->shipping_state)?$request->shipping_state:'',
                     'phone'=>!empty($request->shipping_phone)?$request->shipping_phone:'',
                 ],
-                "shipping_lines" =>[
-                    [
-                     
-                       "method_title" => !empty($request->shipping_lines_method_title)?$request->shipping_lines_method_title:'',
-                       "method_id" => !empty($request->shipping_lines_method_id)?$request->shipping_lines_method_id:'',
-                       "instance_id" => !empty($request->shipping_lines_instance_id)?$request->shipping_lines_instance_id:'',
-                       "total" => !empty($request->shipping_lines_total)?$request->shipping_lines_total:'',
-                       "total_tax" => !empty($request->shipping_lines_total_tax)?$request->shipping_lines_total_tax:'',
-                     ]],
-                   "fee_lines" =>[
-                     [
-                      
-                       "name" => !empty($request->fees_line_name)?$request->fees_line_name:'',
-                       "tax_class" => !empty($request->fees_line_tax_class)?$request->fees_line_tax_class:'',
-                       "tax_status" => !empty($request->fees_line_tax_status)?$request->fees_line_tax_status:'',
-                       "amount" => !empty($request->fees_line_amount)?$request->fees_line_amount:'',
-                       "total" => !empty($request->fees_line_total)?$request->fees_line_total:'',
-                       "total_tax" => !empty($request->fees_line_total_tax)?$request->fees_line_total_tax:'',
-                      
-                     
-                     ]],
+                "shipping_lines" =>$shipping_line,
+              "fee_lines" =>$feeline,
+                    
             ];
             
            
