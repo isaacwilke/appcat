@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Config;
 
 
 class ChangePasswordController extends Controller
@@ -24,17 +25,17 @@ class ChangePasswordController extends Controller
         
         $client = new \GuzzleHttp\Client();
         try{
-            $token = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token', [
+            $token = $client->request('POST', Config::get('constants.griffin.url.token'), [
               
                 'form_params' => [
-                    'username' => 'admin2',
-                    'password' => 'admin2@3338',
+                    'username' => Config::get('constants.griffin.admin.username'),
+                    'password' => Config::get('constants.griffin.admin.password'),
                 ]
             ]);
             $validtoken = $token->getBody()->getContents();
             $validtoken= json_decode($validtoken,true);
            
-            $codevalidate = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/validate-code', [
+            $codevalidate = $client->request('POST',Config::get('constants.griffin.url.reset_validate'), [
                 'headers' =>
                 [
                     'Authorization' => "Bearer {$validtoken['data']['token']}"
@@ -47,7 +48,7 @@ class ChangePasswordController extends Controller
             $validcode = $codevalidate->getBody()->getContents();
             $validcode= json_decode($validcode,true);
             if($validcode['message']=='The code supplied is valid.'){
-                $setpassword = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/set-password', [
+                $setpassword = $client->request('POST', Config::get('constants.griffin.url.set_password'), [
                     'headers' =>
                     [
                         'Authorization' => "Bearer {$validtoken['data']['token']}"
@@ -93,17 +94,17 @@ class ChangePasswordController extends Controller
         
         $client = new \GuzzleHttp\Client();
         try{
-            $token = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token', [
+            $token = $client->request('POST', Config::get('constants.whisker.url.token'), [
               
                 'form_params' => [
-                    'username' => 'admin',
-                    'password' => 'admin@3338',
+                    'username' => Config::get('constants.whisker.admin.username'),
+                    'password' => Config::get('constants.whisker.admin.password'),
                 ]
             ]);
             $validtoken = $token->getBody()->getContents();
             $validtoken= json_decode($validtoken,true);
            
-            $codevalidate = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/bdpwr/v1/validate-code', [
+            $codevalidate = $client->request('POST',Config::get('constants.whisker.url.reset_validate'), [
                 'headers' =>
                 [
                     'Authorization' => "Bearer {$validtoken['data']['token']}"
@@ -116,7 +117,7 @@ class ChangePasswordController extends Controller
             $validcode = $codevalidate->getBody()->getContents();
             $validcode= json_decode($validcode,true);
             if($validcode['message']=='The code supplied is valid.'){
-                $setpassword = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/bdpwr/v1/set-password', [
+                $setpassword = $client->request('POST', Config::get('constants.whisker.url.set_password'), [
                     'headers' =>
                     [
                         'Authorization' => "Bearer {$validtoken['data']['token']}"

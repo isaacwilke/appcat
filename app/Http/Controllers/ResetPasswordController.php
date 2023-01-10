@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Config;
 
 
 
@@ -28,17 +29,17 @@ class ResetPasswordController extends Controller
     public function griffinPassword(Request $request){
         $client = new \GuzzleHttp\Client();
         try{
-            $token = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token', [
+            $token = $client->request('POST', Config::get('constants.griffin.url.token'), [
             
                 'form_params' => [
-                    'username' => 'admin2',
-                    'password' => 'admin2@3338',
+                    'username' => Config::get('constants.griffin.admin.username'),
+                    'password' => Config::get('constants.griffin.admin.password'),
                 ]
             ]);
             $validtoken = $token->getBody()->getContents();
             $validtoken= json_decode($validtoken,true);
         
-            $resetpassword = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/reset-password', [
+            $resetpassword = $client->request('POST', Config::get('constants.griffin.url.reset_password'), [
                 'headers' =>
                 [
                     'Authorization' => "Bearer {$validtoken['data']['token']}"
@@ -78,17 +79,17 @@ class ResetPasswordController extends Controller
     public function whiskerPassword(Request $request){
         $client = new \GuzzleHttp\Client();
         try{
-            $token = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token', [
+            $token = $client->request('POST', Config::get('constants.whisker.url.token'), [
             
                 'form_params' => [
-                    'username' => 'admin',
-                    'password' => 'admin@3338',
+                    'username' => Config::get('constants.whisker.admin.username'),
+                    'password' => Config::get('constants.whisker.admin.password'),
                 ]
             ]);
             $validtoken = $token->getBody()->getContents();
             $validtoken= json_decode($validtoken,true);
         
-            $resetpassword = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/bdpwr/v1/reset-password', [
+            $resetpassword = $client->request('POST', Config::get('constants.whisker.url.reset_password'), [
                 'headers' =>
                 [
                     'Authorization' => "Bearer {$validtoken['data']['token']}"
