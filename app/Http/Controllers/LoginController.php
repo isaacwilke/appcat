@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -38,13 +37,16 @@ class LoginController extends Controller
             'email' => ['required'],
             'password' => ['required'],
         ]);
+        
         $data= [
             'username'=>$request->email,
             'password'=>$request->password,
         ];
-        $method = "POST";
-        $url = Config::get('constants.whisker.url.token');
 
+        $method = "POST";
+
+        $url = Config::get('constants.whisker.url.token');
+        // for getting token from whisker site
         $result = Helper::PostRequest($data,$method,$url,$token="");
         if($result['success']==false){
            return back()->with('error', $result['message']);
@@ -57,6 +59,7 @@ class LoginController extends Controller
 
         $url = Config::get('constants.griffin.url.token'); 
         
+        //for getting token from griffin site
         $second_token = Helper::PostRequest($data,$method,$url,$token="");
         if($second_token['success']==false){
             return back()->with('error', $second_token['message']); 
@@ -65,6 +68,7 @@ class LoginController extends Controller
         
         $token=$result['data']['token'];
         
+        //Checking token is valid or not
         $result1= Helper::PostRequest($data="",$method,$url,$token);
       
         if ($result1['message'] == "Token is valid") {
@@ -73,12 +77,15 @@ class LoginController extends Controller
             $method = "POST";
             $token=$result['data']['token'];
             
+            // get user of whisker site
             $user = Helper::PostRequest($data="",$method,$url,$token); 
              
             $role= "customer";
             
             $method = "GET";
             $token = $second_token['data']['token'];
+
+            //get user of griffin site
             $url =Config::get('constants.griffin.url.search_user').$request->email .'&roles='.$role;
              
             $existinguser=Helper::PostRequest($data="",$method,$url,$token); 
@@ -101,7 +108,7 @@ class LoginController extends Controller
             
                 return redirect()->route('dashboard');
             }else{	
-                throw new \Exception("user is not a customer", 401);
+                return redirect()->route('login')->with('error',  "user is not a customer");
                 
             }
         }
@@ -155,97 +162,77 @@ class LoginController extends Controller
             'email' => ['required'],
             'password' => ['required'],
         ]); 
-        $client = new \GuzzleHttp\Client();
-        try {
-            $response = $client->request('POST', Config::get('constants.griffin.url.token'), [
-          
-                'form_params' => [
-                    'username' => $request->email,
-                    'password' => $request->password,
-                ]
-            ]);
 
-            $result = $response->getBody()->getContents();
+        $method = 'POST';
 
-            $result = json_decode($result,true);
+        $data = [
+            'username' => $request->email,
+            'password' => $request->password, 
+        ];
+
+        $url =  Config::get('constants.griffin.url.token');
+        // Getting token of griffin site
+        $result = Helper::PostRequest($data, $method, $url, $token="");
+
+        if($result['success']==false){
+            return back()->with('error', $result['message']);
+        }
         
-       
-            $response2 = $client->request('POST', Config::get('constants.griffin.url.token_validate'), [
-                'headers' =>
-                [
-                    'Authorization' => "Bearer {$result['data']['token']}"
-                ]
-            ]);
+        $token=$result['data']['token'];
+        $url =Config::get('constants.griffin.url.token_validate');
+        // checking token valid or not
+        $result1 = Helper::PostRequest($data='', $method, $url, $token);
 
-            $result1 = $response2->getBody()->getContents();
-            $result1 = json_decode($result1,true);
+        $data =[
+            'username' => Config::get('constants.whisker.admin.username'),
+            'password' => Config::get('constants.whisker.admin.password'),
+        ];
+        $url =  Config::get('constants.whisker.url.token');
 
-            $newuser = $client->request('POST', Config::get('constants.whisker.url.token'), [
+        // getting token for whisker site
+        $second_token = Helper::PostRequest($data, $method, $url, $token=''); 
+        if($second_token['success']==false){
+            return back()->with('error', $second_token['message']); 
+        }
+          
+        if ($result1['message'] == "Token is valid") {  
+            $method = 'GET';
+            $role= "customer";
+            $url = Config::get('constants.whisker.url.search_user').$request->email.'&roles='.$role;
+            $token =$second_token['data']['token'];
+            // getting user of whisker site
+            $existinguser= Helper::PostRequest($data='', $method, $url, $token);  
+                 
+            $method = 'POST';
+            $url =   Config::get('constants.griffin.url.get_user').$result['data']['id'];
+            $token = $result['data']['token'];
+
+            // getting user of griffin site
+            $user= Helper::PostRequest($data='', $method, $url, $token);
             
-                'form_params' => [
-                    'username' => Config::get('constants.whisker.admin.username'),
-                    'password' => Config::get('constants.whisker.admin.password'),
-                ]
-            ]);
-            $second_token = $newuser->getBody()->getContents();
-            $second_token= json_decode($second_token,true);
-           
-            if ($result1['message'] == "Token is valid") {
-                $role= "customer";
-                $exisiting = $client->request('GET', Config::get('constants.whisker.url.search_user').$request->email.'&roles='.$role, ['headers' => 
-                [
-                    'Authorization' => "Bearer {$second_token['data']['token']}"
-                ]
-                ]);
-    
-                $existinguser= $exisiting->getBody()->getContents();
-                $existinguser = json_decode($existinguser, true);    
-                // dd($existinguser);   
-              
-                $response3 =  $client->request('POST', Config::get('constants.griffin.url.get_user').$result['data']['id'], [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ],
-                ]);
-            
-                $user = $response3->getBody()->getContents();
+            if($user['roles']['0']=='customer'){
 
-                $user= json_decode($user,true);
-             
-                // dd($user);
-                if($user['roles']['0']=='customer'){
-
-                    $request->session()->regenerate();
-                    $request->session()->put('griffin_user', $user);
-                    $request->session()->put('token', $result['data']);
-                    $request->session()->put('user_credentials', $credentials);
-                    // dd( $second_token['data']['token']);
-                    if(!empty($existinguser)){
-                        $request->session()->put("existing_user", $existinguser);
-                        $request->session()->put("whisker_token", $second_token['data']['token']);
-                    }
-                    if ($request->site == "Griffin Rock CAT Retreat - Your Cat's Vacation oasis") {
-                        $request->session()->put('two', $request->site);
-                    } 
-                
-                    return redirect()->intended('griffin-dashboard');
-                }else{
-                    throw new \Exception("user is not a customer", 401);
+                $request->session()->regenerate();
+                $request->session()->put('griffin_user', $user);
+                $request->session()->put('token', $result['data']);
+                $request->session()->put('user_credentials', $credentials);
+                // dd( $second_token['data']['token']);
+                if(!empty($existinguser)){
+                    $request->session()->put("existing_user", $existinguser);
+                    $request->session()->put("whisker_token", $second_token['data']['token']);
+                }
+                if ($request->site == "Griffin Rock CAT Retreat - Your Cat's Vacation oasis") {
+                    $request->session()->put('two', $request->site);
                 } 
             
-            }
-        }catch (\GuzzleHttp\Exception\ClientException $e) {
-            $response = $e->getResponse();
-            $responseBodyAsString = $response->getBody()->getContents();
-    
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
-           
-            return back()->with('error', $responseBodyAsString['message']);
+                return redirect()->intended('griffin-dashboard');
+            }else{
+                return redirect()->route('griffin')->with('error',  "user is not a customer");
+                
+            } 
+            
         }
-        catch (\Throwable $th) {
-            return back()->with('error',  $th->getMessage());
-        }
+       
     }
   
     public function getProfile(Request $request){
@@ -264,103 +251,76 @@ class LoginController extends Controller
 
 
     public function updateProfile(Request $request){
-        try {
+    
            
-            if(Session::has('one') && Session::has('user') && Session::has('token')){
-        
-                $credentials = $request->validate([
-                    'email' => ['required'],
-                    'firstname' => ['required'],
-                    'lastname'=>['required'],
+        if(Session::has('one') && Session::has('user') && Session::has('token')){
+    
+            $credentials = $request->validate([
+                'email' => ['required'],
+                'firstname' => ['required'],
+                'lastname'=>['required'],
 
-                ]); 
-               
-                $clientObj = new \GuzzleHttp\Client();
+            ]); 
 
-                $tokenvalid = $clientObj->request('POST', Config::get('constants.whisker.url.token_validate'), [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$request->auth_token}"
-                    ]
-                ]);
-
-                $tokenvalid = $tokenvalid->getBody()->getContents();
-                
-                $tokenvalid = json_decode($tokenvalid,true);
-               
-                if($tokenvalid['message']=="Token is valid"){
-                    $userobj =  $clientObj->request('POST', Config::get('constants.whisker.url.get_user').$request->id, [
-                        'headers' =>
-                        [
-                            'Authorization' => "Bearer {$request->auth_token}"
-                        ],'form_params' => [
-                            'username' => !empty($request->username)?$request->username:'',
-                            'first_name' =>!empty($request->firstname)?$request->firstname :'',
-                            'last_name'=>!empty($request->lastname)?$request->lastname:"",
-                            'email'=>!empty($request->email)?$request->email:'',
-                            'description'=>!empty($request->description)?$request->description:'',
-                            
-                        ]
-                    ]);
-                
-                    $user = $userobj ->getBody()->getContents();
-
-                    $user= json_decode($user,true);
-                    $request->session()->put('user', $user);
-                    
-                     
-                    $whishkerUser = Session::get('user');
-                   
-                    if(Session::has('existing_user') && Session::has('whisker_token')){
-                        $griffinuser = Session::get('existing_user');
-                        
-                        $user_id = 0;
-                        if (isset($griffinuser['0']['id'])) {
-                            $user_id = $griffinuser['0']['id'];
-                        }else{
-                            $user_id = $griffinuser['id'];
-                        }
-                        
-
-                        $tokenGriffin = Session::get('whisker_token');
-                       
-                       
-                        $griffinobj =  $clientObj->request('POST', Config::get('constants.griffin.url.get_user').$user_id, [
-                            'headers' =>
-                            [
-                                'Authorization' => "Bearer {$tokenGriffin}"
-                            ],'form_params' => [
-                                
-                                'email'=>$request->email,
-                                
-                            ]
-                        ]);
-                    
-                        $griffin = $griffinobj ->getBody()->getContents();
-                    
-                    }
-
-                   
-
-                    return redirect()->route('profile')->with('succes', "User profile updated successfully..!");
-                    
-                } 
-            }else{
-                throw new \Exception("You Need to Login First", 401);
+            $url =  Config::get('constants.whisker.url.token_validate');
+            $token= $request->auth_token;
+            $method ="POST";
+            // Checking token valid or not
+            $tokenvalid = Helper::PostRequest($data='', $method, $url, $token);
+            if($tokenvalid['success']==false){
+                return back()->with('error', $tokenvalid['message']); 
                 
             }
-        }catch (\GuzzleHttp\Exception\ClientException $e) {
-            $response = $e->getResponse();
-            $responseBodyAsString = $response->getBody()->getContents();
+            if($tokenvalid['message']=="Token is valid"){
+                $url = Config::get('constants.whisker.url.get_user').$request->id;
+                $method = "POST";
+                $token = $request->auth_token;
+                $data = [
+                    'username' => !empty($request->username)?$request->username:'',
+                    'first_name' =>!empty($request->firstname)?$request->firstname :'',
+                    'last_name'=>!empty($request->lastname)?$request->lastname:"",
+                    'email'=>!empty($request->email)?$request->email:'',
+                    'description'=>!empty($request->description)?$request->description:'',
+                ];
 
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
-        
-            return back()->with('error', $responseBodyAsString['message']);
+                // Update user details of whisker site
+                $user = Helper::PostRequest($data, $method, $url, $token);
+              
+                
+                $request->session()->put('user', $user);
+                
+                    
+                $whishkerUser = Session::get('user');
+                
+                if(Session::has('existing_user') && Session::has('whisker_token')){
+                    $griffinuser = Session::get('existing_user');
+                    
+                    $user_id = 0;
+                    if (isset($griffinuser['0']['id'])) {
+                        $user_id = $griffinuser['0']['id'];
+                    }else{
+                        $user_id = $griffinuser['id'];
+                    }
+                    
+                    $tokenGriffin = Session::get('whisker_token');
+                    $url =Config::get('constants.griffin.url.get_user').$user_id;
+                    $method ="POST";
+                    $data =[
+                        'email'=>$request->email,
+                    ];
+                    $token = $tokenGriffin;
+                    
+                    // update existing user email
+                    $griffin = Helper::PostRequest($data, $method, $url, $token); 
+                
+                }
+                return redirect()->route('profile')->with('succes', "User profile updated successfully..!");  
+            } 
+        }else{
+            return redirect()->route('login')->with('error',"You Need to Login First");
+            
         }
-        catch (\Throwable $th) {
-            return redirect()->route('login')->with('error',  $th->getMessage());
-           
-        }
+       
         
     }
     
@@ -380,372 +340,291 @@ class LoginController extends Controller
     }
 
     public function updateGriffinProfile(Request $request){
-        try {
+      
         
-            if(Session::has('two') && Session::has('griffin_user') && Session::has('token')){
-               
-                $credentials = $request->validate([
-                    'email' => ['required'],
-                    'firstname' => ['required'],
-                    'lastname'=>['required'],
+        if(Session::has('two') && Session::has('griffin_user') && Session::has('token')){
+            
+            $credentials = $request->validate([
+                'email' => ['required'],
+                'firstname' => ['required'],
+                'lastname'=>['required'],
 
-                ]); 
-              
-                $clientObj = new \GuzzleHttp\Client();
+            ]); 
+            
+          
 
-                // 
-                $tokenvalid = $clientObj->request('POST', Config::get('constants.griffin.url.token_validate'), [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$request->auth_token}"
-                    ]
-                ]);
+            //
+            $token= $request->auth_token;
+            $method ='POST';
+            $url = Config::get('constants.griffin.url.token_validate');
+            
+            $tokenvalid= Helper::PostRequest($data='', $method, $url, $token);
+            if($tokenvalid['success']==false){
+                return back()->with('error', $tokenvalid['message']); 
 
-                $tokenvalid = $tokenvalid->getBody()->getContents();
+            }
+
+            if($tokenvalid['message']=="Token is valid"){
+
+                $method="POST";
+                $url = Config::get('constants.griffin.url.get_user').$request->id;
+                $token = $request->auth_token;
+                $data = [
+                    'username' => !empty($request->username)?$request->username:'',
+                    'first_name' =>!empty($request->firstname)?$request->firstname :'',
+                    'last_name'=>!empty($request->lastname)?$request->lastname:"",
+                    'email'=>!empty($request->email)?$request->email:'',
+                    'description'=>!empty($request->description)?$request->description:'',
+                ];
+                // update user record
+                $user= Helper::PostRequest($data, $method, $url, $token);
                 
-                $tokenvalid = json_decode($tokenvalid,true);
                 
-                if($tokenvalid['message']=="Token is valid"){
-                    $userobj =  $clientObj->request('POST', Config::get('constants.griffin.url.get_user').$request->id, [
-                        'headers' =>
-                        [
-                            'Authorization' => "Bearer {$request->auth_token}"
-                        ],'form_params' => [
-                            'username' => !empty($request->username)?$request->username:'',
-                            'first_name' =>!empty($request->firstname)?$request->firstname :'',
-                            'last_name'=>!empty($request->lastname)?$request->lastname:"",
-                            'email'=>!empty($request->email)?$request->email:'',
-                            'description'=>!empty($request->description)?$request->description:'',
-                            
-                        ]
-                    ]);
+                if(Session::has('existing_user') && Session::has('whisker_token')){
                 
-                 
-                    $user = $userobj ->getBody()->getContents();
-
-                    $user= json_decode($user,true);
-                     
+                    $whiskeruser = Session::get('existing_user');
                     
-                    if(Session::has('existing_user') && Session::has('whisker_token')){
-                   
-                        $whiskeruser = Session::get('existing_user');
-                       
-                        $token = Session::get('whisker_token');
-                        $user_id = 0;
-                        if (isset($whiskeruser['0']['id'])) {
-                            $user_id = $whiskeruser['0']['id'];
-                        }else{
-                            $user_id = $whiskeruser['id'];
-                        }
-                        
-                     
-                        $whiskerobj =  $clientObj->request('POST', Config::get('constants.whisker.url.get_user').$user_id, [
-                            'headers' =>
-                            [
-                                'Authorization' => "Bearer {$token}"
-                            ],'form_params' => [
-                                'email'=>$request->email, 
-                            ]
-                        ]);
-                    
-                        $whisker = $whiskerobj ->getBody()->getContents();
-                       
+                    $token = Session::get('whisker_token');
+                    $user_id = 0;
+                    if (isset($whiskeruser['0']['id'])) {
+                        $user_id = $whiskeruser['0']['id'];
+                    }else{
+                        $user_id = $whiskeruser['id'];
                     }
                     
-                    $request->session()->put('griffin_user', $user);
-                    
+                    $data = [
+                        'email'=>$request->email, 
+                    ];
 
-                    return redirect()->route('griffin-profile')->with('succes', "User profile updated successfully..!");
+                    $method ="POST";
                     
-                } 
-            }else{
-                throw new \Exception("You Need to Login First", 401);
-            }
-        }catch (\GuzzleHttp\Exception\ClientException $e) {
-            $response = $e->getResponse();
-            $responseBodyAsString = $response->getBody()->getContents();
-
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
+                    $url = Config::get('constants.whisker.url.get_user').$user_id;
+                    
+                    //update existing user email
+                    $whisker = Helper::PostRequest($data, $method, $url, $token); 
+                    
+                }
+                
+                $request->session()->put('griffin_user', $user);
+                
+                return redirect()->route('griffin-profile')->with('succes', "User profile updated successfully..!");
+                
+            } 
+        }else{
+            return redirect()->route('griffin')->with('error',"You Need to Login First");
+        }
         
-            return back()->with('error', $responseBodyAsString['message']);
-        }
-        catch (\Throwable $th) {
-            return redirect()->route('griffin')->with('error',  $th->getMessage());
-           
-        }
     }
 
     public function switchToGriffin(Request $request){
-        try {
-            // dd(Session::all());
-            if($request->session()->has('user')){
-                $credentials = $request->session()->get('user_credentials');
-                
-                $userr1 = Session::get('user');
-             
-                $user22 = Session::get('existing_user');
-              
-                $user_id = 0;
-                if (isset($user22['0']['id'])) {
-                    $user_id = $user22['0']['id'];
-                }else{
-                    $user_id = $user22['id'];
-                }
-                $client = new \GuzzleHttp\Client();
-         
-                $response = $client->request('POST', Config::get('constants.griffin.url.token'), [
+        
+        // dd(Session::all());
+        if($request->session()->has('user')){
+            $credentials = $request->session()->get('user_credentials');
             
-                    'form_params' => [
-                        'username' => Config::get('constants.griffin.admin.username'),
-                        'password' => Config::get('constants.griffin.admin.password'),
-                    ]
-                ]);
-
-                $result = $response->getBody()->getContents();
-                $result = json_decode($result,true);
-                // dd($result);
-                $response2 = $client->request('POST', Config::get('constants.griffin.url.token_validate'), [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ]
-                ]);
-
-                $result1 = $response2->getBody()->getContents();
-                $result1 = json_decode($result1,true);
-              
+            $userr1 = Session::get('user');
             
-                if ($result1['message'] == "Token is valid") {
-                
-                    $response3 =  $client->request('POST', Config::get('constants.griffin.url.get_user').$user_id, [
-                        'headers' =>
-                        [
-                            'Authorization' => "Bearer {$result['data']['token']}"
-                        ],
-                    ]);
-                
-                    $user = $response3->getBody()->getContents();
-                   
-                    $user= json_decode($user,true);
-                  
-                    if($user['roles']['0']=='customer'){
-                        $token1= Session::get('token');
-                        $credentials = Session::get('user_credentials');
-                        $request->session()->flush();
-                      
-                        $request->session()->put('user_credentials', $credentials);
-                        $request->session()->put('whisker_token', $token1['token']);
-                        $request->session()->put('existing_user', $userr1);
-                        $request->session()->put('griffin_user', $user);
-                        $request->session()->put('token', $result['data']);
-                        $request->session()->put('two', "Griffin Rock CAT Retreat - Your Cat's Vacation oasis");
-                        return redirect()->intended('griffin-dashboard');
-                    }else{
-                        throw new \Exception("user is not a customer", 401);
-                    }   
-                
-                }
+            $user22 = Session::get('existing_user');
+            
+            $user_id = 0;
+            if (isset($user22['0']['id'])) {
+                $user_id = $user22['0']['id'];
+            }else{
+                $user_id = $user22['id'];
             }
-        }catch (\GuzzleHttp\Exception\ClientException $e) {
-            $response = $e->getResponse();
-            $responseBodyAsString = $response->getBody()->getContents();
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
-            return back()->with('error', $responseBodyAsString['message']);
+            
+            $url =  Config::get('constants.griffin.url.token');
+            $method ='POST';
+            $data=[
+                'username' => Config::get('constants.griffin.admin.username'),
+                'password' => Config::get('constants.griffin.admin.password'),
+            ];
+            //get token of griffin site
+            $result = Helper::PostRequest($data, $method, $url, $token='');
+            if($result['success']==false){
+                return back()->with('error', $result['message']);
+            }
+
+            $url= Config::get('constants.griffin.url.token_validate');
+            
+            $token =$result['data']['token'] ;
+            //checking token validate or not
+            $result1=Helper::PostRequest($data='', $method, $url, $token);
+
+            if($result1['success']==false){
+                return back()->with('error', $result1['message']);
+            }
+        
+            if ($result1['message'] == "Token is valid") {
+            
+                $method = 'POST';
+                $token= $result['data']['token'];
+                $url= Config::get('constants.griffin.url.get_user').$user_id;
+                //fetch griffin user
+                $user= Helper::PostRequest($data='', $method, $url, $token);
+                if($user['roles']['0']=='customer'){
+                    $token1= Session::get('token');
+                    $credentials = Session::get('user_credentials');
+                    $request->session()->flush();
+                    
+                    $request->session()->put('user_credentials', $credentials);
+                    $request->session()->put('whisker_token', $token1['token']);
+                    $request->session()->put('existing_user', $userr1);
+                    $request->session()->put('griffin_user', $user);
+                    $request->session()->put('token', $result['data']);
+                    $request->session()->put('two', "Griffin Rock CAT Retreat - Your Cat's Vacation oasis");
+                    return redirect()->intended('griffin-dashboard');
+                }  
+            
+            }
         }
-        catch (\Throwable $th) {
-            return back()->with('error',  $th->getMessage());
-        }
+       
     }
 
     public function switchToWhisker(Request $request){
-        try {
-            if($request->session()->has('griffin_user')){
-                $credentials = $request->session()->get('user_credentials');
-                $userr1 = Session::get('griffin_user');
-                // dd($userr1);
-                $user22 = Session::get('existing_user');
-              
-                $user_id = 0;
-                if (isset($user22['0']['id'])) {
-                    $user_id = $user22['0']['id'];
-                }else{
-                    $user_id = $user22['id'];
-                }
-                $client = new \GuzzleHttp\Client();
+       
+        if($request->session()->has('griffin_user')){
+            $credentials = $request->session()->get('user_credentials');
+            $userr1 = Session::get('griffin_user');
+            // dd($userr1);
+            $user22 = Session::get('existing_user');
             
-                $response = $client->request('POST', Config::get('constants.whisker.url.token'), [
-            
-                    'form_params' => [
-                        'username' => Config::get('constants.whisker.admin.username'),
-                        'password' => Config::get('constants.whisker.admin.password'),
-                    ]
-                ]);
-
-                $result = $response->getBody()->getContents();
-
-                $result = json_decode($result,true);
-            
-        
-                $response2 = $client->request('POST', Config::get('constants.whisker.url.token_validate'), [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ]
-                ]);
-
-                $result1 = $response2->getBody()->getContents();
-                $result1 = json_decode($result1,true);
-            
-                if ($result1['message'] == "Token is valid") {
-                    $response3 =  $client->request('POST', Config::get('constants.whisker.url.get_user').$user_id, [
-                        'headers' =>
-                        [
-                            'Authorization' => "Bearer {$result['data']['token']}"
-                        ],
-                    ]);
-                
-                    $user = $response3->getBody()->getContents();
-                    $user= json_decode($user,true);
-                    // dd($userr1, $user, $result);
-                    if($user['roles']['0']=='customer'){
-                        $token1= Session::get('token');
-                        $credentials = Session::get('user_credentials');
-                        $request->session()->flush();
-                      
-                        $request->session()->put('user_credentials', $credentials);
-                        $request->session()->put('whisker_token', $token1['token']);
-                        $request->session()->put('existing_user', $userr1);
-                        $request->session()->put('user', $user);
-                        $request->session()->put('token', $result['data']);
-                        $request->session()->put('one', "Whisker And Soda - Where Cats and Relax Collide");
-                       
-                        return redirect()->intended('dashboard');
-                    }else{
-                        throw new \Exception("user is not a customer", 401);
-                    }
-                }
-            
+            $user_id = 0;
+            if (isset($user22['0']['id'])) {
+                $user_id = $user22['0']['id'];
+            }else{
+                $user_id = $user22['id'];
             }
-        }catch (\GuzzleHttp\Exception\ClientException $e) {
-            $response = $e->getResponse();
-            $responseBodyAsString = $response->getBody()->getContents();
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
-            return back()->with('error', $responseBodyAsString['message']);
-        }
-        catch (\Throwable $th) {
-            return back()->with('error',  $th->getMessage());
-        }
+            $client = new \GuzzleHttp\Client();
+                $url=Config::get('constants.whisker.url.token');
+                $method='POST';
+                $data=[
+                'username' => Config::get('constants.whisker.admin.username'),
+                'password' => Config::get('constants.whisker.admin.password'),
+                ];
+                
+            $result = Helper::PostRequest($data, $method, $url, $token='');
+            if($result['success']==false){
+                return back()->with('error', $result['message']);
+            }
+
+            $url =Config::get('constants.whisker.url.token_validate');
+            $method='POST';
+            $token=$result['data']['token'];
+            
+            $result1 = Helper::PostRequest($data='', $method, $url, $token);
+            if($result1['success']==false){
+                return back()->with('error', $result1['message']);
+            }
+            if ($result1['message'] == "Token is valid") {
+                
+                $url =  Config::get('constants.whisker.url.get_user').$user_id;
+                $method='POST';
+                $token=$result['data']['token'];
+                
+                $user = Helper::PostRequest($data='', $method, $url, $token);
+                
+                if($user['roles']['0']=='customer'){
+                    $token1= Session::get('token');
+                    $credentials = Session::get('user_credentials');
+                    $request->session()->flush();
+                    
+                    $request->session()->put('user_credentials', $credentials);
+                    $request->session()->put('whisker_token', $token1['token']);
+                    $request->session()->put('existing_user', $userr1);
+                    $request->session()->put('user', $user);
+                    $request->session()->put('token', $result['data']);
+                    $request->session()->put('one', "Whisker And Soda - Where Cats and Relax Collide");
+                    
+                    return redirect()->intended('dashboard');
+                }
+            }
+        }   
     }
 
     public function griffinchangepassword(Request $request){
         if(Session::has('griffin_user') && Session::has('token')){
           
             return view('pages.griffin-user-password');
-        }
-        
+        } 
     }
 
     public function whiskerchangepassword(Request $request){
         if(Session::has('user') && Session::has('token')){
           
             return view('pages.user-password');
-        }
-        
+        }   
     }
 
     public function griffinpasswordchange(Request $request){
         if(Session::has('griffin_user') && Session::has('token')){
-          
-          try{
+
+            $griffinuser = Session::get('griffin_user');
+                    
             $password = Session::get('user_credentials');
-            $client = new \GuzzleHttp\Client();
-            $response = $client->request('POST', Config::get('constants.griffin.url.token'), [
-                
-                    'form_params' => [
-                        'username' => $password['email'],
-                        'password' => $password['password'],
-                    ]
-                ]);
+            $user_email= $griffinuser['email'];
 
-                $result = $response->getBody()->getContents();
-
-                $result = json_decode($result,true);
+            $method="POST";
+            $url= Config::get('constants.griffin.url.token');
+            $data = [
+             'username' => $user_email,
+             'password' => $password['password'],
+            ];
+             // get token 
+            $result = Helper::PostRequest($data, $method, $url, $token='');
+          
+            if($result['success']==false){
+                return back()->with('error', $result['message']);
+            } 
             
-                $userobj =  $client->request('POST',Config::get('constants.griffin.url.get_user') .$result['data']['id'], [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ],'form_params' => [
-                    
-                        'password'=>!empty($request->password)?$request->password:'',
-                        
-                    ]
-                ]);
-                $user = $userobj->getBody()->getContents();
-                    
-                $user= json_decode($user,true);
-                if(!empty($user)){
-                    return redirect()->route('logout');
-                }
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                return back()->with('error', $responseBodyAsString['message']);
+            $method="POST";
+            $data=[
+                'password'=>!empty($request->password)?$request->password:'',
+            ];
+            $token = $result['data']['token'];
+            $url=Config::get('constants.griffin.url.get_user') .$result['data']['id'];
+             
+            $user = Helper::PostRequest($data, $method, $url, $token);
+            
+            
+            if(!empty($user)){
+                return redirect()->route('logout');
             }
-            catch (\Throwable $th) {
-                return back()->with('error',  $th->getMessage());
-            }
+           
         }
     }
 
     public function whiskerpasswordchange(Request $request){
         if(Session::has('user') && Session::has('token')){
           
-           $password = Session::get('user_credentials');
-           $client = new \GuzzleHttp\Client();
-           try{
-
-          
-                $response = $client->request('POST', Config::get('constants.whisker.url.token'), [
-                
-                    'form_params' => [
-                        'username' => $password['email'],
-                        'password' => $password['password'],
-                    ]
-                ]);
-
-                $result = $response->getBody()->getContents();
-
-                $result = json_decode($result,true);
+            $password = Session::get('user_credentials');
+            $griffinuser = Session::get('user');
+            $user_email= $griffinuser['email'];
             
-                $userobj =  $client->request('POST', Config::get('constants.whisker.url.get_user').$result['data']['id'], [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ],'form_params' => [
-                    
-                        'password'=>!empty($request->password)?$request->password:'',
-                        
-                    ]
-                ]);
-                $user = $userobj->getBody()->getContents();
-                    
-                $user= json_decode($user,true);
-                if(!empty($user)){
-                    return redirect()->route('logout');
-                }
-            
-       
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                return back()->with('error', $responseBodyAsString['message']);
+           $method="POST";
+           $url= Config::get('constants.whisker.url.token');
+           $data = [
+            'username' => $user_email,
+            'password' => $password['password'],
+           ];
+            // get token 
+           $result = Helper::PostRequest($data, $method, $url, $token='');
+           if($result['success']==false){
+                return back()->with('error', $result['message']);
+            }   
+        
+            $method="POST";
+            $data=[
+                'password'=>!empty($request->password)?$request->password:'',
+            ];
+            $token = $result['data']['token'];
+            $url=Config::get('constants.whisker.url.get_user').$result['data']['id'];
+             
+            $user = Helper::PostRequest($data, $method, $url, $token);
+            if(!empty($user)){
+                return redirect()->route('logout');
             }
-            catch (\Throwable $th) {
-                return back()->with('error',  $th->getMessage());
-            }
+         
         }
     }
 }

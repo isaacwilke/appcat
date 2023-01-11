@@ -12,16 +12,21 @@ class Helper{
                 $response = $client->request($method, $url, [
                     'form_params' => $data,
                 ]);
-           }else{
+           }elseif(!empty($token) && empty($data)){
             
             $response = $client->request($method,$url, [
                 'headers' =>[
                     'Authorization' => "Bearer {$token}"],
                
             ]);
+           }else{
+            $response = $client->request($method,$url, [
+                'headers' =>[
+                    'Authorization' => "Bearer {$token}"],
+                'form_params' => $data,
+            ]);
            }
-            
-        
+
             $result = $response->getBody()->getContents();
                 
             return $result = json_decode($result,true);
