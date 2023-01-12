@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Config;
+use App\Helpers\Helper;
 
 
 class ChangePasswordController extends Controller
@@ -22,65 +23,54 @@ class ChangePasswordController extends Controller
 
     public function griffinSetPassword(Request $request)
     {
+      
+        $method = 'POST';
+        $url=Config::get('constants.griffin.url.token');
+        $data=[
+            'username' => Config::get('constants.griffin.admin.username'),
+            'password' => Config::get('constants.griffin.admin.password'),
+        ];
         
-        $client = new \GuzzleHttp\Client();
-        try{
-            $token = $client->request('POST', Config::get('constants.griffin.url.token'), [
-              
-                'form_params' => [
-                    'username' => Config::get('constants.griffin.admin.username'),
-                    'password' => Config::get('constants.griffin.admin.password'),
-                ]
-            ]);
-            $validtoken = $token->getBody()->getContents();
-            $validtoken= json_decode($validtoken,true);
-           
-            $codevalidate = $client->request('POST',Config::get('constants.griffin.url.reset_validate'), [
-                'headers' =>
-                [
-                    'Authorization' => "Bearer {$validtoken['data']['token']}"
-                ],
-                'form_params' => [
-                    'email' => $request->email,
-                    'code' => $request->code
-                ]
-            ]);
-            $validcode = $codevalidate->getBody()->getContents();
-            $validcode= json_decode($validcode,true);
-            if($validcode['message']=='The code supplied is valid.'){
-                $setpassword = $client->request('POST', Config::get('constants.griffin.url.set_password'), [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$validtoken['data']['token']}"
-                    ],'form_params' => [
-                        'email' => $request->email,
-                        'password'=>$request->password,
-                        'code'=>$request->code
-                    ]
-                ]);
-                       
-                $setpassword = $setpassword->getBody()->getContents();
-                $setpassword = json_decode($setpassword,true);
-                return redirect()->route('griffin')->with('succes', $setpassword['message']);
+        //gettting token
+        $validtoken= Helper::PostRequest($data, $method, $url, $token='');
+        if($validtoken['success']==false){
+            return back()->with('error', $validtoken['message']);
+        }
+
+        $data =[
+            'email' => $request->email,
+            'code' => $request->code,
+        ];
+
+        $token=$validtoken['data']['token'];
+        $method='POST';
+        $url=Config::get('constants.griffin.url.reset_validate');
+        // validating code
+        $validcode= Helper::PostRequest($data, $method, $url, $token);
+        
+        if($validcode['data']['status'] != 200){
+            return back()->with('error', $validcode['message']);
+        }
+        
+        if($validcode['message']=='The code supplied is valid.'){
+
+            $url =Config::get('constants.griffin.url.set_password');
+            $method = 'POST';
+            $token=$validtoken['data']['token'];
+            $data =[
+                'email' => $request->email,
+                'password'=>$request->password,
+                'code'=>$request->code
+            ];
+            
+            //Set password
+            $setpassword = Helper::PostRequest($data, $method, $url, $token);
+            
+            if($setpassword['data']['status']!=200){
+                return back()->with('error', $setpassword['message']);  
             }
-            
-        }catch(\GuzzleHttp\Exception\ClientException $e){
-            $resetpassword = $e->getResponse();
-           
-            $responseBodyAsString = $resetpassword->getBody()->getContents();
-            
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
-            //    dd($responseBodyAsString);
-            return back()->with('error', $responseBodyAsString['message']);
-        }catch (\Throwable $th) {
-           
-            $throw = $th->getResponse();
-            $responseBodyAsString = $throw->getBody()->getContents();
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
-           
-            return redirect()->route('griffin.reset')->with('error',  $responseBodyAsString['message']);
-		}
-        // return redirect()->route('login')->with('succes', 'Your password has been changed!');
+            return redirect()->route('griffin')->with('succes', $setpassword['message']);
+        }
        
     }
 
@@ -93,63 +83,50 @@ class ChangePasswordController extends Controller
     {
         
         $client = new \GuzzleHttp\Client();
-        try{
-            $token = $client->request('POST', Config::get('constants.whisker.url.token'), [
-              
-                'form_params' => [
-                    'username' => Config::get('constants.whisker.admin.username'),
-                    'password' => Config::get('constants.whisker.admin.password'),
-                ]
-            ]);
-            $validtoken = $token->getBody()->getContents();
-            $validtoken= json_decode($validtoken,true);
-           
-            $codevalidate = $client->request('POST',Config::get('constants.whisker.url.reset_validate'), [
-                'headers' =>
-                [
-                    'Authorization' => "Bearer {$validtoken['data']['token']}"
-                ],
-                'form_params' => [
-                    'email' => $request->email,
-                    'code' => $request->code,
-                ]
-            ]);
-            $validcode = $codevalidate->getBody()->getContents();
-            $validcode= json_decode($validcode,true);
-            if($validcode['message']=='The code supplied is valid.'){
-                $setpassword = $client->request('POST', Config::get('constants.whisker.url.set_password'), [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$validtoken['data']['token']}"
-                    ],'form_params' => [
-                        'email' => $request->email,
-                        'password'=>$request->password,
-                        'code'=>$request->code
-                    ]
-                ]);
-                       
-                $setpassword = $setpassword->getBody()->getContents();
-                $setpassword = json_decode($setpassword,true);
-                return redirect()->route('login')->with('succes', $setpassword['message']);
-            }
-            
-        }catch(\GuzzleHttp\Exception\ClientException $e){
-            $resetpassword = $e->getResponse();
-           
-            $responseBodyAsString = $resetpassword->getBody()->getContents();
-            
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
-            //    dd($responseBodyAsString);
-            return back()->with('error', $responseBodyAsString['message']);
-        }catch (\Throwable $th) {
-           
-            $throw = $th->getResponse();
-            $responseBodyAsString = $throw->getBody()->getContents();
-            $responseBodyAsString = json_decode($responseBodyAsString,true);
-           
-            return redirect()->route('whisker.reset')->with('error',  $responseBodyAsString['message']);
-		}
-        
+        $method='POST';
+        $url = Config::get('constants.whisker.url.token');
+        $data=[
+            'username' => Config::get('constants.whisker.admin.username'),
+            'password' => Config::get('constants.whisker.admin.password'),
+        ];
+
+        //getting token
+        $validtoken=Helper::PostRequest($data, $method, $url, $token='');
+        if($validtoken['success']==false){
+            return back()->with('error', $validtoken['message']);
+        }
+
+        $data =[
+            'email' => $request->email,
+            'code' => $request->code,
+        ];
+
+        $token=$validtoken['data']['token'];
+        $method='POST';
+        $url=Config::get('constants.whisker.url.reset_validate');
+
+        //checking with code validation
+        $validcode= Helper::PostRequest($data, $method, $url, $token);   
+          
+        if($validcode['message']=='The code supplied is valid.'){
+            $method='POST';
+            $token=$validtoken['data']['token'];
+            $url=Config::get('constants.whisker.url.set_password');
+            $data=[
+                'email' => $request->email,
+                'password'=>$request->password,
+                'code'=>$request->code
+            ];
+
+            //Set password change he pasword
+            $setpassword = Helper::PostRequest($data, $method, $url, $token);
+
+            if($setpassword['data']['status']!=200){
+                return back()->with('error', $setpassword['message']);  
+            }    
+
+            return redirect()->route('login')->with('succes', $setpassword['message']);
+        }  
        
     }
 }

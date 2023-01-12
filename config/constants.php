@@ -31,7 +31,7 @@ return [
             'get_user'=>'https://exceledunet.com/wordpress2/wp-json/wp/v2/users/',
             'get_order'=>'https://exceledunet.com/wordpress2/wp-json/wc/v3/orders/',  
             'reset_password'=>'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/reset-password',
-            'reset_validate'=>' https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/validate-code',
+            'reset_validate'=>'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/validate-code',
             'set_password'=>'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/set-password',
         ],
     ],
