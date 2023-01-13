@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Hash;
-
+use App\Helpers\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Validation\ValidationException;
+
 
 class BillingController extends Controller
 {
@@ -21,41 +19,30 @@ class BillingController extends Controller
             $user = Session::get('griffin_user');
             
             // dd($token);
-            $client = new \GuzzleHttp\Client();
-            
-            try {
-                $response = $client->request('POST', 'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token', [
-                    'form_params' => [
-                        'username' => "admin2",
-                        'password' => 'admin2@3338',
-                    ]
-                ]);
-            
-                $result = $response->getBody()->getContents();
-                    
-                $result = json_decode($result,true);
-               
-                $billing = $client->request('GET', 'https://exceledunet.com/wordpress2/wp-json/wc/v3/customers/'.$user['id'], [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ]
-                ]);
+            $method='POST';
+            $url=Config::get('constants.griffin.url.token');
+            $data=[
+                'username' => Config::get('constants.griffin.admin.username'),
+                'password' => Config::get('constants.griffin.admin.password'),
+            ];
 
-                $billing1 = $billing->getBody()->getContents();
-                $billing_details = json_decode($billing1,true);
-                // 
-                // $result = json_decode($result,true);
-                return view('pages.griffin_billing',['billing'=>$billing_details, 'result'=>$result['data']]);
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                //    dd($responseBodyAsString);
-                return back()->with('error', $responseBodyAsString['message']);
-            } 
-            
+            $result=Helper::PostRequest($data, $method, $url, $token='');
+            if( $result['success']==false){
+                return back()->with('error', $result['message']);
+            }
+
+            $method='GET';
+            $url=Config::get('constants.griffin.url.get_billing').$user['id'];
+           
+            $token=$result['data']['token'];
+
+            $billing_details= Helper::PostRequest($data='', $method, $url, $token);
+           
+            if(!empty($billing_details['message'])){
+                return back()->with('error', $billing_details['message']);
+            }
+
+            return view('pages.griffin_billing',['billing'=>$billing_details, 'result'=>$result['data']]);     
         }elseif($request->session()->has('user')){
             return redirect()->route('whisker-billing');
         }else{
@@ -99,28 +86,20 @@ class BillingController extends Controller
                 ]
             ];
             // dd($data);
-            $client = new \GuzzleHttp\Client();
-            try {
-           
-                $billing = $client->request('PUT','https://exceledunet.com/wordpress2/wp-json/wc/v3/customers/'.$request->user_id, [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$request->auth_token}"
-                    ],'form_params' => $data
-                ]);
+            $method="PUT";
+            $url=Config::get('constants.griffin.url.get_billing').$request->user_id;
+            $token = $request->auth_token;
 
-                $billing1 = $billing->getBody()->getContents();
-                $billing_details = json_decode($billing1,true);
+            $billing_details=Helper::PostRequest($data, $method, $url, $token);
+           
+            if(!empty($billing_details['message']) && !empty($billing_details['data']['status'])){
+                return back()->with('error', $billing_details['message']);
+            }elseif(!empty($billing_details['message'])){
+                return redirect()->route('home')->with('error', $billing_details['message']);
+            }else{
                 return redirect()->route('griffin-billing')->with('succes',"Billing & Shipping Information Update Successfully...!!");
-                //return view('pages.griffin_billing',['billing'=>$billing_details, 'result'=>$result['data']]);
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                //    dd($responseBodyAsString);
-                return back()->with('error', $responseBodyAsString['message']);
-            }    
+
+            }      
         }else{
             return redirect()->route('griffin')->with('error',"You Need To Login First...!!"); 
         }
@@ -131,42 +110,25 @@ class BillingController extends Controller
           
             $user = Session::get('user');
             
-            
-            $client = new \GuzzleHttp\Client();
-            
-            try {
-                $response = $client->request('POST', 'https://exceledunet.com/wordpress/wp-json/jwt-auth/v1/token', [
-                    'form_params' => [
-                        'username' => "admin",
-                        'password' => 'admin@3338',
-                    ]
-                ]);
-            
-                $result = $response->getBody()->getContents();
-                    
-                $result = json_decode($result,true);
-               
-                $billing = $client->request('GET', 'https://exceledunet.com/wordpress/wp-json/wc/v3/customers/'.$user['id'], [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ]
-                ]);
-
-                $billing1 = $billing->getBody()->getContents();
-                $billing_details = json_decode($billing1,true);
-                // 
-                // $result = json_decode($result,true);
-                return view('pages.billing',['billing'=>$billing_details, 'result'=>$result['data']]);
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
+            $method="POST";
+            $url=Config::get('constants.whisker.url.token');
+            $data=[
+                'username' => Config::get('constants.whisker.admin.username'),
+                'password' => Config::get('constants.whisker.admin.password'),
+            ];
+            $result= Helper::PostRequest($data, $method, $url, $token='');
+            if( $result['success']==false){
+                return back()->with('error', $result['message']);
+            }
         
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                //    dd($responseBodyAsString);
-                return back()->with('error', $responseBodyAsString['message']);
-            } 
-            
+            $method= "GET";
+            $token=$result['data']['token'];
+            $url = Config::get('constants.whisker.url.get_billing').$user['id'];
+            $billing_details = Helper::PostRequest($data='', $method, $url, $token);
+            if(!empty($billing_details['message'])){
+                return back()->with('error', $billing_details['message']);
+            }    
+            return view('pages.billing',['billing'=>$billing_details, 'result'=>$result['data']]);   
         }elseif($request->session()->has('griffin_user')){
             return redirect()->route('griffin-billing');
         }else{
@@ -209,29 +171,20 @@ class BillingController extends Controller
                     'phone'=>!empty($request->shipping_phone)?$request->shipping_phone:'',
                 ]
             ];
-             
-            $client = new \GuzzleHttp\Client();
-            try {
-           
-                $billing = $client->request('PUT','https://exceledunet.com/wordpress/wp-json/wc/v3/customers/'.$request->user_id, [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$request->auth_token}"
-                    ],'form_params' => $data
-                ]);
 
-                $billing1 = $billing->getBody()->getContents();
-                $billing_details = json_decode($billing1,true);
+            $method="PUT";
+            $url=Config::get('constants.whisker.url.get_billing').$request->user_id;
+            $token = $request->auth_token;
+
+            $billing_details=Helper::PostRequest($data, $method, $url, $token);
+
+            if(!empty($billing_details['message']) && !empty($billing_details['data']['status'])){
+                return back()->with('error', $billing_details['message']);
+            }elseif(!empty($billing_details['message'])){
+                return redirect()->route('dashboard')->with('error', $billing_details['message']);
+            }else{
                 return redirect()->route('whisker-billing')->with('succes',"Billing & Shipping Information Update Successfully...!!");
-                
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                //    dd($responseBodyAsString);
-                return back()->with('error', $responseBodyAsString['message']);
-            }    
+            }      
         }else{
             return redirect()->route('login')->with('error',"You Need To Login First...!!"); 
         }
