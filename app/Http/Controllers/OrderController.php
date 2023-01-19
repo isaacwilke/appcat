@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+use App\Helpers\Helper;
+
 
 class OrderController extends Controller
 {
@@ -13,39 +14,30 @@ class OrderController extends Controller
     public function getWhiskerOrder(Request $request){
         if(Session::has('user') && Session::has('token')){
             $user = Session::get('user');
-           
+            $data =[
+                'username' =>Config::get('constants.whisker.admin.username'),
+                'password' => Config::get('constants.whisker.admin.password'),
+            ];
+            $method='POST';
+            $url=Config::get('constants.whisker.url.token');
+            $result =  Helper::PostRequest($data, $method, $url, $token='');
+            if($result['success']==false){
+                return back()->with('error', $result['message']);
+            }
             
-            $client = new \GuzzleHttp\Client();
-            try{
-                $response = $client->request('POST', Config::get('constants.whisker.url.token'), [
-                    'form_params' => [
-                        'username' =>Config::get('constants.whisker.admin.username'),
-                        'password' => Config::get('constants.whisker.admin.password'),
-                    ]
-                ]);
-                $result = $response->getBody()->getContents();
-                $result = json_decode($result,true);
-              
-                $orderlistobj= $client->request('GET', Config::get('constants.whisker.url.list_order').'?search='.$user['email'],[
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ]
-                ]);
-                $orderlistobj = $orderlistobj->getBody()->getContents();
-                $orders = json_decode($orderlistobj,true);
+            $method="GET";
+            $url=Config::get('constants.whisker.url.list_order').'?search='.$user['email'];
+            $token=$result['data']['token'];
+            $orders=Helper::PostRequest($data='', $method, $url, $token);
+          
+            if(!empty($orders['0'])){
                 return view('orders.whisker.view',['orders'=>$orders]);
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                  
-                return back()->with('error', $responseBodyAsString['message']);
+               
+            }else{
+                return back()->with('error', $orders['message']);   
+               
             }
-             catch (\Throwable $th) {
-                return back()->with('error',  $th->getMessage());
-            }
+           
         }elseif(Session::has('griffin_user') && Session::has('token')){
             return redirect()->route('griffin.order');
         }else{
@@ -55,35 +47,32 @@ class OrderController extends Controller
 
     public function editWhiskerOrder(Request $request, $id){
         if(Session::has('user') && Session::has('token')){
-            $client = new \GuzzleHttp\Client();
-            try {
-                $response = $client->request('POST', Config::get('constants.whisker.url.token'), [
-                    'form_params' => [
-                        'username' =>Config::get('constants.whisker.admin.username'),
-                        'password' => Config::get('constants.whisker.admin.password'),
-                    ]
-                ]);
-                $result = $response->getBody()->getContents();
-                $result = json_decode($result,true);
-                $orderlistobj= $client->request('GET', Config::get('constants.whisker.url.get_order').$id,[
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ]
-                ]);
-                $orderlistobj = $orderlistobj->getBody()->getContents();
-                $orders = json_decode($orderlistobj,true);
-                return view('orders.whisker.edit',['order'=>$orders, 'token'=>$result['data']]);
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                    
-                return back()->with('error', $responseBodyAsString['message']);
-            } catch (\Throwable $th) {
-                return back()->with('error',  $th->getMessage());
+            $user = Session::get('user');
+            $data =[
+                'username' =>Config::get('constants.whisker.admin.username'),
+                'password' => Config::get('constants.whisker.admin.password'),
+            ];
+            $method='POST';
+            $url=Config::get('constants.whisker.url.token');
+            $result =  Helper::PostRequest($data, $method, $url, $token='');
+            if($result['success']==false){
+                return back()->with('error', $result['message']);
             }
+           
+        
+            $method ='GET';
+            $url =Config::get('constants.whisker.url.get_order').$id;
+           
+            $token= $result['data']['token'];
+            $orders =Helper::PostRequest($data='', $method, $url, $token);
+            
+            if(!empty($orders['data'])){
+                return back()->with('error',  $orders['message']);
+            }elseif(!empty($orders) && isset($orders['success'])){
+                return back()->with('error',  $orders['message']);
+            }else{
+                return view('orders.whisker.edit',['order'=>$orders, 'token'=>$result['data']]);
+            }           
         }elseif(Session::has('griffin_user') && Session::has('token')){
             return redirect()->route('griffin.edit');
         }else{
@@ -113,7 +102,6 @@ class OrderController extends Controller
                 $shipping_line[$key]['total_tax']=$total_tax;
             }
            
-           
             $feeline = array();
             foreach($request->fees_line_id as $key=>$id){
                 $feeline[$key]['id']=$id;
@@ -136,7 +124,7 @@ class OrderController extends Controller
             foreach($request->fees_line_total_tax as $key=>$total_tax){
                 $feeline[$key]['total_tax']=$total_tax;
             }
-            // dd( $feeline);
+        
             $data = [
                 'transaction_id'=>!empty($request->transaction_id)?$request->transaction_id:'',
                 'payment_method' =>!empty($request->payment_method) ?$request->payment_method:'',
@@ -181,32 +169,20 @@ class OrderController extends Controller
                 "shipping_lines" =>$shipping_line,
               "fee_lines" =>$feeline,
             ];
-            // dd($data);
+          
+            $url =Config::get('constants.whisker.url.get_order').$request->order_id;
+            $token=$request->token;
+            $method="PUT";
+            $orders=Helper::PostRequest($data, $method, $url, $token);
            
-            $client = new \GuzzleHttp\Client();
-            try{
-                $orderlistobj = $client->request('PUT',Config::get('constants.whisker.url.get_order').$request->order_id, [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$request->token}"
-                    ],'form_params' => $data
-                ]);
-                $orderlistobj = $orderlistobj->getBody()->getContents();
-                $orders = json_decode($orderlistobj,true);
-                
-                if(!empty($orders)){
-                    return redirect()->route('whisker.order')->with('succes','Order Details Updated Successfully...!!');
-                }
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                    
-                return back()->with('error', $responseBodyAsString['message']);
-            } catch (\Throwable $th) {
-                return back()->with('error',  $th->getMessage());
-            }
+            if(!empty($orders['data'])){
+                return back()->with('error',  $orders['message']);
+            }elseif(!empty($orders) && isset($orders['success'])){
+                return back()->with('error',  $orders['message']);
+            }else{
+                return redirect()->route('whisker.order')->with('succes','Order Details Updated Successfully...!!');
+            } 
+           
         }elseif(Session::has('griffin_user') && Session::has('token')){
             return redirect()->route('griffin.edit');
         }else{
@@ -218,43 +194,27 @@ class OrderController extends Controller
         if(Session::has('griffin_user') && Session::has('token')){
            
             $user = Session::get('griffin_user');
-           
-            
-            $client = new \GuzzleHttp\Client();
-            try{
-                $response = $client->request('POST', Config::get('constants.griffin.url.token'), [
-                    'form_params' => [
-                        'username' =>Config::get('constants.griffin.admin.username'),
-                        'password' => Config::get('constants.griffin.admin.password'),
-                    ]
-                ]);
-                $result = $response->getBody()->getContents();
-                $result = json_decode($result,true);
-              
-                $orderlistobj= $client->request('GET', Config::get('constants.griffin.url.list_order').'?search='.$user['email'],[
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ]
-                ]);
-                $orderlistobj = $orderlistobj->getBody()->getContents();
-                $orders = json_decode($orderlistobj,true);
-                // $time = $orders['1']['date_completed'];
-                // $timestamp = strtotime($time);
-               
-                // $new_date_format = date('Y-m-d H:i:s', $timestamp);
-                // dd($new_date_format);
-                return view('orders.griffin.view',['orders'=>$orders]);
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                  
-                return back()->with('error', $responseBodyAsString['message']);
+            $method='POST';
+            $url =Config::get('constants.griffin.url.token');
+            $data=[
+                'username' =>Config::get('constants.griffin.admin.username'),
+                'password' => Config::get('constants.griffin.admin.password'),
+            ];
+            $result =  Helper::PostRequest($data, $method, $url, $token='');
+            if($result['success']==false){
+                return back()->with('error', $result['message']);
             }
-             catch (\Throwable $th) {
-                return back()->with('error',  $th->getMessage());
+            $method="GET";
+            $url= Config::get('constants.griffin.url.list_order').'?search='.$user['email'];
+            $token=$result['data']['token'];
+            $orders=Helper::PostRequest($data='', $method, $url, $token);
+          
+            if(!empty($orders['0'])){
+                return view('orders.griffin.view',['orders'=>$orders]);
+               
+            }else{
+                return back()->with('error', $orders['message']);   
+               
             }
         }elseif(Session::has('user') && Session::has('token')){
             return redirect()->route('whisker.order');
@@ -265,36 +225,31 @@ class OrderController extends Controller
 
     public function editGriffinOrder(Request $request, $id){
         if(Session::has('griffin_user') && Session::has('token')){
-          
-            $client = new \GuzzleHttp\Client();
-            try{
-                $response = $client->request('POST', Config::get('constants.griffin.url.token'), [
-                    'form_params' => [
-                        'username' =>Config::get('constants.griffin.admin.username'),
-                        'password' => Config::get('constants.griffin.admin.password'),
-                    ]
-                ]);
-                $result = $response->getBody()->getContents();
-                $result = json_decode($result,true);
-                $orderlistobj= $client->request('GET', Config::get('constants.griffin.url.get_order').$id,[
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$result['data']['token']}"
-                    ]
-                ]);
-                $orderlistobj = $orderlistobj->getBody()->getContents();
-                $orders = json_decode($orderlistobj,true);
-                return view('orders.griffin.edit',['order'=>$orders, 'token'=>$result['data']]);
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                    
-                return back()->with('error', $responseBodyAsString['message']);
-            } catch (\Throwable $th) {
-                return back()->with('error',  $th->getMessage());
+            
+            $method ="POST";
+            $data=[
+                'username' =>Config::get('constants.griffin.admin.username'),
+                'password' => Config::get('constants.griffin.admin.password'),
+            ];
+            $url = Config::get('constants.griffin.url.token');
+            $result = Helper::PostRequest($data, $method, $url , $token='');
+            if($result['success']==false){
+                return back()->with('error', $result['message']);
             }
+
+            $method ="GET";
+            $url=Config::get('constants.griffin.url.get_order').$id;
+            $token=$result['data']['token'];
+            $orders= Helper::PostRequest($data='', $method, $url, $token);
+             
+            if(!empty($orders['data'])){
+                return back()->with('error',  $orders['message']);
+            }elseif(!empty($orders) && isset($orders['success'])){
+                return back()->with('error',  $orders['message']);
+            }else{
+                return view('orders.griffin.edit',['order'=>$orders, 'token'=>$result['data']]);
+            }   
+          
         }elseif(Session::has('user') && Session::has('token')){
             return redirect()->route('whisker.edit');
         }else{
@@ -393,31 +348,18 @@ class OrderController extends Controller
                     
             ];
             
+            $method= "PUT";
+            $url=Config::get('constants.griffin.url.get_order').$request->order_id;
+            $token=$request->token;
+            $orders= Helper::PostRequest($data, $method, $url, $token);
+            if(!empty($orders['data'])){
+                return back()->with('error',  $orders['message']);
+            }elseif(!empty($orders) && isset($orders['success'])){
+                return back()->with('error',  $orders['message']);
+            }else{
+                return redirect()->route('griffin.order')->with('succes','Order Details Updated Successfully...!!');
+            }       
            
-            $client = new \GuzzleHttp\Client();
-            try{
-                $orderlistobj = $client->request('PUT',Config::get('constants.griffin.url.get_order').$request->order_id, [
-                    'headers' =>
-                    [
-                        'Authorization' => "Bearer {$request->token}"
-                    ],'form_params' => $data
-                ]);
-                $orderlistobj = $orderlistobj->getBody()->getContents();
-                $orders = json_decode($orderlistobj,true);
-                
-                if(!empty($orders)){
-                    return redirect()->route('griffin.order')->with('succes','Order Details Updated Successfully...!!');
-                }
-            }catch (\GuzzleHttp\Exception\ClientException $e) {
-                $response = $e->getResponse();
-                $responseBodyAsString = $response->getBody()->getContents();
-        
-                $responseBodyAsString = json_decode($responseBodyAsString,true);
-                    
-                return back()->with('error', $responseBodyAsString['message']);
-            } catch (\Throwable $th) {
-                return back()->with('error',  $th->getMessage());
-            }
         }elseif(Session::has('user') && Session::has('token')){
             return redirect()->route('whisker.edit');
         }else{
