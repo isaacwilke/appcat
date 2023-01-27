@@ -16,67 +16,21 @@
             </ol>
             <h6 class="font-weight-bolder text-white mb-0">{{ $title }}</h6>
         </nav>
-     
-         
-            <div class="dropdown">
-                @if(Session::has("user"))
-                    @php $username = Session::get('user');@endphp
-                     <i class="ni ni-single-02 text-white"></i>
-                    <span class="dropdown-toggle  text-white"  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ $username['first_name']}}
-                    </span>
-                @elseif (Session::has("griffin_user"))
-                @php $username = Session::get('griffin_user');@endphp
-                    <i class="ni ni-single-02 text-white"></i>
-                    <span class="dropdown-toggle text-white"  id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ $username['first_name']}}
-                    </span>
-                @endif
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @if(Session::has("one"))
-                        <li><a class="dropdown-item" href="{{ route('profile')}}">Update Profile</a></li>
-                          <li><a class="dropdown-item" href="{{ route('changepassword')}}">change Password</a></li>
-        
-                        {{-- <li>
-                            <form method="get" class=" dropdown-item" action="{{route('switch')}}" id="myForm">
-                                <label class="form-check form-switch">
-                                <input type="checkbox" class="form-check-input" name="checkbox" value="dark"  onclick="document.getElementById('myForm').submit();"> 
-                                 Griffin</label>
-                            </form>
-                        </li> --}}
-                        {{-- <li><a class="dropdown-item" href="{{ route('switch')}}">Switch To Griffin</a></li> --}}
-                    @elseif (Session::has("two"))
-                        <li><a class="dropdown-item" href="{{ route('griffin-profile')}}">Update Profile</a></li>
-                          <li><a class="dropdown-item" href="{{ route('changepassword1')}}">Change Password</a></li>
-                         {{-- <li>
-                            <form method="get" class="dropdown-item " action="{{ route('switch.whisker')}}" id="myForm">
-                                <label class="form-check form-switch">
-                                <input type="checkbox" class="form-check-input" name="checkbox" value="dark"  onclick="document.getElementById('myForm').submit();"> 
-                                 Whisker</label>
-                            </form>
-                        </li> --}}
-                        {{-- <li><a class="dropdown-item" href="{{ route('switch.whisker')}}">Switch To Whisker</a></li> --}}
-                    @endif
-                    <li><form role="form" method="post" action="{{route('logout')}}" id="logout-form">
-                        @csrf
-                        <a href="#"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="dropdown-item">
-                           
-                            <span class="d-sm-inline d-none">Log out</span>
-                        </a>
-                    </form></li>
-                </ul>
-            
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <div class="input-group">
+                    <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" placeholder="Type here...">
+                </div>
             </div>
-            {{-- <ul class="navbar-nav  justify-content-end">
+            <ul class="navbar-nav  justify-content-end">
                 <li class="nav-item d-flex align-items-center">
-                    <form role="form" method="post" action="{{route('logout')}}" id="logout-form">
+                    <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
                         @csrf
-                        <a href="#"
+                        <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                             class="nav-link text-white font-weight-bold px-0">
-                            <i class="ni ni-button-power me-sm-1"></i>
+                            <i class="fa fa-user me-sm-1"></i>
                             <span class="d-sm-inline d-none">Log out</span>
                         </a>
                     </form>
@@ -106,7 +60,7 @@
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
-                                        <img src="{{asset('argon/img/team-2.jpg')}}" class="avatar avatar-sm  me-3 ">
+                                        <img src="./img/team-2.jpg" class="avatar avatar-sm  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="text-sm font-weight-normal mb-1">
@@ -124,7 +78,7 @@
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
-                                        <img src="{{asset('argon/img/small-logos/logo-spotify.svg')}}"
+                                        <img src="./img/small-logos/logo-spotify.svg"
                                             class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
@@ -178,7 +132,10 @@
                         </li>
                     </ul>
                 </li>
-            </ul> --}}
+            </ul>
+        </div>
+         
+          
       
     </div>
 </nav>

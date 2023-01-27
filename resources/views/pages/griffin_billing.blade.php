@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Billing And Shipping Details'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Billing Information'])
      
     
      <div class="container-fluid py-4 pt-4 my-4 mt-4">
@@ -13,7 +13,7 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
-                            <p class="mb-0">Billing And Shipping Details</p>
+                            <p class="mb-0">Billing Information</p>
                             
                         </div>
                     </div>
@@ -192,7 +192,7 @@
                             <div class="row justify-center">
                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-lg mt-4 mb-0">Submit</button>
+                                        <button type="submit" class="btn btn-blue btn-lg mt-4 mb-0">Submit</button>
                                     </div>
                                 </div>
                             </div>

@@ -29,7 +29,7 @@
                                             @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Send Reset Link</button>
+                                            <button type="submit" class="btn btn-lg btn-blue btn-lg w-100 mt-4 mb-0">Send Reset Link</button>
                                         </div>
                                     </form>
                                 </div>

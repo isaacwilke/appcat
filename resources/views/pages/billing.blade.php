@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gary-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Billing And Shipping Details'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Billing Information'])
     <style>
        
     </style>
@@ -14,7 +14,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <p>Billing And Shipping Details</p>
+                            <p>Billing Information</p>
                             
                         </div>
                     </div> 
@@ -29,7 +29,7 @@
                                                 <span>User Information</span>
                                             </button>
                                             <button class="multisteps-form__progress-btn" type="button" title="Address">
-                                                <span>Billing Infornation</span>
+                                                <span>Billing Information</span>
                                             </button>
                                             <button class="multisteps-form__progress-btn" type="button" title="Order Info">
                                                 <span>Shipping Information</span>
@@ -195,7 +195,7 @@
                                                     <div class="row">
                                                         <div class="button-row d-flex mt-4 col-12">
                                                             <button class="btn bg-gradient-light mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
-                                                            <button class="btn bg-gradient-dark ms-auto mb-0" type="submit" title="Send">Submit</button>
+                                                            <button class="btn btn-blue ms-auto mb-0" type="submit" title="Send">Submit</button>
                                                         </div>
                                                     </div>
                                                 </div>

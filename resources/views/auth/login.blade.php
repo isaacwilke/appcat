@@ -43,14 +43,14 @@
                                             <label class="form-check-label" for="rememberMe">Remember me</label>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                                            <button type="submit" class="btn btn-lg btn-blue btn-lg w-100 mt-4 mb-0">Sign in</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-1 text-sm mx-auto">
                                         Forgot you password? 
-                                        <a href="{{route('whisker.reset')}}" class="text-primary text-gradient font-weight-bold">Reset your password</a>
+                                        <a href="{{route('whisker.reset')}}" class="text-blue  font-weight-bold">Reset your password</a>
                                     </p>
                                 </div>
                                 {{-- <div class="card-footer text-center pt-0 px-lg-2 px-1">

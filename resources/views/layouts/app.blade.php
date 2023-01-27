@@ -16,14 +16,36 @@
     <link href="{{asset('argon/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="{{asset('argon/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
+   
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('argon/assets/css/argon-dashboard.css')}}" rel="stylesheet" />
 </head>
 
 <body class="{{ $class ?? '' }}">
+    @if(!(Session::has('user')|| Session::has('griffin_user')))
+        @yield('content')
+    @endif
 
-  @if(!(Session::has('user')|| Session::has('griffin_user')))
+       @if(Session::has('user')|| Session::has('griffin_user'))
+        @if (in_array(request()->route()->getName(), ['sign-in-static', 'sign-up-static', 'login', 'register', 'recover-password', 'rtl', 'virtual-reality']))
+            @yield('content')
+        @else
+            @if (!in_array(request()->route()->getName(), ['profile', 'profile-static']))
+                <div class="min-height-300 bg-primary position-absolute w-100"></div>
+            @elseif (in_array(request()->route()->getName(), ['profile-static', 'profile']))
+                <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+                    <span class="mask bg-primary opacity-6"></span>
+                </div>
+            @endif
+            @include('layouts.navbars.auth.sidenav')
+                <main class="main-content border-radius-lg">
+                    @yield('content')
+                </main>
+            @include('components.fixed-plugin')
+        @endif
+   @endif
+
+  {{-- @if(!(Session::has('user')|| Session::has('griffin_user')))
         @yield('content')
     @endif
 
@@ -34,11 +56,11 @@
                 <div class="min-height-200 position-absolute  w-100 bg-primary"></div>
                     @yield('content')
             
-
+                 @include('components.fixed-plugin')
                 </main>
           
        
-    @endif
+    @endif --}}
 
     <!--   Core JS Files   -->
   
@@ -49,8 +71,8 @@
     <script src="{{asset('argon/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     
     <script src="{{asset('argon/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
-    {{-- <script src="{{asset('argon/assets/js/argon-dashboard.js') }}"></script> --}}
-    {{-- <script src="{{asset('argon/assets/js/custom.js') }}"></script>
+    <script src="{{asset('argon/assets/js/argon-dashboard.js') }}"></script>
+    <script src="{{asset('argon/assets/js/custom.js') }}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -59,7 +81,7 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
-    </script> --}}
+    </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

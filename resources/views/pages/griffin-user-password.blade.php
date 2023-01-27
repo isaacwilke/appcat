@@ -113,7 +113,7 @@
                                 <div class="col-md-12 mt-2">
                                     <div class="form-group text-center">
                                        
-                                        <button type="submit" id="submit" disabled class="btn btn-primary text-uppercase btn-sm ms-auto">{{'Submit'}}</button>
+                                        <button type="submit" id="submit" disabled class="btn btn-blue text-uppercase btn-sm ms-auto">{{'Submit'}}</button>
                                     </div>
                                 </div>
                             </div>

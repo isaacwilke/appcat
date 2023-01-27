@@ -102,7 +102,7 @@
                                 <div class="col-md-12 mt-2">
                                     <div class="form-group text-center">
                                        
-                                        <button type="submit" class="btn btn-primary text-uppercase btn-sm ms-auto">{{'update profile'}}</button>
+                                        <button type="submit" class="btn btn-blue text-uppercase btn-sm ms-auto">{{'update profile'}}</button>
                                     </div>
                                 </div>
                             </div>
