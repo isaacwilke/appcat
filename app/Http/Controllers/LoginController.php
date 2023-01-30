@@ -237,7 +237,7 @@ class LoginController extends Controller
   
     public function getProfile(Request $request){
         
-        if(Session::has('one')||Session::has('user') && Session::has('token')){
+        if(Session::has('one') && Session::has('user') && Session::has('token')){
 
             $data['user'] = Session::get('user');
             $data['token'] = Session::get('token');
@@ -254,7 +254,7 @@ class LoginController extends Controller
     
            
         if(Session::has('one') && Session::has('user') && Session::has('token')){
-    
+            
             $credentials = $request->validate([
                 'email' => ['required'],
                 'firstname' => ['required'],
@@ -622,7 +622,7 @@ class LoginController extends Controller
              
             $user = Helper::PostRequest($data, $method, $url, $token);
             if(!empty($user)){
-                return redirect()->route('logout');
+                return redirect()->route('logout')->with('succes','Password Changed successfully..!');
             }
          
         }
