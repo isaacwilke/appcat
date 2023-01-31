@@ -4546,7 +4546,7 @@ textarea.form-control-lg {
   padding-top: 0.40625rem;
   padding-bottom: 0.40625rem;
   margin-right: 1rem;
-  font-size: 1.125rem;
+  /* font-size: 1.125rem; */
   white-space: nowrap;
 }
 .navbar-nav {
@@ -20291,7 +20291,7 @@ textarea.form-control-lg {
   border: 1px solid #e9ecef;
   position: relative;
   background-color: rgba(33, 37, 41, 0.1);
-  height: 1.25em;
+  height: 1.35em;
 }
 .form-switch .form-check-input:after {
   transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
@@ -21819,7 +21819,7 @@ hr.horizontal.gray-light {
   transition: all 0.1s ease;
 }
 .sidenav .navbar-brand {
-  padding: 1.5rem 1rem;
+  /* padding: 1.5rem 1rem; */
 }
 
 .sidenav-header {

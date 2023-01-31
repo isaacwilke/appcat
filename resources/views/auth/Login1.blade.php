@@ -18,10 +18,11 @@
                     <div class="row">
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
-                               <img src="{{asset('argon/img/griffinlogo.png')}}" class="bg-warning h-50" alt="main_logo"/>
+                              
                                 <div class="card-header pb-0 text-start">
+                                 <img src="{{asset('argon/img/griffinlogo.png')}}" class="bg-warning img-fluid" alt="main_logo"/>
                                 <img >
-                                    <h4 class="font-weight-bolder">Sign In</h4>
+                                    <h4 class="font-weight-bolder mt-2">Sign In</h4>
                                     <p class="mb-0">Enter your email and password to sign in</p>
                                 </div>
                                 <div class="card-body">
@@ -64,10 +65,10 @@
                         </div>
                         <div
                             class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                                style="background-image: url('');
+                            <div class="position-relative  h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                                style="background-image: url({{asset('argon/img/ivana-square.jpg')}});
               background-size: cover;">
-                                <span class="mask bg-gradient-primary opacity-6"></span>
+                                <span class="mask  opacity-6"></span>
                                 <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new
                                     currency"</h4>
                                 <p class="text-white position-relative">The more effortless the writing looks, the more
