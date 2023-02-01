@@ -3463,11 +3463,6 @@ textarea.form-control-lg {
   background-color: #fb6340;
   border-color: #fb6340;
 }
-.btn-blue {
-  color: #FFFFFF;
-  background-color: #043F5D;
-  border-color: #043F5D;
-}
 .btn-primary:hover {
   color: #000;
   background-color: #fc7a5d;
@@ -4546,7 +4541,7 @@ textarea.form-control-lg {
   padding-top: 0.40625rem;
   padding-bottom: 0.40625rem;
   margin-right: 1rem;
-  /* font-size: 1.125rem; */
+  font-size: 1.125rem;
   white-space: nowrap;
 }
 .navbar-nav {
@@ -21097,7 +21092,7 @@ hr.horizontal.gray-light {
 .navbar-vertical .navbar-brand > img,
 .navbar-vertical .navbar-brand-img {
   max-width: 100%;
-  max-height: 6rem;
+  max-height: 2rem;
 }
 .navbar-vertical .navbar-nav .nav-link {
   padding-left: 1rem;
@@ -21819,7 +21814,7 @@ hr.horizontal.gray-light {
   transition: all 0.1s ease;
 }
 .sidenav .navbar-brand {
-  /* padding: 1.5rem 1rem; */
+  padding: 1.5rem 1rem;
 }
 
 .sidenav-header {
@@ -21874,7 +21869,6 @@ hr.horizontal.gray-light {
   color: white;
   background-color: rgba(255, 255, 255, 0.13);
 }
-
 
 .navbar-main {
   transition: box-shadow 0.25s ease-in, background-color 0.25s ease-in;
@@ -24760,42 +24754,42 @@ pre[class*=language-] {
 /*
  * Container style
  */
-/* .ps {
+.ps {
   overflow: hidden !important;
   overflow-anchor: none;
   -ms-overflow-style: none;
   touch-action: auto;
   -ms-touch-action: auto;
-} */
+}
 
 /*
  * Scrollbar rail styles
  */
-/* .ps__rail-x {
+.ps__rail-x {
   display: none;
   opacity: 0;
   transition: background-color 0.2s linear, opacity 0.2s linear;
   -webkit-transition: background-color 0.2s linear, opacity 0.2s linear;
   height: 15px;
-  
+  /* there must be 'bottom' or 'top' for ps__rail-x */
   bottom: 0px;
-
+  /* please don't change 'position' */
   position: absolute;
-} */
+}
 
-/* .ps__rail-y {
+.ps__rail-y {
   display: none;
   opacity: 0;
   transition: background-color 0.2s linear, opacity 0.2s linear;
   -webkit-transition: background-color 0.2s linear, opacity 0.2s linear;
   width: 15px;
- 
+  /* there must be 'right' or 'left' for ps__rail-y */
   right: 0;
-
+  /* please don't change 'position' */
   position: absolute;
-} */
+}
 
-/* .ps--active-x > .ps__rail-x,
+.ps--active-x > .ps__rail-x,
 .ps--active-y > .ps__rail-y {
   display: block;
   background-color: transparent;
@@ -24808,9 +24802,9 @@ pre[class*=language-] {
 .ps--scrolling-x > .ps__rail-x,
 .ps--scrolling-y > .ps__rail-y {
   opacity: 0.6;
-} */
+}
 
-/* .ps .ps__rail-x:hover,
+.ps .ps__rail-x:hover,
 .ps .ps__rail-y:hover,
 .ps .ps__rail-x:focus,
 .ps .ps__rail-y:focus,
@@ -24818,33 +24812,65 @@ pre[class*=language-] {
 .ps .ps__rail-y.ps--clicking {
   background-color: #eee;
   opacity: 0.9;
-} */
+}
 
 /*
  * Scrollbar thumb styles
  */
-/* .ps__thumb-x {
+.ps__thumb-x {
   background-color: #aaa;
   border-radius: 6px;
   transition: background-color 0.2s linear, height 0.2s ease-in-out;
   -webkit-transition: background-color 0.2s linear, height 0.2s ease-in-out;
   height: 6px;
-
+  /* there must be 'bottom' for ps__thumb-x */
   bottom: 2px;
- 
+  /* please don't change 'position' */
   position: absolute;
-} */
+}
 
-/* .ps__thumb-y {
+.ps__thumb-y {
   background-color: #aaa;
   border-radius: 6px;
   transition: background-color 0.2s linear, width 0.2s ease-in-out;
   -webkit-transition: background-color 0.2s linear, width 0.2s ease-in-out;
-  
+  width: 6px;
+  /* there must be 'right' for ps__thumb-y */
   right: 2px;
- 
+  /* please don't change 'position' */
   position: absolute;
-} */
+}
+
+.ps__rail-x:hover > .ps__thumb-x,
+.ps__rail-x:focus > .ps__thumb-x,
+.ps__rail-x.ps--clicking .ps__thumb-x {
+  background-color: #999;
+  height: 11px;
+}
+
+.ps__rail-y:hover > .ps__thumb-y,
+.ps__rail-y:focus > .ps__thumb-y,
+.ps__rail-y.ps--clicking .ps__thumb-y {
+  background-color: #999;
+  width: 11px;
+}
+
+/* MS supports */
+@supports (-ms-overflow-style: none) {
+  .ps {
+    overflow: auto !important;
+  }
+}
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .ps {
+    overflow: auto !important;
+  }
+}
+.btn-blue {
+  color: #FFFFFF;
+  background-color: #043F5D;
+  border-color: #043F5D;
+}
 .multisteps-form__panel{
   background-color:transparent!important;
   border-color:hsla(0,0%,100%,.15)!important;
@@ -24883,7 +24909,7 @@ pre[class*=language-] {
           border-radius:50%;
           background-color:#fff;
           box-sizing:border-box;
-          z-index:3}
+          z-index:3;}
           .multisteps-form__progress-btn:after{
             position:absolute;
             top:5px;
@@ -24897,17 +24923,17 @@ pre[class*=language-] {
             /* height:2px; */
             content:"";
             background-color:currentColor;
-            z-index:1}
+            z-index:1;}
             .multisteps-form__progress-btn:first-child:after{
               display:none
             }
             .multisteps-form__progress-btn.js-active{
-              color:#344767}
-              .multisteps-form__progress-btn.js-active span{color:#8392ab}
+              color:#344767;}
+              .multisteps-form__progress-btn.js-active span{color:#8392ab;}
               .multisteps-form__progress-btn.js-active:before{
                 transform:translateX(-50%) scale(1.2);
-                background-color:currentColor}
-                .multisteps-form__form{position:relative}
+                background-color:currentColor;}
+                .multisteps-form__form{position:relative;}
                 .multisteps-form__panel{
                   position:absolute;
                   top:0;
@@ -24915,14 +24941,14 @@ pre[class*=language-] {
                   width:100%;
                   /* height:0; */
                   opacity:0;
-                  visibility:hidden
+                  visibility:hidden;
                 }
                 .multisteps-form__panel.js-active{
                   height:auto;
                   opacity:1;
-                  visibility:visible}
+                  visibility:visible;}
                   .multisteps-form__panel[data-animation=scaleIn]{
-                    transform:scale(.9)}
+                    transform:scale(.9);}
                     .multisteps-form__panel[data-animation=scaleIn].js-active{
                       transition-property:all;
                       transition-duration:.2s;
@@ -24930,8 +24956,4 @@ pre[class*=language-] {
                       transition-delay:0s;
                       transform:scale(1);
                     }
-
-
-
-
-
+                   

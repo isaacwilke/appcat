@@ -4,7 +4,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <div class="navbar-brand  text-center" href="#" target="_blank">
+        <a class="navbar-brand  text-center m-0" href="#" target="_blank">
             @if (Session::has('one'))
                 <img src="{{ asset('argon/img/cropped-ws_icon3-1-32x32.jpg') }}"
                     class="navbar-brand-img image-fluid rounded" alt="main_logo">
@@ -22,16 +22,16 @@
                     </form>
                 @else
                     <br/>
-                    <a class="text-center justify-content-center"
+                    <p class="mt-1 text-center justify-content-center"
                         href="https://griffinrockcatretreat.com/">
 
-                        <i class="ni ni-bullet-list-67 text-success text-sm opacity-10"></i>
+                        <i class="ni ni-atom text-success text-sm opacity-10"></i>
 
                         <span class="ms-1">Griffin Rock CAT Retreat</span>
-                    </a>
+                    </p>
                 @endif
             @elseif(Session::has('two'))
-                <img src="{{ asset('argon/img/cropped-grcr_icon-32x32.jpg') }}" class="navbar-brand-img rounded"
+                <img src="{{ asset('argon/img/cropped-grcr_icon-32x32.jpg') }}" class="navbar-brand-img navbar-brand-img h-100 rounded"
                     alt="main_logo">
 
                 @if (Session::has('existing_user'))
@@ -46,20 +46,20 @@
                     </form>
                 @else
                 <br/>
-                    <a  class="text-center justify-content-center" href="https://whiskersandsoda.com/">
+                    <p  class="mt-1 text-center justify-content-center" href="https://whiskersandsoda.com/">
                         
-                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-atom text-success text-sm opacity-10"></i>
                         
                         <span class=" ms-1">whisker and soda</span>
-                    </a>
+                    </p>
                 @endif
             @endif
-             <hr class="horizontal dark m-1"> 
-        </div>
+             
+        </a>
        
     </div>
-   
-    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+    <hr class="horizontal dark ">
+     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
    
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -68,7 +68,7 @@
                     href="{{ route('home') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-tv-2 text-success text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
@@ -80,7 +80,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-bullet-list-67 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Membership</span>
                     </a>
@@ -90,7 +90,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-bag-17 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Bookings</span>
                     </a>
@@ -111,7 +111,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Transactions</span>
                     </a>
@@ -121,7 +121,7 @@
                         href="{{ route('profile') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
@@ -131,7 +131,7 @@
                     <a class="nav-link {{ Route::currentRouteName() == '' ? 'active' : '' }}" href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-box-2 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Help</span>
                     </a>
@@ -143,7 +143,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-bag-17 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Bookings</span>
                     </a>
@@ -165,7 +165,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Transactions</span>
                     </a>
@@ -176,7 +176,7 @@
                         href="{{ route('griffin-profile') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
@@ -186,7 +186,7 @@
                     <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                            <i class="ni ni-box-2 text-success text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Help</span>
                     </a>
