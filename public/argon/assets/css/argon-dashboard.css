@@ -24956,4 +24956,15 @@ pre[class*=language-] {
                       transition-delay:0s;
                       transform:scale(1);
                     }
-                   
+                    .navbar-vertical .navbar-nav .nav-link .icon .ni {
+                     color:#043F58;
+                  }
+                  .navbar-vertical .navbar-nav .nav-link.active .icon .ni {
+                    color:white;
+                 }
+                 .bg-color{
+                  background-color: #f38120 ;
+                 }
+                 .ni {
+                  color:#043F58;
+               }

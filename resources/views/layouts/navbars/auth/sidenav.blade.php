@@ -4,7 +4,7 @@
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
-        <a class="navbar-brand  text-center m-0" href="#" target="_blank">
+        <a class="navbar-brand  text-center m-0" target="_blank">
             @if (Session::has('one'))
                 <img src="{{ asset('argon/img/cropped-ws_icon3-1-32x32.jpg') }}"
                     class="navbar-brand-img image-fluid rounded" alt="main_logo">
@@ -22,10 +22,10 @@
                     </form>
                 @else
                     <br/>
-                    <p class="mt-1 text-center justify-content-center"
-                        href="https://griffinrockcatretreat.com/">
+                    <p class="mt-1 text-center cursor-pointer justify-content-center" id='site'
+                        data-id="https://griffinrockcatretreat.com/">
 
-                        <i class="ni ni-atom text-success text-sm opacity-10"></i>
+                        <i class="ni ni-atom text-sm opacity-10"></i>
 
                         <span class="ms-1">Griffin Rock CAT Retreat</span>
                     </p>
@@ -46,9 +46,9 @@
                     </form>
                 @else
                 <br/>
-                    <p  class="mt-1 text-center justify-content-center" href="https://whiskersandsoda.com/">
+                    <p  class="mt-1 text-center cursor-pointer justify-content-center" id='site' data-id="https://whiskersandsoda.com/">
                         
-                            <i class="ni ni-atom text-success text-sm opacity-10"></i>
+                            <i class="ni ni-atom text-sm opacity-10"></i>
                         
                         <span class=" ms-1">whisker and soda</span>
                     </p>
@@ -68,7 +68,7 @@
                     href="{{ route('home') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-tv-2 text-success text-sm opacity-10"></i>
+                        <i class="ni ni-tv-2  text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
@@ -80,7 +80,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bullet-list-67 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-bullet-list-67  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Membership</span>
                     </a>
@@ -90,7 +90,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bag-17 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-bag-17  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Bookings</span>
                     </a>
@@ -101,7 +101,7 @@
                         href="{{ route('whisker-billing') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                            <i class="ni ni-credit-card  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Billings</span>
                     </a>
@@ -111,7 +111,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Transactions</span>
                     </a>
@@ -121,7 +121,7 @@
                         href="{{ route('profile') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-single-02  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
@@ -131,7 +131,7 @@
                     <a class="nav-link {{ Route::currentRouteName() == '' ? 'active' : '' }}" href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-box-2 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-box-2  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Help</span>
                     </a>
@@ -143,7 +143,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bag-17 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-bag-17  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Bookings</span>
                     </a>
@@ -154,7 +154,7 @@
                         href="{{ route('griffin-billing') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                            <i class="ni ni-credit-card  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Billings</span>
                     </a>
@@ -165,7 +165,7 @@
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Transactions</span>
                     </a>
@@ -176,7 +176,7 @@
                         href="{{ route('griffin-profile') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-single-02  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
@@ -186,7 +186,7 @@
                     <a class="nav-link {{ Route::currentRouteName() == 'profile' ? 'active' : '' }}" href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-box-2 text-success text-sm opacity-10"></i>
+                            <i class="ni ni-box-2  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Help</span>
                     </a>
@@ -196,7 +196,7 @@
 
         </ul>
     </div>
-    <div class="sidenav-footer mx-3 ">
+    {{-- <div class="sidenav-footer mx-3 ">
         <div class="card card-plain shadow-none" id="sidenavCard">
             <img class="w-50 mx-auto" src="{{ asset('argon/img/illustrations/icon-documentation-warning.svg') }}"
                 alt="sidebar_illustration">
@@ -210,5 +210,15 @@
         <a href="#" target="_blank" class="btn btn-dark btn-sm w-100 mb-3">Documentation</a>
         <a class="btn btn-primary btn-sm mb-0 w-100" href="#" target="_blank" type="button">Upgrade to
             PRO</a>
-    </div>
+    </div> --}}
+     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+ 
+    <script>
+        $(document).ready(function(){
+            $('#site').click(function(){
+                var site = $(this).attr('data-id');
+                location.href = site;
+            });
+        });
+    </script>
 </aside>
