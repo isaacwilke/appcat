@@ -14,16 +14,17 @@
                
                     <div class="row">
                         <div class="col-xl-5 col-lg-6 col-md-8 d-flex flex-column mx-lg-0 mx-auto">
-                            <div class="card card-plain">
-                                 <img src="{{asset('argon/img/griffinlogo.png')}}" class="bg-warning h-50" alt="main_logo"/>
+                            <div class="card card-plain pb-0 text-start mt-2">
+                                    <img src="{{asset('argon/img/GRCR_logo_login.png')}}" class="text-center rounded mx-auto d-block img-fluid" alt="main_logo"/>
                                 <div class="card-header pb-0 text-start">
+                             
                                     <h4 class="font-weight-bolder">Reset your password</h4>
                                     <p class="mb-0">Enter your email to Reset your Password</p>
                                 </div>
                                 <div class="card-body">
                                     <form role="form" method="POST" action="{{route('griffin.password')}}">
                                         @csrf
-                                        @method('post')
+                                       
                                         <div class="flex flex-col mb-3">
                                             <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" value="{{ old('email') }}" aria-label="Email">
                                             @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror

@@ -14,9 +14,9 @@
                
                     <div class="row">
                         <div class="col-xl-5 col-lg-6 col-md-8 d-flex flex-column mx-lg-0 mx-auto">
-                            <div class="card card-plain">
-                                 <img src="{{asset('argon/img/whiskerlogo.png')}}" class="h-50" alt="main_logo"/>
-                                <div class="card-header pb-0 text-start">
+                            <div class="card card-plain pb-0 text-start mt-2">
+                                 <img src="{{asset('argon/img/W&S_logo_login.png')}}" class="text-center rounded mx-auto d-block img-fluid" alt="main_logo"/>
+                                <div class="card-header pb-0 text-start mt-2">
                                     <h4 class="font-weight-bolder">Reset your password</h4>
                                     <p class="mb-0">Enter your email to Reset your Password</p>
                                 </div>

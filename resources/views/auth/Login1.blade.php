@@ -17,11 +17,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                            <div class="card card-plain">
-                              
-                                <div class="card-header pb-0 text-start">
-                                 <img src="{{asset('argon/img/griffinlogo.png')}}" class="bg-warning img-fluid" alt="main_logo"/>
-                                <img >
+                            <div class="card card-plain pb-0 text-start mt-2">
+                               <img src="{{asset('argon/img/GRCR_logo_login.png')}}" class="text-center rounded mx-auto d-block img-fluid" alt="main_logo"/>
+                                <div class="card-header pb-0 ">
+                                
+                             
                                     <h4 class="font-weight-bolder mt-2">Sign In</h4>
                                     <p class="mb-0">Enter your email and password to sign in</p>
                                 </div>
