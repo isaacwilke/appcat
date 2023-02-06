@@ -59,7 +59,7 @@
        
     </div>
     <hr class="horizontal dark ">
-     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main" style="height:auto">
    
         <ul class="navbar-nav">
             <li class="nav-item">
