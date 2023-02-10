@@ -48,29 +48,30 @@ class LoginController extends Controller
         $url = Config::get('constants.whisker.url.token');
         // for getting token from whisker site
         $result = Helper::PostRequest($data,$method,$url,$token="");
+       
         if($result['success']==false){
            return back()->with('error', $result['message']);
         }
         
-        $data=[
-            'username' => Config::get('constants.griffin.admin.username'),
-            'password' => Config::get('constants.griffin.admin.password'),
-        ];
+        // $data=[
+        //     'username' => Config::get('constants.griffin.admin.username'),
+        //     'password' => Config::get('constants.griffin.admin.password'),
+        // ];
 
-        $url = Config::get('constants.griffin.url.token'); 
+        // $url = Config::get('constants.griffin.url.token'); 
         
-        //for getting token from griffin site
-        $second_token = Helper::PostRequest($data,$method,$url,$token="");
-        if($second_token['success']==false){
-            return back()->with('error', $second_token['message']); 
-        }
+        // //for getting token from griffin site
+        // $second_token = Helper::PostRequest($data,$method,$url,$token="");
+        // if($second_token['success']==false){
+        //     return back()->with('error', $second_token['message']); 
+        // }
         $url = Config::get('constants.whisker.url.token_validate');
         
         $token=$result['data']['token'];
         
         //Checking token is valid or not
         $result1= Helper::PostRequest($data="",$method,$url,$token);
-      
+       
         if ($result1['message'] == "Token is valid") {
             
             $url= Config::get('constants.whisker.url.get_user').$result['data']['id'];
@@ -80,24 +81,24 @@ class LoginController extends Controller
             // get user of whisker site
             $user = Helper::PostRequest($data="",$method,$url,$token); 
              
-            $role= "customer";
+            $role= "armember";
             
-            $method = "GET";
-            $token = $second_token['data']['token'];
+            // $method = "GET";
+            // // $token = $second_token['data']['token'];
 
-            //get user of griffin site
-            $url =Config::get('constants.griffin.url.search_user').$request->email .'&roles='.$role;
+            // //get user of griffin site
+            // $url =Config::get('constants.griffin.url.search_user').$request->email .'&roles='.$role;
              
-            $existinguser=Helper::PostRequest($data="",$method,$url,$token); 
+            // $existinguser=Helper::PostRequest($data="",$method,$url,$token); 
              
-            if($user['roles']['0']=="customer"){
+            if(in_array("armember", $user['roles'])){
                 $request->session()->regenerate();
                 $request->session()->put('user_credentials', $credentials);
-                if(!empty($existinguser)){
+                // if(!empty($existinguser)){
                     
-                    $request->session()->put("existing_user", $existinguser);
-                    $request->session()->put("whisker_token", $second_token['data']['token']);
-                }
+                //     $request->session()->put("existing_user", $existinguser);
+                //     $request->session()->put("whisker_token", $second_token['data']['token']);
+                // }
                 $request->session()->put('user', $user);
                 
                 $request->session()->put('token', $result['data']);
@@ -108,7 +109,7 @@ class LoginController extends Controller
             
                 return redirect()->route('dashboard');
             }else{	
-                return redirect()->route('login')->with('error',  "user is not a customer");
+                return redirect()->route('login')->with('error',  "user is not a ar member");
                 
             }
         }
