@@ -8,6 +8,8 @@ use App\Http\Controllers\BillingController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,3 +73,7 @@ Route::post('whisker-order-store',[OrderController::class,'storeWhskerOrder'])->
 Route::get('griffin-orders',[OrderController::class,'getGriffinOrder'])->name('griffin.order');
 Route::get('griffin-orders/{id}',[OrderController::class,'editGriffinOrder'])->name('griffin.edit');
 Route::post('griffin-order-store',[OrderController::class,'storeGriffinOrder'])->name('griffin.orderstore');
+
+Route::get('whisker-membership', [MembershipController::class,'getMember'])->name('whisker.member');
+
+Route::get('whisker-transaction',[TransactionController::class,'getWhiskerTransaction'])->name('whisker.transaction');
