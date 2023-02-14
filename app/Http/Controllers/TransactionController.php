@@ -24,7 +24,7 @@ class TransactionController extends Controller
             $token=$token['token'];
             $url=Config::get('constants.whisker.url.user_transaction_details').'arm_api_key='.Config::get('constants.whisker.armember_api_key').'&arm_user_id='.$user['id'].'&arm_perpage=10';
             $result =  Helper::PostRequest($data='', $method, $url, $token);
-           
+            
             if($result['status']==0){
                 return back()->with('error', $result['message']);
             }

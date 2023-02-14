@@ -77,3 +77,8 @@ Route::post('griffin-order-store',[OrderController::class,'storeGriffinOrder'])-
 Route::get('whisker-membership', [MembershipController::class,'getMember'])->name('whisker.member');
 
 Route::get('whisker-transaction',[TransactionController::class,'getWhiskerTransaction'])->name('whisker.transaction');
+
+Route::get('whisker-memberships-list',[MembershipController::class,'listMembership'])->name('whisker.memberlist');
+
+Route::get('whisker-membership_details/{id}',[MembershipController::class,'membershipdetails'])->name('whisker.memberlist.detail');
+Route::get('whisker-membership-purchase/{id}',[MembershipController::class,'addmember'])->name('whisker.addmember');

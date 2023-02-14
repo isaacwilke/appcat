@@ -12,39 +12,28 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <p>Membership Details</p>
+                            <p>Membership List</p>
                             
                         </div>
                     </div> 
               
                  
-                    <div class="row mb-5 ps-2 pe-2">
-                        @foreach($response['memberships'] as $membership)
+                    <div class="row mb-5 ms-2 me-2">
+                        @foreach($response as $plan)
                           
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <div class="card d-flex text-center"> 
                                 <div class="card-body">
                             
-                                    <h5 class="card-title">{{$membership['name']}}</h5>
-                                    <p class="card-text text-sm">
-                                   {{html_entity_decode($membership['recurring_profile'], ENT_QUOTES, "UTF-8")}} 
-                                    </p>
-                                    <p class="card-text text-sm">
-                                    <span>Payment Mode:-</span> {{$membership['payment_mode']}}</p>
-                                    <p class="card-text text-sm">
-                                    <span>Start Date:-</span> {{$membership['start_date']}}</p>
-                                    <p class="card-text text-sm">
-                                    <span>End Date:-</span> {{$membership['end_date']}}</p>
-                                    <p class="card-text text-sm">
-                                    <span>Renew Date:-</span> {{$membership['renew_date']}}</p>
-                                   
-                                    {{-- <a href="#" class="btn btn-blue">Edit</a> --}}
+                                    <h5 class="card-title">{{$plan['plan_name']}}</h5>
+                                    
+                                    <a href=" {{ route('whisker.memberlist.detail', ['id' => $plan['plan_id']])}}" class="btn btn-blue">View</a>
                                 </div>
                         
                             </div>
                         
                         </div> 
-                        
+                       
                         
                         @endforeach
                         

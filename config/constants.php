@@ -20,24 +20,27 @@ return [
             'get_billing'=>'https://whiskersandsoda.com/wp-json/wc/v3/customers/',
             'user_memberhip_details'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_member_memberships?',
             'user_transaction_details'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_member_payments?',
+            'membership_list'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_memberships?',
+            'membership_details'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_membership_details?',
+            'add_member_plan'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_add_member_membership?'
         ],
     ],
     'griffin'=>[
         'admin'=>[
-            "username"=>'admin2',
-            'password'=>'admin2@3338'
+            "username"=>'dev1',
+            'password'=>'$Y*IenB62r(DN%PC8ylp@wwIjJfAA9DeXg^O)IM3jj3f#q7H'
         ],
         'url'=>[
-            'token'=>'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token',
-            'token_validate'=>'https://exceledunet.com/wordpress2/wp-json/jwt-auth/v1/token/validate',
-            'list_order'=>'https://exceledunet.com/wordpress2/wp-json/wc/v3/orders',
-            'search_user'=>'https://exceledunet.com/wordpress2/wp-json/wp/v2/users?search=',
-            'get_user'=>'https://exceledunet.com/wordpress2/wp-json/wp/v2/users/',
-            'get_order'=>'https://exceledunet.com/wordpress2/wp-json/wc/v3/orders/',  
-            'reset_password'=>'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/reset-password',
-            'reset_validate'=>'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/validate-code',
-            'set_password'=>'https://exceledunet.com/wordpress2/wp-json/bdpwr/v1/set-password',
-            'get_billing'=>'https://exceledunet.com/wordpress2/wp-json/wc/v3/customers/',
+            'token'=>'https://griffinrockcatretreat.com/wp-json/jwt-auth/v1/token',
+            'token_validate'=>'https://griffinrockcatretreat.com/wp-json/jwt-auth/v1/token/validate',
+            'list_order'=>'https://griffinrockcatretreat.com/wp-json/wc/v3/orders',
+            'search_user'=>'https://griffinrockcatretreat.com/wp-json/wp/v2/users?search=',
+            'get_user'=>'https://griffinrockcatretreat.com/wp-json/wp/v2/users/',
+            'get_order'=>'https://griffinrockcatretreat.com/wp-json/wc/v3/orders/',  
+            'reset_password'=>'https://griffinrockcatretreat.com/wp-json/bdpwr/v1/reset-password',
+            'reset_validate'=>'https://griffinrockcatretreat.com/wp-json/bdpwr/v1/validate-code',
+            'set_password'=>'https://griffinrockcatretreat.com/wp-json/bdpwr/v1/set-password',
+            'get_billing'=>'https://griffinrockcatretreat.com/wp-json/wc/v3/customers/',
         ],
     ],
 

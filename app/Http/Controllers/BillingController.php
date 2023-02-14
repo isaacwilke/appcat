@@ -125,6 +125,7 @@ class BillingController extends Controller
             $token=$result['data']['token'];
             $url = Config::get('constants.whisker.url.get_billing').$user['id'];
             $billing_details = Helper::PostRequest($data='', $method, $url, $token);
+            dd( $billing_details);
             if(!empty($billing_details['message'])){
                 return back()->with('error', $billing_details['message']);
             }    
