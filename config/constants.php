@@ -22,7 +22,8 @@ return [
             'user_transaction_details'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_member_payments?',
             'membership_list'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_memberships?',
             'membership_details'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_membership_details?',
-            'add_member_plan'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_add_member_membership?'
+            'add_member_plan'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_add_member_membership?',
+            'add_transaction'=>'https://whiskersandsoda.com/wp-json/armember/v1/arm_add_member_transaction?'
         ],
     ],
     'griffin'=>[
