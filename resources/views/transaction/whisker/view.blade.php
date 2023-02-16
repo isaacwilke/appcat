@@ -33,6 +33,8 @@
                                             {{__('Payment Date')}}</th>
                                               <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             {{__('Payment Status')}}</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            {{__('Action')}}</th>
                                              
                                     </tr>
                                 </thead>
@@ -64,7 +66,9 @@
                                         <td class="text-center">
                                              {{$payment['arm_payment_status']}}
                                         </td>
-                                        
+                                        <td>
+                                             <a class="btn btn-blue" href="{{ route('whisker.transactionpdf',['id'=>$payment['arm_log_id']]) }}">pdf</a>
+                                        </td>
                                          
                                     </tr>
                                 @endforeach  
