@@ -48,7 +48,7 @@ class LoginController extends Controller
         $url = Config::get('constants.whisker.url.token');
         // for getting token from whisker site
         $result = Helper::PostRequest($data,$method,$url,$token="");
-       
+        
         if($result['success']==false){
            return back()->with('error', $result['message']);
         }
@@ -174,7 +174,7 @@ class LoginController extends Controller
         $url =  Config::get('constants.griffin.url.token');
         // Getting token of griffin site
         $result = Helper::PostRequest($data, $method, $url, $token="");
-
+        
         if($result['success']==false){
             return back()->with('error', $result['message']);
         }

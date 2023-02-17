@@ -12,6 +12,7 @@
                     <div class="card-header pb-0">
                         <h6>Transaction Details</h6>
                     </div>
+                  
                     <div class="card-body">
                         <div class="table-responsive p-0">
                             <table class="table table-responsive align-items-center mb-0">

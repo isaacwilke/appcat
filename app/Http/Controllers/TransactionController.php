@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use Barryvdh\DomPDF\PDF as DomPDFPDF;
+
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -56,8 +56,9 @@ class TransactionController extends Controller
            $id= $id;
            foreach($result['response']['result']['payments'] as $key => $payment){
                 if($payment['arm_log_id']== $id){
-                    $pdf = PDF::loadView('transaction.whisker.pdf',['payment'=>$payment]);
-                    return $pdf->download('transaction.pdf');
+                  
+                    $pd = PDF::loadView('transaction.whisker.pdf',['payment'=>$payment]);
+                    return $pd->download('transaction.pdf');
                 }
            }
             // $pdf = PDF::loadView('index',$data);
