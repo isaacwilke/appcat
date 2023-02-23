@@ -63,8 +63,16 @@
                         </div>
                         <div
                             class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                              @php  $array = [
+                                asset('argon/img/ws_login_right1.jpg'),
+                                asset('argon/img/ws_login_right2.jpg'),
+                                asset('argon/img/ws_login_right3.jpg'),
+                            ];
+                            $random_keys=array_rand($array);
+       
+                            @endphp
                             <div class="position-relative  h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                                style="background-image: url({{asset('argon/img/ivana-square.jpg')}});
+                                style="background-image: url({{$array[$random_keys]}});
               background-size: cover;">
                                 <span class="mask opacity-6"></span>
                                 <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new
