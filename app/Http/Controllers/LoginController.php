@@ -62,6 +62,7 @@ class LoginController extends Controller
         
         //for getting token from griffin site
         $second_token = Helper::PostRequest($data,$method,$url,$token="");
+        
         if($second_token['success']==false){
             return back()->with('error', $second_token['message']); 
         }
