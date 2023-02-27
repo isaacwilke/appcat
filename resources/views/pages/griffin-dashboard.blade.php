@@ -112,8 +112,9 @@
 
 
        
-        @include('layouts.footers.auth.footer')
+
     </div>
+        @include('layouts.footers.auth.footer')
 @endsection
 
 @push('js')

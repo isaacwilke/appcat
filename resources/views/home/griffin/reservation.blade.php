@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gary-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Reservation'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'View Reservation'])
      
     <div id="alert">
         @include('components.alert')
@@ -14,7 +14,7 @@
                         @csrf
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
-                                <p class="mb-0">Reservations</p>
+                                <p class="mb-0">View Reservation</p>
                                 <button type="submit" class="btn btn-primary btn-sm ms-auto">Cancel</button>
                             </div>
                         </div>
