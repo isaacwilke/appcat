@@ -223,7 +223,7 @@ class LoginController extends Controller
                     $request->session()->put("existing_user", $existinguser);
                     $request->session()->put("whisker_token", $second_token['data']['token']);
                 }
-                if ($request->site == "Griffin Rock CAT Retreat - Your Cat's Vacation oasis") {
+                if ($request->site == "Griffin Rock Cat Retreat - Your Cat's Vacation Oasis") {
                     $request->session()->put('two', $request->site);
                 } 
             
@@ -475,7 +475,7 @@ class LoginController extends Controller
                     $request->session()->put('existing_user', $userr1);
                     $request->session()->put('griffin_user', $user);
                     $request->session()->put('token', $result['data']);
-                    $request->session()->put('two', "Griffin Rock CAT Retreat - Your Cat's Vacation oasis");
+                    $request->session()->put('two', "Griffin Rock Cat Retreat - Your Cat's Vacation Oasis");
                     return redirect()->intended('griffin-dashboard');
                 }  
             

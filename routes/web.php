@@ -30,7 +30,7 @@ Route::get('/register',[RegisterController::class,'create'])->name('register');
    
 Route::post('/register',[RegisterController::class,'store'])->name('register.performed');
 Route::get('/dashboard',[HomeController::class,'index'])->name('dashboard');
-Route::get('/griffin-dashboard',[HomeController::class,'index1'])->name('home');
+Route::get('/griffin-dashboard/{status?}',[HomeController::class,'index1'])->name('home');
 Route::post('logout',[LoginController::class,'logout'])->name('logout');
 
 Route::post('api/update', [LoginController::class, 'updateapi'])->name('api.performed');
@@ -84,6 +84,6 @@ Route::get('whisker-membership_details/{id}',[MembershipController::class,'membe
 Route::get('whisker-membership-purchase/{id}',[MembershipController::class,'addmember'])->name('whisker.addmember');
 Route::get('whisker-transaction-pdf/{id}',[TransactionController::class,'viewTransaction'])->name('whisker.transactionpdf');
 
-Route::post('griffin-bookings',[HomeController::class, 'griffinbooking'])->name('griffin.bookingsview');
+Route::get('griffin-dashboard/bookings/{id}',[HomeController::class, 'griffinbooking'])->name('griffin.bookingsview');
 Route::get('griffin-contacus',[HomeController::class, 'contactus'])->name('griffin.contactus');
 Route::post('griffin-sendcontact',[HomeController::class,'sendContactus'])->name('griffin.sendcontact');

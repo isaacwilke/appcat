@@ -50,10 +50,8 @@
                                 style="background-image: url({{$array[$random_keys]}});
                                         background-size: cover;">
                                 <span class="mask opacity-6"></span>
-                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new
-                                    currency"</h4>
-                                <p class="text-white position-relative">The more effortless the writing looks, the more
-                                    effort the writer actually put into the process.</p>
+                                <h4 class="mt-5 text-white font-weight-bolder position-relative"></h4>
+                                <p class="text-white position-relative"></p>
                             </div>
                         </div>
                     </div>

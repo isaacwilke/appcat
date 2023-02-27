@@ -68,7 +68,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex align-items-center">
-                            <p>Update profile</p>
+                            <p>Update Profile</p>
                             
                         </div>
                     </div> 
@@ -185,18 +185,11 @@
                                             <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
                                                 <div class="row text-center">
                                                     <div class="col-12 mx-auto">
-                                                        <h5 class="font-weight-normal">Are you living in a nice area?</h5>
-                                                        <p>One thing I love about the later sunsets is the chance to go for a walk through the neighborhood woods before dinner</p>
-                                                    </div>
+                                                                                                            </div>
                                                 </div>
                                                 <div class="multisteps-form__content">
                                                     <div class="row mt-3">
-                                                        <div class="col-12 col-sm-4">
-                                                            <div class="avatar avatar-xxl position-relative">
-                                                                <img src="https://demos.creative-tim.com/test/soft-ui-dashboard-pro/assets/img/team-2.jpg" class="border-radius-md" />
-                                                                
-                                                            </div>
-                                                        </div>
+
                                                         <div class="col-12 col-sm-7 mt-4 mt-sm-0 text-start">
                                                             
                                                             <label> Password</label>

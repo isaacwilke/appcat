@@ -20,15 +20,7 @@
 
 
                     </form>
-                @else
-                    <br/>
-                    <p class="mt-1 text-center cursor-pointer justify-content-center" id='site'
-                        data-id="https://griffinrockcatretreat.com/">
-
-                        <i class="ni ni-atom text-sm opacity-10"></i>
-
-                        <span class="ms-1">Griffin Rock CAT Retreat</span>
-                    </p>
+                
                 @endif
             @elseif(Session::has('two'))
                 <img src="{{ asset('argon/img/cropped-grcr_icon-32x32.jpg') }}" class="navbar-brand-img navbar-brand-img h-100 rounded"
@@ -44,14 +36,7 @@
                         </div>
 
                     </form>
-                @else
-                <br/>
-                    <p  class="mt-1 text-center cursor-pointer justify-content-center" id='site' data-id="https://whiskersandsoda.com/">
-                        
-                            <i class="ni ni-atom text-sm opacity-10"></i>
-                        
-                        <span class=" ms-1">whisker and soda</span>
-                    </p>
+                
                 @endif
             @endif
              
@@ -148,18 +133,18 @@
                 </li>
             @endif
             @if (Session::has('two'))
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link {{ str_contains(request()->url(), 'user-management') == true ? 'active' : '' }}"
                         href="#">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bag-17  text-sm opacity-10"></i>
+                            <i class="ni ni-calendar-grid-58  text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Bookings</span>
+                        <span class="nav-link-text ms-1">Reservations</span>
                     </a>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteName() == 'griffin-billing' ? 'active' : '' }}"
                         href="{{ route('griffin-billing') }}">
                         <div
@@ -179,7 +164,7 @@
                         </div>
                         <span class="nav-link-text ms-1">Transactions</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a class="nav-link {{ str_contains(request()->url(), 'profile') == true ? 'active' : '' }}"
