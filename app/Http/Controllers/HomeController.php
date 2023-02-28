@@ -126,7 +126,7 @@ class HomeController extends Controller
                 'Email' => $request->email,
             ];
             Mail::send('mail.contactus', ['contactus' => $data], function ($message) use ($request) {
-                $message->to("test@test.com");
+                $message->to("admin@griffinrockcatretreat.com");
                 $message->from($request->email);
                 $message->subject('Contact us');
             });
@@ -150,7 +150,7 @@ class HomeController extends Controller
             if($booking['status']=='success'){
                 $user = Session::get('griffin_user');
                 Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email"=>$user['email'], 'name'=>$user['first_name'].' '.$user['last_name']], function ($message) use ($random) {
-                    $message->to(['test@test.com','test@test.com']);
+                    $message->to([$random['email'],'admin@griffinrockcatretreat.com']);
                   
                     $message->subject('Reservation Cancelled'."#".$random['booking']);
                 });
