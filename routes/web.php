@@ -87,3 +87,5 @@ Route::get('whisker-transaction-pdf/{id}',[TransactionController::class,'viewTra
 Route::get('griffin-dashboard/bookings/{id}',[HomeController::class, 'griffinbooking'])->name('griffin.bookingsview');
 Route::get('griffin-contacus',[HomeController::class, 'contactus'])->name('griffin.contactus');
 Route::post('griffin-sendcontact',[HomeController::class,'sendContactus'])->name('griffin.sendcontact');
+
+Route::post('griffin_cancel_reservation',[HomeController::class,"cancelReservation"])->name('griffin.cancel');

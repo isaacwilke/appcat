@@ -57,14 +57,8 @@ class HomeController extends Controller
                     $now = Carbon::now()->format('Y-m-d');
 
                     if ($status == "Current" && $bookings['check_in'] > $now) {
-
-
-
                         $filterBooking[] = $bookings;
                         // return Response::json(['success' => $data], 200);
-
-
-
                     }
                     if (($status == "Past") && ($bookings['check_in'] < $now) && ($bookings['check_out'] < $now)) {
                         $filterBooking[] = $bookings;
@@ -109,7 +103,7 @@ class HomeController extends Controller
 
                     $booking = $bookings;
                     // return Response::json(['success' => $data], 200);
-
+                  
                     return view('home.griffin.reservation', compact('booking'));
                 }
             }
@@ -138,6 +132,33 @@ class HomeController extends Controller
             });
 
             return redirect()->back();
+        }
+    }
+
+    public function cancelReservation(Request $request){
+        if ($request->session()->has('griffin_user') && $request->session()->has('token')) {
+             $user = Session::get('griffin_user');
+                $random = [
+                    'email'=>$user['email'],
+                    'booking'=>$request->bookingid,
+                ];
+            $token = Session::get('token');
+            $method = 'GET';
+            $url = Config::get('constants.griffin.url.cancel_booking').$request->bookingid;
+            $token = $token['token'];
+            $booking =  Helper::PostRequest($data = '', $method, $url, $token = $token);
+            if($booking['status']=='success'){
+                $user = Session::get('griffin_user');
+                Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email"=>$user['email'], 'name'=>$user['first_name'].' '.$user['last_name']], function ($message) use ($random) {
+                    $message->to(['test@test.com','test@test.com']);
+                  
+                    $message->subject('Reservation Cancelled'."#".$random['booking']);
+                });
+                return redirect()->route('home')->with('succes',$booking['message']);
+            }else{
+                return redirect()->route('home')->with('error',$booking['message']);  
+            }
+            
         }
     }
 }

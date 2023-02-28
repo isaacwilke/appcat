@@ -43,6 +43,7 @@ return [
             'set_password'=>'https://griffinrockcatretreat.com/wp-json/bdpwr/v1/set-password',
             'get_billing'=>'https://griffinrockcatretreat.com/wp-json/wc/v3/customers/',
             'get_bookings'=>'https://griffinrockcatretreat.com/wp-json/portalapi/v1/bookings/',
+            'cancel_booking'=>'https://griffinrockcatretreat.com/wp-json/portalapi/v1/booking/cancel?bookingid='
         ],
        
     ],

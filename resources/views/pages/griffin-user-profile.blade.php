@@ -73,28 +73,13 @@
                         </div>
                     </div> 
                     <div class="card-body">   
-                        <div class="col-12 text-center">
-                            <div class="multisteps-form mb-5">
                         
-                                <div class="row">
-                                    <div class="col-12  mx-auto my-5">
-                                        <div class="multisteps-form__progress">
-                                            {{-- <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">
-                                                <span>User Information</span>
-                                            </button> --}}
-                                            <button class="multisteps-form__progress-btn js-active" type="button" title="update profile">
-                                                <span>Update Profile</span>
-                                            </button>
-                                            <button class="multisteps-form__progress-btn" type="button" title="Update Password">
-                                                <span>Update Password</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                        
+                                
                         
                                 <div class="row">
                                     <div class="col-12 m-auto">
-                                        <form name="test" class="multisteps-form__form" id="update_profile" method="POST" >
+                                        <form name="test" class="multisteps-form__form" id="update_profile" action ="{{route('update-griffin-profile')}}" method="POST" >
                                             @csrf
                                             {{-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                                 <div class="row text-center">
@@ -133,13 +118,13 @@
                                                 </div>
                                             </div>  --}}
                                     
-                                            <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
+                                            <div class="card p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                                 <div class="row text-center">
                                                     <div class="col-12 mx-auto">
                                                         <h5 class="font-weight-normal"></p>
                                                     </div>
                                                 </div>
-                                                <div class="multisteps-form__content">
+                                                <div class="">
                                                     <div class="row text-start">
                                                        <input class="form-control" type="hidden" name="id"  value="{{$user['user']['id']}}">
                                                         <input class="form-control" type="hidden" name="auth_token"  value="{{$user['token']['token']}}">
@@ -170,27 +155,9 @@
                                                             <label> Role</label>
                                                             <input class="multisteps-form__input form-control" readonly  type="text" name="roles" value="{{$user['user']['roles']['0']}}"/>
                                                         </div>
-                                                     
-                                                    </div>
-                                                    <div class="button-row text-center mt-4">
-                                                     <button type="button" id="update-profile" data-id="{{route('update-griffin-profile')}}" class="btn btn-blue text-uppercase btn-sm ms-auto">{{'update profile'}}</button>
-                                                       {{-- <button class="btn btn-blue mb-0" type="submit" title="Send">Submit</button> --}}
-                                                        {{-- <button class="btn bg-gradient-dark ms-auto mb-0" type="button" title="Next">Next</button> --}}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                       
-                                       
-                                        
-                                            <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
-                                                <div class="row text-center">
-                                                    <div class="col-12 mx-auto">
-                                                                                                            </div>
-                                                </div>
-                                                <div class="multisteps-form__content">
-                                                    <div class="row mt-3">
+                                                     <div class="row mt-3">
 
-                                                        <div class="col-12 col-sm-7 mt-4 mt-sm-0 text-start">
+                                                        <div class="col-md-6 col-sm-7 mt-4 mt-sm-0 text-start">
                                                             
                                                             <label> Password</label>
                                                               @php $password = Session::get('user_credentials');@endphp
@@ -205,25 +172,32 @@
                                                                         <li class="condition-one ccross" id="special_character">Must contain at least one special character</li>
                                                                         </ul>
                                                                     </div>
-                                                            <label> Confirm Password</label>
-                                                            <input class="multisteps-form__input form-control mb-3" type="password" id ="confirm-password" name="confirm-password"  value="" />
                                                              
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="button-row  mt-4 col-12">
+                                                        <div class="col-md-6 col-sm-7 mt-4 mt-sm-0 text-start">
+                                                        <label> Confirm Password</label>
+                                                            <input class="multisteps-form__input form-control mb-3" type="password" id ="confirm-password" name="confirm_password"  value="" />
                                                             
-                                                            <button class="btn btn-blue ms-auto mb-0" disabled id='update_password' data-id ="{{route('update-griffin-password')}}" type="button" title="Send">Submit</button>
                                                         </div>
+                                                    </div>
+                                                    </div>
+                                                    <div class="button-row text-center mt-4">
+                                                     <button type="submit" id="update-profile" data-id="{{route('update-griffin-profile')}}" class="btn btn-blue text-uppercase btn-sm ms-auto">{{'update profile'}}</button>
+                                                      
                                                     </div>
                                                 </div>
                                             </div>
+                                       
+                                       
+                                        
+                                            
+                                                  
                                        </form>
                                     </div>
                                 </div>
                                
-                            </div>
-                        </div>
+                            
+                        
                     </div>
                 </div>
             </div>
@@ -240,111 +214,112 @@
 @endsection
 @push('js')
   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-    <script src="{{asset('argon/assets/js/plugins/multistep-form.js')}}" type="text/javascript"></script>
-
+ 
     <script>
         $(document).ready(function(){
             $('#alert').fadeOut(5000);
-            $('#update_password').click(function(){
-                var action = $(this).attr('data-id');
-                
-                $('form[name=test]').attr('action',action);
-                $('form[name=test]').submit();
-            });
+              var confirmpass = $('#confirm-password').val();
+            var pass = $('#password').val();
 
-            $('#update-profile').click(function(){
-                var action = $(this).attr('data-id');
-               
-                $('form[name=test]').attr('action',action);
-                $('form[name=test]').submit();
-            });
-            $("#confirm-password").on('blur',function (){
+              $('#confirm-password').focusout(function(){
+              
+                    if($(this).val().length == 0){
+                        $('#update-profile').removeAttr('disabled',true);
+                    }
+                    if(pass == $(this).val()) {
+                        $('#update-profile').removeAttr('disabled',true);
+                    }
+                    
+                });
 
-               var pass = $('#password').val();
-       
-                var confirmpass = $('#confirm-password').val();
-                if($('.ctick').length ==5 && pass == confirmpass) {
-                    $('#update_password').removeAttr('disabled',true);
-                }else{
-                
-                    $('#update_password').attr('disabled',true);
-                
-                }
-   
-            });
-        });
+        
+                $('#confirm-password').on('keypress', function () {
+                   
+                   
+              
+                    if($('.ctick').length ==5 && pass == confirmpass) {
+                       
+                        $('#update-profile').removeAttr('disabled',true);
+                    }else{
+                        
+                        $('#update-profile').attr('disabled',true);
+                    }
 
-        $(document).on('keyup , blur', '#password', function () {
-            let password = $("#password").val();
+                    
+                });
+          //  }   
+
+          
+             
+            $(document).on('keyup , blur', '#password', function () {
+                let password = $("#password").val();
          
        
-            var confirmpass = $('#confirm-password').val();
-            password_length = password.length;
-            if (password === '') {
+                var confirmpass = $('#confirm-password').val();
+                password_length = password.length;
+                if (password === '') {
                 
-                password_is_valid = false;
+                    password_is_valid = false;
             
 
-            }if(password.length==12){
-                var password1 = true;
+                }if(password.length==12){
+                    var password1 = true;
                 
-            }
-            if(password.length < 12) {
-                $("#character_length").removeClass('ctick').addClass('ccross');
-                password_is_valid = false;
+                }
+                if(password.length < 12) {
+                    $("#character_length").removeClass('ctick').addClass('ccross');
+                        password_is_valid = false;
                 
-            } else {
-                $("#character_length").removeClass('ccross').addClass('ctick');
-                var character = true;
+                } else {
+                    $("#character_length").removeClass('ccross').addClass('ctick');
+                    var character = true;
                 
-            }
-            if (!password.match(/[A-Z]/)) {
-                $("#uppercase_latter").removeClass('ctick').addClass('ccross');
-                password_is_valid = false;
+                }
+                if (!password.match(/[A-Z]/)) {
+                    $("#uppercase_latter").removeClass('ctick').addClass('ccross');
+                    password_is_valid = false;
                 
-            } else {
-                $("#uppercase_latter").removeClass('ccross').addClass('ctick');
+                } else {
+                    $("#uppercase_latter").removeClass('ccross').addClass('ctick');
                     var uppercase = true;
                 
-            }
-            if (!password.match(/[a-z]/)) {
-                $("#lowercase_latter").removeClass('ctick').addClass('ccross');
-                password_is_valid = false;
+                }
+                if (!password.match(/[a-z]/)) {
+                    $("#lowercase_latter").removeClass('ctick').addClass('ccross');
+                    password_is_valid = false;
                 
-            } else {
-                $("#lowercase_latter").removeClass('ccross').addClass('ctick');
-                var lowercase= true;
+                } else {
+                    $("#lowercase_latter").removeClass('ccross').addClass('ctick');
+                    var lowercase= true;
                 
-            }
-            if (!password.match(/[0-9]/)) {
-                $("#one_number").removeClass('ctick').addClass('ccross');
-                password_is_valid = false;
+                }
+                if (!password.match(/[0-9]/)) {
+                    $("#one_number").removeClass('ctick').addClass('ccross');
+                    password_is_valid = false;
             
-            } else {
-                $("#one_number").removeClass('ccross').addClass('ctick');
-                var number = true;
+                } else {
+                    $("#one_number").removeClass('ccross').addClass('ctick');
+                    var number = true;
                 
-            }
-            if (!password.match(/[!@#$%^&*]/)) {
-                $("#special_character").removeClass('ctick').addClass('ccross');
-                password_is_valid = false;
+                }
+                if (!password.match(/[!@#$%^&*]/)) {
+                    $("#special_character").removeClass('ctick').addClass('ccross');
+                    password_is_valid = false;
                 
-            } else {
-                $("#special_character").removeClass('ccross').addClass('ctick');
-                var special_character = true;
+                } else {
+                    $("#special_character").removeClass('ccross').addClass('ctick');
+                    var special_character = true;
 
                 
-            }
+                }
 
-            if(password != confirmpass) {
-                
-                $('#update_password').attr('disabled',true);
-            }else{
-                $('#update_password').removeAttr('disabled',true);
-            }
+               
 
    
+            });
         });
+
+       
        
         
     </script>

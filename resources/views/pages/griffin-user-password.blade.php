@@ -106,7 +106,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Confirm Password</label>
                                        
-                                        <input class="form-control" type="password" id ="confirm-password" name="confirm-password"  value="">
+                                        <input class="form-control" type="password" id ="confirm-password" name="confirm_password"  value="">
                                     
                                     </div>    
                                 </div></div>
@@ -123,8 +123,9 @@
             </div>
             
         </div>
-        @include('layouts.footers.auth.footer')
+        
     </div>
+    @include('layouts.footers.auth.footer')
 @endsection
 @push('js')
   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>

@@ -345,7 +345,7 @@ class LoginController extends Controller
       
         
         if(Session::has('two') && Session::has('griffin_user') && Session::has('token')){
-            
+          
             $credentials = $request->validate([
                 'email' => ['required'],
                 'firstname' => ['required'],
@@ -354,64 +354,100 @@ class LoginController extends Controller
             ]); 
             
           
+           
+            if(empty($request->confirm_password)){
 
-            //
-            $token= $request->auth_token;
-            $method ='POST';
-            $url = Config::get('constants.griffin.url.token_validate');
-            
-            $tokenvalid= Helper::PostRequest($data='', $method, $url, $token);
-            if($tokenvalid['success']==false){
-                return back()->with('error', $tokenvalid['message']); 
-
-            }
-
-            if($tokenvalid['message']=="Token is valid"){
-
-                $method="POST";
-                $url = Config::get('constants.griffin.url.get_user').$request->id;
-                $token = $request->auth_token;
-                $data = [
-                    'username' => !empty($request->username)?$request->username:'',
-                    'first_name' =>!empty($request->firstname)?$request->firstname :'',
-                    'last_name'=>!empty($request->lastname)?$request->lastname:"",
-                    'email'=>!empty($request->email)?$request->email:'',
-                    'description'=>!empty($request->description)?$request->description:'',
-                ];
-                // update user record
-                $user= Helper::PostRequest($data, $method, $url, $token);
+           
+                $token= $request->auth_token;
+                $method ='POST';
+                $url = Config::get('constants.griffin.url.token_validate');
                 
-                
-                if(Session::has('existing_user') && Session::has('whisker_token')){
-                
-                    $whiskeruser = Session::get('existing_user');
+                $tokenvalid= Helper::PostRequest($data='', $method, $url, $token);
+                if($tokenvalid['success']==false){
+                    return back()->with('error', $tokenvalid['message']); 
+
+                }
+
+                if($tokenvalid['message']=="Token is valid"){
+
+                    $method="POST";
+                    $url = Config::get('constants.griffin.url.get_user').$request->id;
+                    $token = $request->auth_token;
+                    $data = [
+                        'username' => !empty($request->username)?$request->username:'',
+                        'first_name' =>!empty($request->firstname)?$request->firstname :'',
+                        'last_name'=>!empty($request->lastname)?$request->lastname:"",
+                        'email'=>!empty($request->email)?$request->email:'',
+                        'description'=>!empty($request->description)?$request->description:'',
+                    ];
+                    // update user record
+                    $user= Helper::PostRequest($data, $method, $url, $token);
                     
-                    $token = Session::get('whisker_token');
-                    $user_id = 0;
-                    if (isset($whiskeruser['0']['id'])) {
-                        $user_id = $whiskeruser['0']['id'];
-                    }else{
-                        $user_id = $whiskeruser['id'];
+                    
+                    if(Session::has('existing_user') && Session::has('whisker_token')){
+                    
+                        $whiskeruser = Session::get('existing_user');
+                        
+                        $token = Session::get('whisker_token');
+                        $user_id = 0;
+                        if (isset($whiskeruser['0']['id'])) {
+                            $user_id = $whiskeruser['0']['id'];
+                        }else{
+                            $user_id = $whiskeruser['id'];
+                        }
+                        
+                        $data = [
+                            'email'=>$request->email, 
+                        ];
+
+                        $method ="POST";
+                        
+                        $url = Config::get('constants.whisker.url.get_user').$user_id;
+                        
+                        //update existing user email
+                        $whisker = Helper::PostRequest($data, $method, $url, $token); 
+                        
                     }
                     
-                    $data = [
-                        'email'=>$request->email, 
-                    ];
-
-                    $method ="POST";
+                    $request->session()->put('griffin_user', $user);
                     
-                    $url = Config::get('constants.whisker.url.get_user').$user_id;
+                    return redirect()->route('griffin-profile')->with('succes', "User profile updated successfully..!");
                     
-                    //update existing user email
-                    $whisker = Helper::PostRequest($data, $method, $url, $token); 
+                } 
+            }else{
+              
+                $griffinuser = Session::get('griffin_user');
                     
+                $password = Session::get('user_credentials');
+                $user_email= $griffinuser['email'];
+    
+                $method="POST";
+                $url= Config::get('constants.griffin.url.token');
+                $data = [
+                 'username' => $user_email,
+                 'password' => $password['password'],
+                ];
+                 // get token 
+                $result = Helper::PostRequest($data, $method, $url, $token='');
+              
+                if($result['success']==false){
+                    return back()->with('error', $result['message']);
+                } 
+                
+                $method="POST";
+                $data=[
+                    'password'=>!empty($request->confirm_password)?$request->confirm_password:'',
+                ];
+                $token = $result['data']['token'];
+                $url=Config::get('constants.griffin.url.get_user') .$result['data']['id'];
+                 
+                $user = Helper::PostRequest($data, $method, $url, $token);
+                
+                
+                if(!empty($user)){
+                    return redirect()->route('logout')->with('succes','Password Changed Suucessfully');
                 }
-                
-                $request->session()->put('griffin_user', $user);
-                
-                return redirect()->route('griffin-profile')->with('succes', "User profile updated successfully..!");
-                
-            } 
+            }    
         }else{
             return redirect()->route('griffin')->with('error',"You Need to Login First");
         }
