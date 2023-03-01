@@ -1,21 +1,19 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'contact us'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Contact Us'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     
-                        <div class="card-header">
-                            
-                        </div>
                        
                         <div class="card-body">
-                            <div class="p-4 " style='background-color:#adb5bd;'>
-                          
-                                <p class=" text-center">Get In Touch</p>
-                              
+                            <div class="d-flex align-items-center">
+                            <p><b>Get In Touch</b></p>
+                            
+                        </div>
+                            
                            
                                   <form role="form" method="POST" action="{{route('griffin.sendcontact')}}">
                                     @csrf
@@ -36,7 +34,7 @@
                                             <button type="submit" class="btn btn-blue mt-2 mb-0">Submit</button>
                                         </div>
                                 </form>
-                            </div>
+                           
                             
                         </div>
                     

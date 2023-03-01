@@ -25,7 +25,7 @@
                                         @csrf
                                         @method('post')
                                         <div class="flex flex-col mb-3">
-                                            <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" value="{{ old('email') }}" aria-label="Email">
+                                            <input type="email" required name="email" class="form-control form-control-lg" placeholder="Email" value="{{ old('email') }}" aria-label="Email">
                                             @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="text-center">

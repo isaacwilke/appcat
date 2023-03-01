@@ -94,11 +94,14 @@
                                             </tr>
                                         @endforeach
                                     @else
+                                    
+
                                         <tr>
-                                            <td class ="text-center">
-                                                {{ ' No Records Found' }}
+                                            <td colspan="5" class="text-center">
+                                                No Records Found
                                             </td>
                                         </tr>
+                                        
                                     @endif
                                 </tbody>
                             </table>

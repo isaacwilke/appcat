@@ -29,13 +29,13 @@
                                         @csrf
                                         @method('post')
                                         <div class="flex flex-col mb-3">
-                                            <input type="email" name="email" class="form-control form-control-lg" value="{{ old('email')}}" aria-label="Email">
+                                            <input type="email" required name="email" class="form-control form-control-lg" value="{{ old('email')}}" aria-label="Email">
                                             @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <input type="hidden" name="site" value="Whisker And Soda - Where Cats and Relax Collide">
 
                                         <div class="flex flex-col mb-3">
-                                            <input type="password" name="password" class="form-control form-control-lg" aria-label="Password" value="" >
+                                            <input type="password" required name="password" class="form-control form-control-lg" aria-label="Password" value="" >
                                             @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="form-check form-switch">

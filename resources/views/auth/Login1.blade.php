@@ -2,13 +2,14 @@
 
 @section('content')
     <div class="container position-sticky z-index-sticky top-0">
-    <div id="alert">
-        @include('components.alert')
-    </div>
+ 
         <div class="row">
             <div class="col-12">
                 @include('layouts.navbars.guest.navbar')
             </div>
+              <div id="alert">
+        @include('components.alert')
+    </div>
         </div>
     </div>
     <main class="main-content  mt-0">
@@ -30,13 +31,13 @@
                                         @csrf
                                         @method('post')
                                         <div class="flex flex-col mb-3">
-                                            <input type="email" name="email" class="form-control form-control-lg" value="{{ old('email')}}" aria-label="Email">
+                                            <input type="email" name="email" required class="form-control form-control-lg" value="{{ old('email')}}" aria-label="Email">
                                             @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <input type="hidden" name="site" value="Griffin Rock Cat Retreat - Your Cat's Vacation Oasis">
 
                                         <div class="flex flex-col mb-3">
-                                            <input type="password" name="password" class="form-control form-control-lg" aria-label="Password" value="" >
+                                            <input type="password" name="password" required class="form-control form-control-lg" aria-label="Password" value="" >
                                             @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="form-check form-switch">

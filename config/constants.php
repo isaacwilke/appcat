@@ -32,18 +32,18 @@ return [
             'password'=>'$Y*IenB62r(DN%PC8ylp@wwIjJfAA9DeXg^O)IM3jj3f#q7H'
         ],
         'url'=>[
-            'token'=>'https://griffinrockcatretreat.com/wp-json/jwt-auth/v1/token',
-            'token_validate'=>'https://griffinrockcatretreat.com/wp-json/jwt-auth/v1/token/validate',
-            'list_order'=>'https://griffinrockcatretreat.com/wp-json/wc/v3/orders',
-            'search_user'=>'https://griffinrockcatretreat.com/wp-json/wp/v2/users?search=',
-            'get_user'=>'https://griffinrockcatretreat.com/wp-json/wp/v2/users/',
-            'get_order'=>'https://griffinrockcatretreat.com/wp-json/wc/v3/orders/',  
-            'reset_password'=>'https://griffinrockcatretreat.com/wp-json/bdpwr/v1/reset-password',
-            'reset_validate'=>'https://griffinrockcatretreat.com/wp-json/bdpwr/v1/validate-code',
-            'set_password'=>'https://griffinrockcatretreat.com/wp-json/bdpwr/v1/set-password',
-            'get_billing'=>'https://griffinrockcatretreat.com/wp-json/wc/v3/customers/',
-            'get_bookings'=>'https://griffinrockcatretreat.com/wp-json/portalapi/v1/bookings/',
-            'cancel_booking'=>'https://griffinrockcatretreat.com/wp-json/portalapi/v1/booking/cancel?bookingid='
+            'token'=>'http://grcrdev.divinus.us/wp-json/jwt-auth/v1/token',
+            'token_validate'=>'http://grcrdev.divinus.us/wp-json/jwt-auth/v1/token/validate',
+            'list_order'=>'http://grcrdev.divinus.us/wp-json/wc/v3/orders',
+            'search_user'=>'http://grcrdev.divinus.us/wp-json/wp/v2/users?search=',
+            'get_user'=>'http://grcrdev.divinus.us/wp-json/wp/v2/users/',
+            'get_order'=>'http://grcrdev.divinus.us/wp-json/wc/v3/orders/',  
+            'reset_password'=>'http://grcrdev.divinus.us/wp-json/bdpwr/v1/reset-password',
+            'reset_validate'=>'http://grcrdev.divinus.us/wp-json/bdpwr/v1/validate-code',
+            'set_password'=>'http://grcrdev.divinus.us/wp-json/bdpwr/v1/set-password',
+            'get_billing'=>'http://grcrdev.divinus.us/wp-json/wc/v3/customers/',
+            'get_bookings'=>'http://grcrdev.divinus.us/wp-json/portalapi/v1/bookings/',
+            'cancel_booking'=>'https://grcrdev.divinus.us/wp-json/portalapi/v1/booking/cancel?bookingid='
         ],
        
     ],

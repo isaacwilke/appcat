@@ -39,36 +39,43 @@ class HomeController extends Controller
         }
     }
 
-    public function index1(Request $request, $status="")
+    public function index1(Request $request, $status = "")
     {
         if ($request->session()->has('griffin_user') && $request->session()->has('token')) {
-           
+
             if (!empty($status) &&  $status != "All") {
                 Session::put('Status', $status);
                 $user = Session::get('griffin_user');
-               
+
                 $token = Session::get('token');
                 $method = 'GET';
                 $url = Config::get('constants.griffin.url.get_bookings') . $user['id'];
                 $token = $token['token'];
                 $booking =  Helper::PostRequest($data = '', $method, $url, $token = $token);
+                $filterBooking = [];
+               
+                if (!empty($booking)) {
+                    foreach ($booking as $bookings) {
+                        $now = Carbon::now()->format('Y-m-d');
 
-                foreach ($booking as $bookings) {
-                    $now = Carbon::now()->format('Y-m-d');
-
-                    if ($status == "Current" && $bookings['check_in'] > $now) {
-                        $filterBooking[] = $bookings;
-                        // return Response::json(['success' => $data], 200);
+                        if ($status == "Current" && $bookings['check_in'] > $now) {
+                            $filterBooking[] = $bookings;
+                            // return Response::json(['success' => $data], 200);
+                        }
+                        if (($status == "Past") && ($bookings['check_in'] < $now) && ($bookings['check_out'] < $now)) {
+                            $filterBooking[] = $bookings;
+                        } else if (($status == "Past") && ($bookings['check_in'] > $now) && ($bookings['check_out'] > $now)) {
+                            $filterBooking[] = null;
+                        }
                     }
-                    if (($status == "Past") && ($bookings['check_in'] < $now) && ($bookings['check_out'] < $now)) {
-                        $filterBooking[] = $bookings;
-                    }else if (($status == "Past") && ($bookings['check_in'] > $now) && ($bookings['check_out'] > $now)) {
-                        $filterBooking[] = null;
+                    if (isset($filterBooking) && !empty($filterBooking)) {
+                        $filterBooking = array_filter($filterBooking);
                     }
+                    return view('pages.griffin-dashboard', compact('filterBooking'));
+                } else {
+                    $filterBooking[] = $booking;
+                    return view('pages.griffin-dashboard', compact('filterBooking'));
                 }
-                
-                $filterBooking = array_filter($filterBooking);
-                return view('pages.griffin-dashboard', compact('filterBooking'));
             } else {
                 Session::put('Status', 'All');
                 $user = Session::get('griffin_user');
@@ -103,7 +110,7 @@ class HomeController extends Controller
 
                     $booking = $bookings;
                     // return Response::json(['success' => $data], 200);
-                  
+
                     return view('home.griffin.reservation', compact('booking'));
                 }
             }
@@ -135,30 +142,30 @@ class HomeController extends Controller
         }
     }
 
-    public function cancelReservation(Request $request){
+    public function cancelReservation(Request $request)
+    {
         if ($request->session()->has('griffin_user') && $request->session()->has('token')) {
-             $user = Session::get('griffin_user');
-                $random = [
-                    'email'=>$user['email'],
-                    'booking'=>$request->bookingid,
-                ];
+            $user = Session::get('griffin_user');
+            $random = [
+                'email' => $user['email'],
+                'booking' => $request->bookingid,
+            ];
             $token = Session::get('token');
             $method = 'GET';
-            $url = Config::get('constants.griffin.url.cancel_booking').$request->bookingid;
+            $url = Config::get('constants.griffin.url.cancel_booking') . $request->bookingid;
             $token = $token['token'];
             $booking =  Helper::PostRequest($data = '', $method, $url, $token = $token);
-            if($booking['status']=='success'){
+            if ($booking['status'] == 'success') {
                 $user = Session::get('griffin_user');
-                Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email"=>$user['email'], 'name'=>$user['first_name'].' '.$user['last_name']], function ($message) use ($random) {
-                    $message->to([$random['email'],'admin@griffinrockcatretreat.com']);
-                  
-                    $message->subject('Reservation Cancelled'."#".$random['booking']);
+                Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email" => $user['email'], 'name' => $user['first_name'] . ' ' . $user['last_name']], function ($message) use ($random) {
+                    $message->to([$random['email'], 'admin@griffinrockcatretreat.com']);
+
+                    $message->subject('Reservation Cancelled' . "#" . $random['booking']);
                 });
-                return redirect()->route('home')->with('succes',$booking['message']);
-            }else{
-                return redirect()->route('home')->with('error',$booking['message']);  
+                return redirect()->route('home')->with('succes', $booking['message']);
+            } else {
+                return redirect()->route('home')->with('error', $booking['message']);
             }
-            
         }
     }
 }

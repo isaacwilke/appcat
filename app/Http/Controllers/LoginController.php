@@ -442,10 +442,11 @@ class LoginController extends Controller
                 $url=Config::get('constants.griffin.url.get_user') .$result['data']['id'];
                  
                 $user = Helper::PostRequest($data, $method, $url, $token);
-                
+                Session::flush();
                 
                 if(!empty($user)){
-                    return redirect()->route('logout')->with('succes','Password Changed Suucessfully');
+                    return redirect()->route('griffin')->with('succes', "Password Changed Suucessfully");
+                   // return redirect()->route('logout')->with('succes','Password Changed Suucessfully');
                 }
             }    
         }else{

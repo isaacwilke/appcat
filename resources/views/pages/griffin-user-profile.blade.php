@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Update Profile'])
@@ -59,83 +59,45 @@
   opacity: 0.4;
 }
 </style>
-    <div class="container-fluid pt-4 mt-4">
+    <div class="container-fluid ">
       <div id="alert">
             @include('components.alert')
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="d-flex align-items-center">
-                            <p>Update Profile</p>
-                            
-                        </div>
-                    </div> 
+                   
                     <div class="card-body">   
                         
-                        
+                         <div class="d-flex align-items-center">
+                            <p class="text-bold"><b>Update Profile</b></p>
+                            
+                        </div>
                                 
                         
                                 <div class="row">
                                     <div class="col-12 m-auto">
                                         <form name="test" class="multisteps-form__form" id="update_profile" action ="{{route('update-griffin-profile')}}" method="POST" >
                                             @csrf
-                                            {{-- <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
-                                                <div class="row text-center">
-                                                    <div class="col-12 mx-auto">
-                                                        <h5 class="font-weight-normal">Let's start with the basic information</h5>
-                                                        <p></p>
-                                                    </div>
-                                                </div>
-                                               <div class="multisteps-form__content">
-                                                    <div class="row mt-3">
-                                                        <div class="col-12 col-sm-4">
-                                                            <div class="avatar avatar-xxl position-relative">
-                                                                <img src="https://demos.creative-tim.com/test/soft-ui-dashboard-pro/assets/img/team-2.jpg" class="border-radius-md" />
-                                                                
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12 col-sm-7 mt-4 mt-sm-0 text-start">
-                                                            <input class="form-control" readonly type="hidden" name="auth_token" value="{{$result['token']}}">
-                                                            <input class="form-control" readonly type="hidden" name="user_id" value="{{$billing['id']}}">
-                                                            <label> Username</label>
-                                                            <input class="multisteps-form__input form-control mb-3" type="text" readonly  name="username" value="{{$billing['username']}}"placeholder="Eg. Michael" />
-                                                            <label> Email</label>
-                                                            <input class="multisteps-form__input form-control mb-3" type="email" name="email" readonly value="{{$billing['email']}}" placeholder="Eg. Michael" />
-                                                             <label> Role</label>
-                                                            <input class="multisteps-form__input form-control mb-3" type="text" name="role" readonly value="{{$billing['role']}}" placeholder="Eg. Michael" />
-                                                            <label>First Name</label>
-                                                            <input class="multisteps-form__input form-control mb-3" type="text" name="first_name" value="{{$billing['first_name']}}" placeholder="Eg. Michael" />
-                                                            <label>Last Name</label>
-                                                            <input class="multisteps-form__input form-control mb-3" type="text" name="last_name" value="{{$billing['last_name']}}" placeholder="Eg. Tomson" />
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="button-row d-flex mt-4">
-                                                        <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
-                                                    </div>
-                                                </div>
-                                            </div>  --}}
-                                    
+                                            
                                             <div class="card p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                                 <div class="row text-center">
                                                     <div class="col-12 mx-auto">
                                                         <h5 class="font-weight-normal"></p>
                                                     </div>
                                                 </div>
-                                                <div class="">
+                                                
                                                     <div class="row text-start">
                                                        <input class="form-control" type="hidden" name="id"  value="{{$user['user']['id']}}">
                                                         <input class="form-control" type="hidden" name="auth_token"  value="{{$user['token']['token']}}">
                                                         <div class="col-12 col-md-6  mt-3">
                                                             <label>First Name</label>
-                                                            <input class="multisteps-form__input form-control"type="text" name="firstname" value="{{$user['user']["first_name"]}}" />
+                                                            <input class="multisteps-form__input form-control"type="text" required name="firstname" value="{{$user['user']["first_name"]}}" />
                                                             @error('firstname') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                                         </div>
                                                         <div class="col-12 col-md-6  mt-3">
                                                             <label>Last Name</label>
-                                                            <input class="multisteps-form__input form-control" type="text" name="lastname"value="{{ $user['user']["last_name"] }}" />
+                                                            <input class="multisteps-form__input form-control" type="text" required name="lastname"value="{{ $user['user']["last_name"] }}" />
                                                               @error('lastname') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                                         </div>
                                                          <div class="col-12 col-md-6  mt-3">
@@ -144,7 +106,7 @@
                                                         </div>
                                                         <div class="col-12 col-md-6 mt-3">
                                                             <label>Email Address</label>
-                                                            <input class="multisteps-form__input form-control"  type="email" name="email" value="{{ $user['user']['email']}}"/>
+                                                            <input class="multisteps-form__input form-control" required type="email" name="email" value="{{ $user['user']['email']}}"/>
                                                             @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                                         </div>
                                                         <div class="col-12 col-md-6 mt-3">
@@ -160,8 +122,8 @@
                                                         <div class="col-md-6 col-sm-7 mt-4 mt-sm-0 text-start">
                                                             
                                                             <label> Password</label>
-                                                              @php $password = Session::get('user_credentials');@endphp
-                                                            <input class="multisteps-form__input form-control mb-3" type="password" id='password' name="password" value="{{$password["password"]}}"/>
+                                                            
+                                                            <input class="multisteps-form__input form-control mb-3" type="password" id='password' name="password" value=""/>
                                                                   <p class="passwordhint">Password Requirements: </p>
                                                                     <div class="pass-checklist">
                                                                         <ul>
@@ -176,13 +138,13 @@
                                                         </div>
                                                         <div class="col-md-6 col-sm-7 mt-4 mt-sm-0 text-start">
                                                         <label> Confirm Password</label>
-                                                            <input class="multisteps-form__input form-control mb-3" type="password" id ="confirm-password" name="confirm_password"  value="" />
+                                                            <input class="multisteps-form__input form-control mb-3" type="password" id ="confirm-password"  name="confirm_password"  value="" />
                                                             
                                                         </div>
                                                     </div>
                                                     </div>
                                                     <div class="button-row text-center mt-4">
-                                                     <button type="submit" id="update-profile" data-id="{{route('update-griffin-profile')}}" class="btn btn-blue text-uppercase btn-sm ms-auto">{{'update profile'}}</button>
+                                                     <button type="submit"  id="update-profile" data-id="{{route('update-griffin-profile')}}" class="btn btn-blue text-uppercase btn-sm ms-auto">{{'update profile'}}</button>
                                                       
                                                     </div>
                                                 </div>
@@ -218,40 +180,27 @@
     <script>
         $(document).ready(function(){
             $('#alert').fadeOut(5000);
-              var confirmpass = $('#confirm-password').val();
-            var pass = $('#password').val();
-
-              $('#confirm-password').focusout(function(){
-              
-                    if($(this).val().length == 0){
-                        $('#update-profile').removeAttr('disabled',true);
-                    }
-                    if(pass == $(this).val()) {
-                        $('#update-profile').removeAttr('disabled',true);
-                    }
-                    
-                });
-
+            
         
-                $('#confirm-password').on('keypress', function () {
-                   
-                   
-              
-                    if($('.ctick').length ==5 && pass == confirmpass) {
-                       
-                        $('#update-profile').removeAttr('disabled',true);
-                    }else{
-                        
-                        $('#update-profile').attr('disabled',true);
-                    }
+                $("#confirm-password").on('blur',function (){
 
-                    
-                });
-          //  }   
+               var pass = $('#password').val();
+       
+                var confirmpass = $('#confirm-password').val();
+                if($('.ctick').length ==5 && pass == confirmpass) {
+                    $('#update-profile').removeAttr('disabled',true);
+                }else{
+                    alert('password and confirm password not matched');
+                    $('#update-profile').attr('disabled',true);
+            
+                }
+   
+            });
+         
 
           
              
-            $(document).on('keyup , blur', '#password', function () {
+            $(document).on('keyup, focusout', '#password', function () {
                 let password = $("#password").val();
          
        
@@ -313,7 +262,10 @@
                 
                 }
 
-               
+                if(password != confirmpass) {
+                    alert('password and confirm password not matched');
+                    $('#update-profile').attr('disabled',true);
+                }
 
    
             });
