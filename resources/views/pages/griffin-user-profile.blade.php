@@ -179,42 +179,11 @@
  
     <script>
         $(document).ready(function(){
-            $('#alert').fadeOut(5000);
-            
-        
-                $("#confirm-password").on('blur',function (){
-
-               var pass = $('#password').val();
-       
-                var confirmpass = $('#confirm-password').val();
-                if($('.ctick').length ==5 && pass == confirmpass) {
-                    $('#update-profile').removeAttr('disabled',true);
-                }else{
-                    alert('password and confirm password not matched');
-                    $('#update-profile').attr('disabled',true);
-            
-                }
-   
-            });
-         
-
           
-             
-            $(document).on('keyup, focusout', '#password', function () {
-                let password = $("#password").val();
-         
-       
-                var confirmpass = $('#confirm-password').val();
-                password_length = password.length;
-                if (password === '') {
-                
-                    password_is_valid = false;
-            
 
-                }if(password.length==12){
-                    var password1 = true;
+            $("#password").keyup(function(){
                 
-                }
+                let password = $("#password").val();
                 if(password.length < 12) {
                     $("#character_length").removeClass('ctick').addClass('ccross');
                         password_is_valid = false;
@@ -262,17 +231,65 @@
                 
                 }
 
-                if(password != confirmpass) {
-                    alert('password and confirm password not matched');
-                    $('#update-profile').attr('disabled',true);
-                }
 
-   
             });
+             
+          
         });
 
        
        
+
+
+        $( "#update_profile" ).submit(function( event ) {
+            let password = $("#password").val();
+            let confirm_password = $("#confirm-password").val();
+            if(password != '' || confirm_password != '')
+            {
+
+                var  password_is_valid = 1;
+                let password = $("#password").val();
+                if(password.length < 12) {
+                    $("#character_length").removeClass('ctick').addClass('ccross');
+                        password_is_valid = 0;
+                
+                } 
+                if (!password.match(/[A-Z]/)) {
+                    $("#uppercase_latter").removeClass('ctick').addClass('ccross');
+                    password_is_valid = 0;
+                
+                } 
+                if (!password.match(/[a-z]/)) {
+                    $("#lowercase_latter").removeClass('ctick').addClass('ccross');
+                    password_is_valid = 0;
+                
+                }
+                if (!password.match(/[0-9]/)) {
+                    $("#one_number").removeClass('ctick').addClass('ccross');
+                    password_is_valid = 0;
+            
+                } 
+                if (!password.match(/[!@#$%^&*]/)) {
+                    $("#special_character").removeClass('ctick').addClass('ccross');
+                    password_is_valid = 0;
+                
+                }
+                if(password_is_valid == 0)
+                {
+                    alert("Password field  \n Must contain at least 12 characters \n Must contain at least one uppercase letter \n Must contain at least one lowercase letter \n Must contain at least one number \n Must contain at least one special character");
+                    return false;
+                }
+
+
+
+                if(password != confirm_password)
+                {
+                    alert('Password and Confirm Password not matched.');
+                    return false;
+                }
+            }
+            return true;
+        });
         
     </script>
 @endpush
