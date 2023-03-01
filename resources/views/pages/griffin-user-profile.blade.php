@@ -106,7 +106,7 @@
                                                         </div>
                                                         <div class="col-12 col-md-6 mt-3">
                                                             <label>Email Address</label>
-                                                            <input class="multisteps-form__input form-control" required type="email" name="email" value="{{ $user['user']['email']}}"/>
+                                                            <input class="multisteps-form__input form-control" required type="email" name="email" value="{{ $user['user']['email']}}" readonly />
                                                             @error('email') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                                         </div>
                                                         <div class="col-12 col-md-6 mt-3">
