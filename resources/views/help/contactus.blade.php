@@ -9,8 +9,11 @@
                     
                        
                         <div class="card-body">
-                            <div class="d-flex align-items-center">
-                            <p><b>Get In Touch</b></p>
+                            {{-- <div class="d-flex align-items-center">
+                            <p><b>Get In Touch</b></p> --}}
+                            <div class="col-md-6">
+                                <h6>Get In Touch</h6>
+                            </div>
                             
                         </div>
                             

@@ -39,6 +39,8 @@ class HomeController extends Controller
         }
     }
 
+  
+
     public function index1(Request $request, $status = "")
     {
         if ($request->session()->has('griffin_user') && $request->session()->has('token')) {

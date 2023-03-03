@@ -10,6 +10,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WebcamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +86,10 @@ Route::get('whisker-membership-purchase/{id}',[MembershipController::class,'addm
 Route::get('whisker-transaction-pdf/{id}',[TransactionController::class,'viewTransaction'])->name('whisker.transactionpdf');
 
 Route::get('griffin-dashboard/bookings/{id}',[HomeController::class, 'griffinbooking'])->name('griffin.bookingsview');
-Route::get('griffin-contacus',[HomeController::class, 'contactus'])->name('griffin.contactus');
+Route::get('griffin-contactus',[HomeController::class, 'contactus'])->name('griffin.contactus');
 Route::post('griffin-sendcontact',[HomeController::class,'sendContactus'])->name('griffin.sendcontact');
 
 Route::post('griffin_cancel_reservation',[HomeController::class,"cancelReservation"])->name('griffin.cancel');
+
+Route::get('griffin-webcam',[WebcamController::class,"index"])->name('griffin.webcam');
+

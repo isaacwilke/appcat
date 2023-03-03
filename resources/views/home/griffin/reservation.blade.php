@@ -74,32 +74,32 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Cat Name</label>
                                         <input class="form-control" type="text" readonly name="cat_name"
-                                            value="{{$information['cats_name']}}">
+                                            value="{{$information['cats_name'] }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Cat Age</label>
                                         <input class="form-control" readonly type="text" name="cat_age"
-                                            value="{{$information['cats_age']}}">
+                                            value="{{$information['cats_age'] }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Cat's weight</label>
-                                        <input class="form-control" type="text" readonly name="cats_weight" value="{{$information['cats_weight']}}">
+                                        <input class="form-control" type="text" readonly name="cats_weight" value="{{$information['cats_weight'] }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
-                                        <input class="form-control" type="text" readonly name="vaccine_uploaded_documents" value="{{$information['vaccine_uploaded_documents']}}">
+                                        <input class="form-control" type="text" readonly name="vaccine_uploaded_documents" value="{{$information['vaccine_uploaded_documents'] }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
-                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions_2" value="{{$information['special_dietary_needs_or_restrictions_2']}}">
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions_2" value="{{$information['special_dietary_needs_or_restrictions_2'] }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -111,7 +111,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Litter Preferencev:</label>
-                                        <input class="form-control" type="text" readonly name="litter_preference" value="{{$information['litter_preference']}}">
+                                        <input class="form-control" type="text" readonly name="litter_preference" value="{{$information['litter_preference'] }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">

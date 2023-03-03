@@ -24871,6 +24871,16 @@ pre[class*=language-] {
   background-color: #043F5D;
   border-color: #043F5D;
 }
+.btn-blue:hover {
+  color: #FFFFFF;
+  background-color: #043F5D;
+  border-color: #043F5D;
+}
+.btn-filter {
+  color: #000;
+  background-color:#f38120;
+  border-color: #f38120;
+}
 .multisteps-form__panel{
   background-color:transparent!important;
   border-color:hsla(0,0%,100%,.15)!important;

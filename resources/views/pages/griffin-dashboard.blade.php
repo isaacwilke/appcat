@@ -21,17 +21,17 @@
                               
                                     {{-- <button type="button" class="btn btn-blue" name="status" id="btn_name" value="All" onclick="document.getElementById('myForm').submit();">All</button> --}}
                                     @if(Session::get('Status')=="All")
-                                    <a  class="btn btn-primary" name="status" id="btn_name" href="{{route('home',['status'=>'All'])}}">All</a>
+                                    <a  class="btn btn-filter" name="status" id="btn_name" href="{{route('home',['status'=>'All'])}}">All</a>
                                     @else
                                      <a  class="btn btn-blue" name="status" id="btn_name" href="{{route('home',['status'=>'All'])}}">All</a>
                                     @endif
                                     @if(Session::get("Status")=='Current')
-                                    <a  class="btn btn-primary" name="status" id="btn_class" value="Current" href="{{route('home',['status'=>'Current'])}}">Current</a>
+                                    <a  class="btn btn-filter" name="status" id="btn_class" value="Current" href="{{route('home',['status'=>'Current'])}}">Current</a>
                                     @else
                                     <a  class="btn btn-blue" name="status" id="btn_class" value="Current" href="{{route('home',['status'=>'Current'])}}">Current</a>
                                     @endif
                                     @if(Session::get('Status')=="Past")
-                                    <a  class="btn btn-primary" name="status" id="btn_tag" value="Past" href="{{route('home',['status'=>'Past'])}}">Past</a>
+                                    <a  class="btn btn-filter" name="status" id="btn_tag" value="Past" href="{{route('home',['status'=>'Past'])}}">Past</a>
                                     @else
                                     <a  class="btn btn-blue" name="status" id="btn_tag" value="Past" href="{{route('home',['status'=>'Past'])}}">Past</a>
                                     @endif
@@ -67,17 +67,20 @@
                                         @foreach ($filterBooking as $filterBookings)
                                             <tr>
                                                 <td class="text-center">
-                                                    {{ $filterBookings['check_in'] }}
+                                                {{-- $filterBookings['check_in']->format('mm-dd-yyyy')  --}}
+                                                    {{ $filterBookings['check_in']->format('mm-dd-yyyy')}}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $filterBookings['check_out'] }}
+                                                {{-- $filterBookings['check_out']->format('mm-dd-yyyy') --}}
+                                                    {{ $filterBookings['check_out']->format('mm-dd-yyyy') }}
                                                 </td>
 
                                                 <td class="text-center">
                                                     {{ $filterBookings['no_of_rooms'] }}
                                                 </td>
                                                 <td class="text-center">
-                                                    {{ $filterBookings['status'] }}
+                                                {{-- {{ ucfirst($filterBookings['status']) }} --}}
+                                                    {{ucfirst($filterBookings['status']) }}
                                                 </td>
 
                                                 {{-- <td class="text-center">

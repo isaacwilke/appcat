@@ -175,7 +175,6 @@ class LoginController extends Controller
         $url =  Config::get('constants.griffin.url.token');
         // Getting token of griffin site
         $result = Helper::PostRequest($data, $method, $url, $token="");
-        
         if($result['success']==false){
             return back()->with('error', $result['message']);
         }

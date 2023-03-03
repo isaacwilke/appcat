@@ -69,10 +69,13 @@
                    
                     <div class="card-body">   
                         
-                         <div class="d-flex align-items-center">
+                         {{-- <div class="d-flex align-items-center">
                             <p class="text-bold"><b>Update Profile</b></p>
                             
-                        </div>
+                        </div> --}}
+                        <div class="col-md-6">
+                                <h6>Update Profile</h6>
+                            </div>
                                 
                         
                                 <div class="row">
