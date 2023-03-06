@@ -67,8 +67,8 @@
                                         @foreach ($filterBooking as $filterBookings)
                                             <tr>
                                                 <td class="text-center">
-                                                {{-- $filterBookings['check_in']->format('mm-dd-yyyy')  --}}
-                                                    {{ $filterBookings['check_in']->format('mm-dd-yyyy')}}
+                                               
+                                                    {{ Carbon\Carbon::parse($filterBookings['check_in'])->format('mm-dd-yyyy')}}
                                                 </td>
                                                 <td class="text-center">
                                                 {{-- $filterBookings['check_out']->format('mm-dd-yyyy') --}}
