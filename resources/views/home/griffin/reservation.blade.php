@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">No of Rooms</label>
-                                        <input class="form-control" type="text" readonly name="no_of_rooms" value="{{$booking['no_of_rooms']}}">
+                                        <input class="form-control" type="text" readonly name="no_of_rooms" value="{{ isset($booking['no_of_rooms']) ? $booking['no_of_rooms'] : '' }}">
                                     </div>
                                 </div>
                              
@@ -53,7 +53,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Checkin</label>
-                                        <input class="form-control" type="text" readonly name="checkin" value="{{$booking['check_in']}}">
+                                        <input class="form-control" type="text" readonly name="checkin" value="{{ isset($booking['check_in']) ? $booking['check_in'] : '' }}">
                                     </div>
                                 </div>
                               
@@ -61,7 +61,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">checkout</label>
                                         
-                                        <input class="form-control" type="text"readonly name="checkout" value="{{$booking['check_out']}}">
+                                        <input class="form-control" type="text"readonly name="checkout" value="{{ isset($booking['check_out']) ? $booking['check_out'] : '' }}">
                                     </div>
                                 </div>
                               
@@ -74,32 +74,32 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Cat Name</label>
                                         <input class="form-control" type="text" readonly name="cat_name"
-                                            value="{{$information['cats_name'] }}">
+                                            value="{{ isset($information['cats_name']) ? $information['cats_name'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Cat Age</label>
                                         <input class="form-control" readonly type="text" name="cat_age"
-                                            value="{{$information['cats_age'] }}">
+                                            value="{{ isset($information['cats_age']) ? $information['cats_age'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Cat's weight</label>
-                                        <input class="form-control" type="text" readonly name="cats_weight" value="{{$information['cats_weight'] }}">
+                                        <input class="form-control" type="text" readonly name="cats_weight" value="{{ isset($information['cats_weight']) ? $information['cats_weight'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
-                                        <input class="form-control" type="text" readonly name="vaccine_uploaded_documents" value="{{$information['vaccine_uploaded_documents'] }}">
+                                        <input class="form-control" type="text" readonly name="vaccine_uploaded_documents" value="{{ isset($information['vaccine_uploaded_documents']) ? $information['vaccine_uploaded_documents'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
-                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions_2" value="{{$information['special_dietary_needs_or_restrictions_2'] }}">
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions_2" value="{{ isset($information['special_dietary_needs_or_restrictions']) ? $information['special_dietary_needs_or_restrictions'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -111,7 +111,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Litter Preferencev:</label>
-                                        <input class="form-control" type="text" readonly name="litter_preference" value="{{$information['litter_preference'] }}">
+                                        <input class="form-control" type="text" readonly name="litter_preference" value="{{ isset($information['litter_preference']) ? $information['litter_preference'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -141,28 +141,28 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Phone</label>
                                         <input class="form-control" readinly type="text"readonly name="phone"
-                                            value="{{$information['phone']}}">
+                                            value="{{ isset($information['phone']) ? $information['phone'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">address street</label>
                                         <input class="form-control"readonly type="text" name="address_street"
-                                            value="{{$information['address_street']}}">
+                                            value="{{ isset($information['address_street']) ? $information['address_street'] : '' }}">
                                     </div>
                                 </div>
                                    <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">city</label>
                                         <input class="form-control" type="text"readonly name="city"
-                                            value="{{$information['city']}}">
+                                            value="{{ isset($information['city']) ? $information['city'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">state</label>
                                         <input class="form-control" type="text" readonly name="state"
-                                            value="{{$information['state']}}">
+                                            value="{{ isset($information['state']) ? $information['state'] : '' }}">
                                     </div>
                                 </div>
 
@@ -170,14 +170,14 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">zip</label>
                                         <input class="form-control" type="text"readonly name="zip"
-                                            value="{{$information['zip']}}">
+                                            value="{{ isset($information['zip']) ? $information['zip'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">preferred_method_of_contact</label>
                                         <input class="form-control" type="text" readonly name="preferred_method_of_contact"
-                                            value="{{$information['preferred_method_of_contact']}}">
+                                            value="{{ isset($information['preferred_method_of_contact']) ? $information['preferred_method_of_contact'] : '' }}">
                                     </div>
                                 </div>
 
@@ -185,28 +185,28 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">emergency_contact</label>
                                         <input class="form-control" type="text"readonly name="emergency_contact"
-                                            value="{{$information['emergency_contact']}}">
+                                            value="{{ isset($information['emergency_contact']) ? $information['emergency_contact'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">phone_2</label>
                                         <input class="form-control" type="text" readonly name="phone_2"
-                                            value="{{$information['phone_2']}}">
+                                            value="{{ isset($information['phone_2']) ? $information['phone_2'] : '' }}">
                                     </div>
                                 </div>
                                    <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">acceptance_of_terms_and_conditions</label>
                                         <input class="form-control" type="text"readonly name="acceptance_of_terms_and_conditions_2"
-                                            value="{{$information['acceptance_of_terms_and_conditions_2']}}">
+                                            value="{{ isset($information['acceptance_of_terms_and_conditions']) ? $information['acceptance_of_terms_and_conditions'] : '' }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">acceptance_of_cancellation_policy</label>
                                         <input class="form-control" type="text" readonly name="acceptance_of_cancellation_policy_2"
-                                            value="{{$information['acceptance_of_cancellation_policy_2']}}">
+                                            value="{{ isset($information['acceptance_of_cancellation_policy']) ? $information['acceptance_of_cancellation_policy'] : '' }}">
                                     </div>
                                 </div>
                             </div>
@@ -215,8 +215,9 @@
                 </div>
             </div>
             
-        @include('layouts.footers.auth.footer')
+       
     </div>
+     @include('layouts.footers.auth.footer')
 @endsection
 
 @push('js')
