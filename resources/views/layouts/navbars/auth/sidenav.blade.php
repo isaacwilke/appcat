@@ -23,7 +23,7 @@
                 
                 @endif
             @elseif(Session::has('two'))
-                <img src="{{ asset('argon/img/cropped-grcr_icon-32x32.jpg') }}" class="navbar-brand-img navbar-brand-img h-100 rounded"
+                <img src="{{ asset('argon/img/cropped-grcr_icon-180x180.jpg') }}" class="navbar-brand-img navbar-brand-img h-100 rounded"
                     alt="main_logo">
 
                 @if (Session::has('existing_user'))
