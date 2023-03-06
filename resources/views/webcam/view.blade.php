@@ -31,8 +31,8 @@
 													
 													<h3><?php echo "Reservation: ".$counter; ?></h3>
 													<div class="reservation_list_data">
-													<div class="col-full"><div><?php echo "Check In Date: </div><span>".$bookings['check_in']; ?></span></div>
-													<div class="col-full"><div><?php echo "Check Out Date: </div><span>".$bookings['check_out']; ?></span></div>
+													<div class="col-full"><div><?php echo "Check In Date: </div><span>".date('m-d-Y',strtotime($bookings['check_in'])); ?></span></div>
+													<div class="col-full"><div><?php echo "Check Out Date: </div><span>".date('m-d-Y',strtotime($bookings['check_out'])); ?></span></div>
 													<div class="col-full"><div><?php echo "Number of Cats: </div><span>".(float)$bookings['adults'] + (float)$bookings['children']; ?></span></div>
 													
 													</div>
