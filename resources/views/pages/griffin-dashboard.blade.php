@@ -68,11 +68,11 @@
                                             <tr>
                                                 <td class="text-center">
                                                
-                                                    {{ Carbon\Carbon::parse($filterBookings['check_in'])->format('mm-dd-yyyy')}}
+                                                    {{ Carbon\Carbon::parse($filterBookings['check_in'])->format('m-d-Y')}}
                                                 </td>
                                                 <td class="text-center">
                                                
-                                                    {{ Carbon\Carbon::parse($filterBookings['check_out'])->format('mm-dd-yyyy') }}
+                                                    {{ Carbon\Carbon::parse($filterBookings['check_out'])->format('m-d-Y') }}
                                                 </td>
 
                                                 <td class="text-center">
