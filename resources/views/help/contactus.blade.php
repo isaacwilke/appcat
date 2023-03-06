@@ -15,12 +15,12 @@
                                 <h6>Get In Touch</h6>
                             </div>
                             
-                        </div>
+                        
                             
                            
-                                  <form role="form" method="POST" action="{{route('griffin.sendcontact')}}">
+                                <form role="form" method="POST" action="{{route('griffin.sendcontact')}}">
                                     @csrf
-                                <div class="form-group mb-3">
+                                    <div class="form-group mb-3">
                                        
                                         <input type="text" required class="form-control" id="exampleFormControlInput1" name ="name" placeholder="name">
                                     </div>
