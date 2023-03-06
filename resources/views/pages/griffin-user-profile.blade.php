@@ -59,7 +59,7 @@
   opacity: 0.4;
 }
 </style>
-    <div class="container-fluid ">
+    <div class="container-fluid py-4">
       <div id="alert">
             @include('components.alert')
         </div>
