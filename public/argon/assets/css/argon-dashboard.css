@@ -3446,8 +3446,8 @@ textarea.form-control-lg {
     transition: none;
   }
 }
-.btn:hover {
-  color: #67748e;
+.btn:hover, .btn-filter:hover, .btn-filter {
+  color: #fff;
 }
 .btn-check:focus + .btn, .btn:focus {
   outline: 0;
@@ -19611,6 +19611,49 @@ textarea.form-control-lg {
 .card {
   box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15);
 }
+/*-- New css 07-03 --*/
+.card.mb-4 {
+    min-height: calc(100vh - 195px);
+}
+.reservation_list_data {
+        display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.reservation_list h3 {
+    text-align: center;
+}
+.room_btn {
+    width: 100%;
+    text-align: center;
+}
+.col-full {
+    width: 33.33%;
+    display: flex;
+}
+
+.col-full div {
+    margin-right: 5px;
+}
+.room_btn .btn {
+    border-radius: 0;
+    padding: 2rem 2rem;
+}
+@media(max-width:767px){
+    .card.mb-4 {
+            min-height: auto;
+        }
+    .navbar-main .container-fluid {
+    padding: 0;
+}
+ol.breadcrumb.bg-transparent.mb-0.me-5 {
+    margin-right: 0 !important;
+}
+.card .card-header .col-md-6.text-end {
+    text-align: center !important;
+}
+}
+/*-- New css 07-03 --*/
 .card .card-header {
   padding: 1.5rem;
 }
@@ -24872,14 +24915,18 @@ pre[class*=language-] {
   border-color: #043F5D;
 }
 .btn-blue:hover {
-  color: #FFFFFF;
-  background-color: #043F5D;
-  border-color: #043F5D;
+    color: #FFFFFF;
+    background-color: #02334c;
+    border-color: #02334c;
 }
 .btn-filter {
-  color: #000;
+  color: #fff;
   background-color:#f38120;
   border-color: #f38120;
+}
+.btn-filter:hover {
+    background-color: #ed6d00;
+    border-color: #ed6d00;
 }
 .multisteps-form__panel{
   background-color:transparent!important;

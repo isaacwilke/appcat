@@ -20,6 +20,34 @@
                         
                                 <div class="row">
                                     <div class="col-12 m-auto">
+										
+										<?php if (!empty($booking)){ 
+											$counter = 1;
+											foreach ($booking as $bookings){
+												if($bookings['status'] == 'confirmed' && strtotime(date('Y-m-d'))  <=  strtotime(date('Y-m-d',strtotime($bookings['check_out']))))
+												{
+													?>
+													<div class="reservation_list">
+													
+													<h3><?php echo "Reservation: ".$counter; ?></h3>
+													<div class="reservation_list_data">
+													<div class="col-full"><div><?php echo "Check In Date: </div><span>".$bookings['check_in']; ?></span></div>
+													<div class="col-full"><div><?php echo "Check Out Date: </div><span>".$bookings['check_out']; ?></span></div>
+													<div class="col-full"><div><?php echo "Number of Cats: </div><span>".(float)$bookings['adults'] + (float)$bookings['children']; ?></span></div>
+													
+													</div>
+													<div class="room_btn"><div class="btn btn-blue text-uppercase btn-lg"><?php echo "Room Number: ".$bookings['room_no']; ?></div></div>
+													</div>
+													
+													
+													<?php
+													$counter++;
+												}
+												
+											}
+										} 
+										?>
+									
                                         
                                     </div>
                                 </div>

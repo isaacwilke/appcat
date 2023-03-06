@@ -91,5 +91,5 @@ Route::post('griffin-sendcontact',[HomeController::class,'sendContactus'])->name
 
 Route::post('griffin_cancel_reservation',[HomeController::class,"cancelReservation"])->name('griffin.cancel');
 
-Route::get('griffin-webcam',[WebcamController::class,"index"])->name('griffin.webcam');
+Route::get('griffin-webcam',[WebcamController::class,"griffinwebcam"])->name('griffin.webcam');
 
