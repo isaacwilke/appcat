@@ -18,6 +18,25 @@
             </ol>
            
         </nav>
+        <ul class="navbar-nav ms-md-auto pe-md-3 justify-content-end">
+                <li class="nav-item d-flex align-items-center">
+                    <form role="form" method="post" action="http://appcat.eiws.co.in/logout" id="logout-form">
+                        <input type="hidden" name="_token" value="GPSdiZzavEbi7nl90AaK3fBaXT5zETnPc8b6IIbd">                        <a href="http://appcat.eiws.co.in/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-white font-weight-bold px-0">
+                            <i class="fa fa-user me-sm-1" aria-hidden="true"></i>
+                            <span class="d-sm-inline d-none">Log out</span>
+                        </a>
+                    </form>
+                </li>
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                    <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                            <i class="sidenav-toggler-line bg-white"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             {{-- <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                 <div class="input-group">
