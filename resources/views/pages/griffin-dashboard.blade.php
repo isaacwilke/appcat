@@ -71,15 +71,15 @@
                                                     {{ Carbon\Carbon::parse($filterBookings['check_in'])->format('mm-dd-yyyy')}}
                                                 </td>
                                                 <td class="text-center">
-                                                {{-- $filterBookings['check_out']->format('mm-dd-yyyy') --}}
-                                                    {{ $filterBookings['check_out']->format('mm-dd-yyyy') }}
+                                               
+                                                    {{ Carbon\Carbon::parse($filterBookings['check_out'])->format('mm-dd-yyyy') }}
                                                 </td>
 
                                                 <td class="text-center">
                                                     {{ $filterBookings['no_of_rooms'] }}
                                                 </td>
                                                 <td class="text-center">
-                                                {{-- {{ ucfirst($filterBookings['status']) }} --}}
+                                               
                                                     {{ucfirst($filterBookings['status']) }}
                                                 </td>
 
