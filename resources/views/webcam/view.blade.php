@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card" style="height: 415px;">
+                <div class="card" style="min-height: 415px;">
                    
                     <div class="card-body">   
                         
@@ -36,7 +36,39 @@
 													<div class="col-full"><div><?php echo "Number of Cats: </div><span>".(float)$bookings['adults'] + (float)$bookings['children']; ?></span></div>
 													
 													</div>
-													<div class="room_btn"><div class="btn btn-blue text-uppercase btn-lg"><?php echo "Room Number: ".$bookings['room_no']; ?></div></div>
+													<?php
+													if($bookings['row_type'] == 'single-room')
+													{
+														?>
+														<div class="room_btn"><div class="btn btn-blue text-uppercase btn-lg"><?php echo "Room Number: ".$bookings['room_no']; ?></div></div>
+														<?php
+													}
+													?>
+													
+													
+													<?php
+													if($bookings['row_type'] == 'multiple-room')
+													{
+														$roomnoArr = explode(",",$bookings['room_no']);
+														?>
+														<div class="room_btn">
+														<?php
+														foreach($roomnoArr as $room)
+														{
+														?>
+														<div class="btn btn-blue text-uppercase btn-lg"><?php echo "Room Number: ".$room; ?></div>
+														<?php
+														}
+														?>
+														</div>
+														<?php
+													}
+													?>
+													
+													
+													
+													
+													
 													</div>
 													
 													

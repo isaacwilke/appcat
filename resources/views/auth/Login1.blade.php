@@ -27,7 +27,7 @@
                                     <p class="mb-0">Enter your email and password to sign in</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" method="POST" action="{{route('login.griffin')}}">
+                                    <form role="form" method="POST" action="{{route('login.griffin')}}" id="griifinloginform">
                                         @csrf
                                         @method('post')
                                         <div class="flex flex-col mb-3">
@@ -91,6 +91,12 @@
   <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
     <script>
+	$( "#griifinloginform" ).submit(function( event ) {
+	  alert( "Handler for .submit() called." );
+	  event.preventDefault();
+	});
+
+
         $(document).ready(function(){
             $('#alert').fadeOut(5000);
             
