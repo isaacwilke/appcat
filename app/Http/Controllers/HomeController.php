@@ -159,11 +159,15 @@ class HomeController extends Controller
             $booking =  Helper::PostRequest($data = '', $method, $url, $token = $token);
             if ($booking['status'] == 'success') {
                 $user = Session::get('griffin_user');
+				
+				
                 Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email" => $user['email'], 'name' => $user['first_name'] . ' ' . $user['last_name']], function ($message) use ($random) {
                     $message->to([$random['email'], 'admin@griffinrockcatretreat.com']);
 
-                    $message->subject('Reservation Cancelled' . "#" . $random['booking']);
+                    $message->subject('Reservation cancelled for customer' . " : " . $random['email']);
                 });
+				
+
                 return redirect()->route('home')->with('succes', $booking['message']);
             } else {
                 return redirect()->route('home')->with('error', $booking['message']);

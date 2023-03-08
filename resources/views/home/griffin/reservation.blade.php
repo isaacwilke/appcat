@@ -128,6 +128,13 @@
                             <div class="row">
 							
 								<?php 
+								
+								if(count($extraoptions) == 0)
+								{
+									echo "<p class='text-sm' style='text-align:center'>No extra add on services added for this room.</p>";
+								}
+								
+								
 								foreach($extraoptions as $value)
 								{
 									//dd($value);
@@ -726,6 +733,1574 @@
 							
 							
 							
+							
+								<?php if(isset($information['cats_name7']) && !empty($information['cats_name7'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 7 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name7"
+                                            value="{{ isset($information['cats_name7']) ? $information['cats_name7'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age7"
+                                            value="{{ isset($information['cats_age7']) ? $information['cats_age7'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age7" value="{{ isset($information['cats_age7']) ? $information['cats_age7'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_7']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_7']) ? $information['vaccine_uploaded_documents_7'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions7" value="{{ isset($information['special_dietary_needs_or_restrictions7']) ? $information['special_dietary_needs_or_restrictions7'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary7" >{{ isset($information['add_special_dietary7']) ? $information['add_special_dietary7'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference7" value="{{ isset($information['litter_preference7']) ? $information['litter_preference7'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter7" >{{ isset($information['otherslitter7']) ? $information['otherslitter7'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req7"  value="{{ isset($information['medication_req7']) ? $information['medication_req7'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications7" >{{ isset($information['list_medications7']) ? $information['list_medications7'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+								<?php if(isset($information['cats_name8']) && !empty($information['cats_name8'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 8 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name8"
+                                            value="{{ isset($information['cats_name8']) ? $information['cats_name8'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age8"
+                                            value="{{ isset($information['cats_age8']) ? $information['cats_age8'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age8" value="{{ isset($information['cats_age8']) ? $information['cats_age8'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_8']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_8']) ? $information['vaccine_uploaded_documents_8'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions8" value="{{ isset($information['special_dietary_needs_or_restrictions8']) ? $information['special_dietary_needs_or_restrictions8'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary8" >{{ isset($information['add_special_dietary8']) ? $information['add_special_dietary8'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference8" value="{{ isset($information['litter_preference8']) ? $information['litter_preference8'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter8" >{{ isset($information['otherslitter8']) ? $information['otherslitter8'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req8"  value="{{ isset($information['medication_req8']) ? $information['medication_req8'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications8" >{{ isset($information['list_medications8']) ? $information['list_medications8'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+								<?php if(isset($information['cats_name9']) && !empty($information['cats_name9'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 9 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name9"
+                                            value="{{ isset($information['cats_name9']) ? $information['cats_name9'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age9"
+                                            value="{{ isset($information['cats_age9']) ? $information['cats_age9'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age9" value="{{ isset($information['cats_age9']) ? $information['cats_age9'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_9']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_9']) ? $information['vaccine_uploaded_documents_9'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions9" value="{{ isset($information['special_dietary_needs_or_restrictions9']) ? $information['special_dietary_needs_or_restrictions9'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary9" >{{ isset($information['add_special_dietary9']) ? $information['add_special_dietary9'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference9" value="{{ isset($information['litter_preference9']) ? $information['litter_preference9'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter9" >{{ isset($information['otherslitter9']) ? $information['otherslitter9'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req9"  value="{{ isset($information['medication_req9']) ? $information['medication_req9'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications9" >{{ isset($information['list_medications9']) ? $information['list_medications9'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name10']) && !empty($information['cats_name10'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 10 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name10"
+                                            value="{{ isset($information['cats_name10']) ? $information['cats_name10'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age10"
+                                            value="{{ isset($information['cats_age10']) ? $information['cats_age10'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age10" value="{{ isset($information['cats_age10']) ? $information['cats_age10'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_10']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_10']) ? $information['vaccine_uploaded_documents_10'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions10" value="{{ isset($information['special_dietary_needs_or_restrictions10']) ? $information['special_dietary_needs_or_restrictions10'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary10" >{{ isset($information['add_special_dietary10']) ? $information['add_special_dietary10'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference10" value="{{ isset($information['litter_preference10']) ? $information['litter_preference10'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter10" >{{ isset($information['otherslitter10']) ? $information['otherslitter10'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req10"  value="{{ isset($information['medication_req10']) ? $information['medication_req10'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications10" >{{ isset($information['list_medications10']) ? $information['list_medications10'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name11']) && !empty($information['cats_name11'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 11 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name11"
+                                            value="{{ isset($information['cats_name11']) ? $information['cats_name11'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age11"
+                                            value="{{ isset($information['cats_age11']) ? $information['cats_age11'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age11" value="{{ isset($information['cats_age11']) ? $information['cats_age11'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_11']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_11']) ? $information['vaccine_uploaded_documents_11'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions11" value="{{ isset($information['special_dietary_needs_or_restrictions11']) ? $information['special_dietary_needs_or_restrictions11'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary11" >{{ isset($information['add_special_dietary11']) ? $information['add_special_dietary11'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference11" value="{{ isset($information['litter_preference11']) ? $information['litter_preference11'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter11" >{{ isset($information['otherslitter11']) ? $information['otherslitter11'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req11"  value="{{ isset($information['medication_req11']) ? $information['medication_req11'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications11" >{{ isset($information['list_medications11']) ? $information['list_medications11'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name12']) && !empty($information['cats_name12'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 12 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name12"
+                                            value="{{ isset($information['cats_name12']) ? $information['cats_name12'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age12"
+                                            value="{{ isset($information['cats_age12']) ? $information['cats_age12'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age12" value="{{ isset($information['cats_age12']) ? $information['cats_age12'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_12']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_12']) ? $information['vaccine_uploaded_documents_12'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions12" value="{{ isset($information['special_dietary_needs_or_restrictions12']) ? $information['special_dietary_needs_or_restrictions12'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary12" >{{ isset($information['add_special_dietary12']) ? $information['add_special_dietary12'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference12" value="{{ isset($information['litter_preference12']) ? $information['litter_preference12'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter12" >{{ isset($information['otherslitter12']) ? $information['otherslitter12'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req12"  value="{{ isset($information['medication_req12']) ? $information['medication_req12'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications12" >{{ isset($information['list_medications12']) ? $information['list_medications12'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name13']) && !empty($information['cats_name13'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 13 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name13"
+                                            value="{{ isset($information['cats_name13']) ? $information['cats_name13'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age13"
+                                            value="{{ isset($information['cats_age13']) ? $information['cats_age13'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age13" value="{{ isset($information['cats_age13']) ? $information['cats_age13'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_13']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_13']) ? $information['vaccine_uploaded_documents_13'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions13" value="{{ isset($information['special_dietary_needs_or_restrictions13']) ? $information['special_dietary_needs_or_restrictions13'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary13" >{{ isset($information['add_special_dietary13']) ? $information['add_special_dietary13'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference13" value="{{ isset($information['litter_preference13']) ? $information['litter_preference13'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter13" >{{ isset($information['otherslitter13']) ? $information['otherslitter13'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req13"  value="{{ isset($information['medication_req13']) ? $information['medication_req13'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications13" >{{ isset($information['list_medications13']) ? $information['list_medications13'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name14']) && !empty($information['cats_name14'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 14 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name14"
+                                            value="{{ isset($information['cats_name14']) ? $information['cats_name14'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age14"
+                                            value="{{ isset($information['cats_age14']) ? $information['cats_age14'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age14" value="{{ isset($information['cats_age14']) ? $information['cats_age14'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_14']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_14']) ? $information['vaccine_uploaded_documents_14'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions14" value="{{ isset($information['special_dietary_needs_or_restrictions14']) ? $information['special_dietary_needs_or_restrictions14'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary14" >{{ isset($information['add_special_dietary14']) ? $information['add_special_dietary14'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference14" value="{{ isset($information['litter_preference14']) ? $information['litter_preference14'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter14" >{{ isset($information['otherslitter14']) ? $information['otherslitter14'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req14"  value="{{ isset($information['medication_req14']) ? $information['medication_req14'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications14" >{{ isset($information['list_medications14']) ? $information['list_medications14'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name15']) && !empty($information['cats_name15'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 15 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name15"
+                                            value="{{ isset($information['cats_name15']) ? $information['cats_name15'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age15"
+                                            value="{{ isset($information['cats_age15']) ? $information['cats_age15'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age15" value="{{ isset($information['cats_age15']) ? $information['cats_age15'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_15']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_15']) ? $information['vaccine_uploaded_documents_15'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions15" value="{{ isset($information['special_dietary_needs_or_restrictions15']) ? $information['special_dietary_needs_or_restrictions15'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary15" >{{ isset($information['add_special_dietary15']) ? $information['add_special_dietary15'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference15" value="{{ isset($information['litter_preference15']) ? $information['litter_preference15'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter15" >{{ isset($information['otherslitter15']) ? $information['otherslitter15'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req15"  value="{{ isset($information['medication_req15']) ? $information['medication_req15'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications15" >{{ isset($information['list_medications15']) ? $information['list_medications15'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name16']) && !empty($information['cats_name16'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 16 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name16"
+                                            value="{{ isset($information['cats_name16']) ? $information['cats_name16'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age16"
+                                            value="{{ isset($information['cats_age16']) ? $information['cats_age16'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age16" value="{{ isset($information['cats_age16']) ? $information['cats_age16'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_16']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_16']) ? $information['vaccine_uploaded_documents_16'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions16" value="{{ isset($information['special_dietary_needs_or_restrictions16']) ? $information['special_dietary_needs_or_restrictions16'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary16" >{{ isset($information['add_special_dietary16']) ? $information['add_special_dietary16'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference16" value="{{ isset($information['litter_preference16']) ? $information['litter_preference16'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter16" >{{ isset($information['otherslitter16']) ? $information['otherslitter16'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req16"  value="{{ isset($information['medication_req16']) ? $information['medication_req16'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications16" >{{ isset($information['list_medications16']) ? $information['list_medications16'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name17']) && !empty($information['cats_name17'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 17 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name17"
+                                            value="{{ isset($information['cats_name17']) ? $information['cats_name17'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age17"
+                                            value="{{ isset($information['cats_age17']) ? $information['cats_age17'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age17" value="{{ isset($information['cats_age17']) ? $information['cats_age17'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_17']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_17']) ? $information['vaccine_uploaded_documents_17'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions17" value="{{ isset($information['special_dietary_needs_or_restrictions17']) ? $information['special_dietary_needs_or_restrictions17'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary17" >{{ isset($information['add_special_dietary17']) ? $information['add_special_dietary17'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference17" value="{{ isset($information['litter_preference17']) ? $information['litter_preference17'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter17" >{{ isset($information['otherslitter17']) ? $information['otherslitter17'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req17"  value="{{ isset($information['medication_req17']) ? $information['medication_req17'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications17" >{{ isset($information['list_medications17']) ? $information['list_medications17'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name18']) && !empty($information['cats_name18'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 18 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name18"
+                                            value="{{ isset($information['cats_name18']) ? $information['cats_name18'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age18"
+                                            value="{{ isset($information['cats_age18']) ? $information['cats_age18'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age18" value="{{ isset($information['cats_age18']) ? $information['cats_age18'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_18']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_18']) ? $information['vaccine_uploaded_documents_18'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions18" value="{{ isset($information['special_dietary_needs_or_restrictions18']) ? $information['special_dietary_needs_or_restrictions18'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary18" >{{ isset($information['add_special_dietary18']) ? $information['add_special_dietary18'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference18" value="{{ isset($information['litter_preference18']) ? $information['litter_preference18'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter18" >{{ isset($information['otherslitter18']) ? $information['otherslitter18'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req18"  value="{{ isset($information['medication_req18']) ? $information['medication_req18'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications18" >{{ isset($information['list_medications18']) ? $information['list_medications18'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name19']) && !empty($information['cats_name19'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 19 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name19"
+                                            value="{{ isset($information['cats_name19']) ? $information['cats_name19'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age19"
+                                            value="{{ isset($information['cats_age19']) ? $information['cats_age19'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age19" value="{{ isset($information['cats_age19']) ? $information['cats_age19'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_19']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_19']) ? $information['vaccine_uploaded_documents_19'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions19" value="{{ isset($information['special_dietary_needs_or_restrictions19']) ? $information['special_dietary_needs_or_restrictions19'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary19" >{{ isset($information['add_special_dietary19']) ? $information['add_special_dietary19'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference19" value="{{ isset($information['litter_preference19']) ? $information['litter_preference19'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter19" >{{ isset($information['otherslitter19']) ? $information['otherslitter19'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req19"  value="{{ isset($information['medication_req19']) ? $information['medication_req19'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications19" >{{ isset($information['list_medications19']) ? $information['list_medications19'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name20']) && !empty($information['cats_name20'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 20 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name20"
+                                            value="{{ isset($information['cats_name20']) ? $information['cats_name20'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age20"
+                                            value="{{ isset($information['cats_age20']) ? $information['cats_age20'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age20" value="{{ isset($information['cats_age20']) ? $information['cats_age20'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_20']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_20']) ? $information['vaccine_uploaded_documents_20'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions20" value="{{ isset($information['special_dietary_needs_or_restrictions20']) ? $information['special_dietary_needs_or_restrictions20'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary20" >{{ isset($information['add_special_dietary20']) ? $information['add_special_dietary20'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference20" value="{{ isset($information['litter_preference20']) ? $information['litter_preference20'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter20" >{{ isset($information['otherslitter20']) ? $information['otherslitter20'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req20"  value="{{ isset($information['medication_req20']) ? $information['medication_req20'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications20" >{{ isset($information['list_medications20']) ? $information['list_medications20'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name21']) && !empty($information['cats_name21'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 21 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name21"
+                                            value="{{ isset($information['cats_name21']) ? $information['cats_name21'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age21"
+                                            value="{{ isset($information['cats_age21']) ? $information['cats_age21'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age21" value="{{ isset($information['cats_age21']) ? $information['cats_age21'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_21']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_21']) ? $information['vaccine_uploaded_documents_21'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions21" value="{{ isset($information['special_dietary_needs_or_restrictions21']) ? $information['special_dietary_needs_or_restrictions21'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary21" >{{ isset($information['add_special_dietary21']) ? $information['add_special_dietary21'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference21" value="{{ isset($information['litter_preference21']) ? $information['litter_preference21'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter21" >{{ isset($information['otherslitter21']) ? $information['otherslitter21'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req21"  value="{{ isset($information['medication_req21']) ? $information['medication_req21'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications21" >{{ isset($information['list_medications21']) ? $information['list_medications21'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name22']) && !empty($information['cats_name22'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 22 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name22"
+                                            value="{{ isset($information['cats_name22']) ? $information['cats_name22'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age22"
+                                            value="{{ isset($information['cats_age22']) ? $information['cats_age22'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age22" value="{{ isset($information['cats_age22']) ? $information['cats_age22'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_22']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_22']) ? $information['vaccine_uploaded_documents_22'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions22" value="{{ isset($information['special_dietary_needs_or_restrictions22']) ? $information['special_dietary_needs_or_restrictions22'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary22" >{{ isset($information['add_special_dietary22']) ? $information['add_special_dietary22'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference22" value="{{ isset($information['litter_preference22']) ? $information['litter_preference22'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter22" >{{ isset($information['otherslitter22']) ? $information['otherslitter22'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req22"  value="{{ isset($information['medication_req22']) ? $information['medication_req22'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications22" >{{ isset($information['list_medications22']) ? $information['list_medications22'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name23']) && !empty($information['cats_name23'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 23 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name23"
+                                            value="{{ isset($information['cats_name23']) ? $information['cats_name23'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age23"
+                                            value="{{ isset($information['cats_age23']) ? $information['cats_age23'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age23" value="{{ isset($information['cats_age23']) ? $information['cats_age23'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_23']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_23']) ? $information['vaccine_uploaded_documents_23'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions23" value="{{ isset($information['special_dietary_needs_or_restrictions23']) ? $information['special_dietary_needs_or_restrictions23'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary23" >{{ isset($information['add_special_dietary23']) ? $information['add_special_dietary23'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference23" value="{{ isset($information['litter_preference23']) ? $information['litter_preference23'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter23" >{{ isset($information['otherslitter23']) ? $information['otherslitter23'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req23"  value="{{ isset($information['medication_req23']) ? $information['medication_req23'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications23" >{{ isset($information['list_medications23']) ? $information['list_medications23'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+							
+								<?php if(isset($information['cats_name24']) && !empty($information['cats_name24'])){ ?>
+						   
+						   <hr class="horizontal dark">
+                            <p class="text-sm">Cats 24 Information</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Name</label>
+                                        <input class="form-control" type="text" readonly name="cats_name24"
+                                            value="{{ isset($information['cats_name24']) ? $information['cats_name24'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat Age</label>
+                                        <input class="form-control" readonly type="text" name="cats_age24"
+                                            value="{{ isset($information['cats_age24']) ? $information['cats_age24'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Cat's weight</label>
+                                        <input class="form-control" type="text" readonly name="cats_age24" value="{{ isset($information['cats_age24']) ? $information['cats_age24'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Vaccine & Negative FeLV</label>
+										<?php 
+											if(isset($information['vaccine_uploaded_documents_24']))
+											{
+											?>
+												<br><a class="btn btn-blue" href="{{ isset($information['vaccine_uploaded_documents_24']) ? $information['vaccine_uploaded_documents_24'] : '' }}" target="blank">View</a>
+											<?php											
+											}
+											
+										?>
+										
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Special Dietary Needs or Restriction?</label>
+                                        <input class="form-control" type="text" readonly name="special_dietary_needs_or_restrictions24" value="{{ isset($information['special_dietary_needs_or_restrictions24']) ? $information['special_dietary_needs_or_restrictions24'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Add Special Dietary:</label>
+                                        <textarea class="form-control"  readonly name="add_special_dietary24" >{{ isset($information['add_special_dietary24']) ? $information['add_special_dietary24'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Litter Preference:</label>
+                                        <input class="form-control" type="text" readonly name="litter_preference24" value="{{ isset($information['litter_preference24']) ? $information['litter_preference24'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Others(Litter):</label>
+										 <textarea class="form-control"  readonly name="otherslitter24" >{{ isset($information['otherslitter24']) ? $information['otherslitter24'] : '' }}</textarea>
+										 
+										 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Medication Req:</label>
+                                        <input class="form-control" type="text" readonly  name="medication_req24"  value="{{ isset($information['medication_req24']) ? $information['medication_req24'] : '' }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">List Medications: </label>
+										<textarea class="form-control"  readonly name="list_medications24" >{{ isset($information['list_medications24']) ? $information['list_medications24'] : '' }}</textarea>
+                                    </div>
+                                </div>
+                                
+                            </div>
+							
+							<?php } ?>
+							
+							
+							
+							
+									
 							
 							
 							

@@ -28,7 +28,6 @@
 												{
 													?>
 													<div class="reservation_list">
-													
 													<h3><?php echo "Reservation: ".$counter; ?></h3>
 													<div class="reservation_list_data">
 													<div class="col-full"><div><?php echo "Check In Date: </div><span>".date('m-d-Y',strtotime($bookings['check_in'])); ?></span></div>
