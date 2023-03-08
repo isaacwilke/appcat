@@ -162,7 +162,7 @@ class HomeController extends Controller
 				
 				
                 Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email" => $user['email'], 'name' => $user['first_name'] . ' ' . $user['last_name']], function ($message) use ($random) {
-                    $message->to([$random['email'], 'admin@griffinrockcatretreat.com']);
+                    $message->to([$random['email'], 'isaac@divinusinc.com']);
 
                     $message->subject('Reservation cancelled for customer' . " : " . $random['email']);
                 });
