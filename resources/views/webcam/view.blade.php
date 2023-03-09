@@ -20,7 +20,9 @@
                         
                                 <div class="row">
                                     <div class="col-12 m-auto">
-										
+									<h3 style="text-align: center;
+    margin-top: 100px;">COMING SOON</h3>
+										<?php if(1 == 2){ ?>
 										<?php if (!empty($booking)){ 
 											$counter = 1;
 											foreach ($booking as $bookings){
@@ -78,7 +80,7 @@
 											}
 										} 
 										?>
-									
+									<?php } ?>
                                         
                                     </div>
                                 </div>
