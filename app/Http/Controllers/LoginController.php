@@ -184,25 +184,9 @@ class LoginController extends Controller
         // checking token valid or not
         $result1 = Helper::PostRequest($data='', $method, $url, $token);
 
-        $data =[
-            'username' => Config::get('constants.whisker.admin.username'),
-            'password' => Config::get('constants.whisker.admin.password'),
-        ];
-        $url =  Config::get('constants.whisker.url.token');
-
-        // getting token for whisker site
-        $second_token = Helper::PostRequest($data, $method, $url, $token=''); 
-        if($second_token['success']==false){
-            return back()->with('error', $second_token['message']); 
-        }
-          
+       
         if ($result1['message'] == "Token is valid") {  
-            $method = 'GET';
-            $role= "armember";
-            $url = Config::get('constants.whisker.url.search_user').$request->email.'&roles='.$role;
-            $token =$second_token['data']['token'];
-            // getting user of whisker site
-            $existinguser= Helper::PostRequest($data='', $method, $url, $token);  
+           
                  
             $method = 'POST';
             $url =   Config::get('constants.griffin.url.get_user').$result['data']['id'];
@@ -217,11 +201,7 @@ class LoginController extends Controller
                 $request->session()->put('griffin_user', $user);
                 $request->session()->put('token', $result['data']);
                 $request->session()->put('user_credentials', $credentials);
-                // dd( $second_token['data']['token']);
-                if(!empty($existinguser)){
-                    $request->session()->put("existing_user", $existinguser);
-                    $request->session()->put("whisker_token", $second_token['data']['token']);
-                }
+               
                 if ($request->site == "Griffin Rock Cat Retreat - Your Cat's Vacation Oasis") {
                     $request->session()->put('two', $request->site);
                 } 
