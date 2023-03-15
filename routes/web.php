@@ -23,7 +23,8 @@ use App\Http\Controllers\WebcamController;
 |
 */
 
-Route::get('/', [LoginController::class,'show'])->name('login');
+
+Route::get('/', [LoginController::class,'Display'])->name('login');
 
 Route::get('/whisker-login',[LoginController::class,'show'])->name('login');
 
