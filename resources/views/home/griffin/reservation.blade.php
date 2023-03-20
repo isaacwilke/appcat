@@ -114,7 +114,13 @@
                                     </div>
                                 </div>
 								
-                             
+                             <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Price</label>
+                                        
+                                        <input class="form-control" type="text"readonly name="amount_paid" value="${{ isset($information['amount_paid']) ? $information['amount_paid'] : '' }}">
+                                    </div>
+                                </div>
                                 
                               
                             </div>
