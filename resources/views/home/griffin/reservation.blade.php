@@ -53,6 +53,8 @@
                                         <input class="form-control" type="text" readonly name="room_no" value="{{ isset($booking['room_no']) ? $booking['room_no'] : '' }}">
                                     </div>
                                 </div>
+								
+								
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Number of Rooms</label>
@@ -119,6 +121,16 @@
                                         <label for="example-text-input" class="form-control-label">Price</label>
                                         
                                         <input class="form-control" type="text"readonly name="amount_paid" value="${{ isset($booking['amount_paid']) ? $booking['amount_paid'] : '' }}">
+                                    </div>
+                                </div>
+								
+								
+									
+                             <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="example-text-input" class="form-control-label">Accommodation</label>
+                                        
+                                        <input class="form-control" type="text"readonly name="accom_resa" value="${{ isset($booking['accom_resa']) ? $booking['accom_resa'] : '' }}">
                                     </div>
                                 </div>
                                 
