@@ -160,8 +160,7 @@ class HomeController extends Controller
             if ($booking['status'] == 'success') {
                 $user = Session::get('griffin_user');
 				
-				$request->customer_last_name = $user['last_name'];
-                Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email" => $user['email'], 'name' => $user['first_name'] . ' ' . $user['last_name']], function ($message) use ($random) {
+                Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email" => $user['email'], 'first_name' => $user['first_name'], "last_name" => $user['last_name']], function ($message) use ($random) {
                     $message->to([$random['email']]);
 
                     $message->subject('Cancellation Request Confirmation');

@@ -1,4 +1,4 @@
-<p>Hello {{$user['last_name']}},</p>
+<p>Hello {{$last_name}},</p>
 <br>
 <p>We are bummed to see that you have requested a cancellation of your reservation.  We were so looking forward to getting to pamper and care for your cat while you are away. </p>
 <br>
