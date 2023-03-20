@@ -130,7 +130,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Accommodation</label>
                                         
-                                        <input class="form-control" type="text"readonly name="accom_resa" value="${{ isset($booking['accom_resa']) ? $booking['accom_resa'] : '' }}">
+                                        <input class="form-control" type="text"readonly name="accom_resa" value="{{ isset($booking['accom_resa']) ? $booking['accom_resa'] : '' }}">
                                     </div>
                                 </div>
                                 
