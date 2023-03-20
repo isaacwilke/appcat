@@ -118,7 +118,7 @@
                                     <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Price</label>
                                         
-                                        <input class="form-control" type="text"readonly name="amount_paid" value="${{ isset($information['amount_paid']) ? $information['amount_paid'] : '' }}">
+                                        <input class="form-control" type="text"readonly name="amount_paid" value="${{ isset($booking['amount_paid']) ? $booking['amount_paid'] : '' }}">
                                     </div>
                                 </div>
                                 
