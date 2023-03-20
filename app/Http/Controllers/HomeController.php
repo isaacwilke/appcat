@@ -159,14 +159,20 @@ class HomeController extends Controller
             $booking =  Helper::PostRequest($data = '', $method, $url, $token = $token);
             if ($booking['status'] == 'success') {
                 $user = Session::get('griffin_user');
-				
+				//mail to user
                 Mail::send('mail.cancelreservation', ['reservation' => $request->all(), "email" => $user['email'], 'first_name' => $user['first_name'], "last_name" => $user['last_name']], function ($message) use ($random) {
                     $message->to([$random['email']]);
 
                     $message->subject('Cancellation Request Confirmation');
                 });
-				
+				//mail to admin
+				 Mail::send('mail.cancelreservationadmin', ['reservation' => $request->all(), "email" => $user['email'], 'first_name' => $user['first_name'], "last_name" => $user['last_name']], function ($message) use ($random) {
+                    $message->to([$random['email']]);
 
+                    $message->subject('Cancellation Request for a Reservation');
+                });
+				
+				
                 return redirect()->route('home')->with('succes', $booking['message']);
             } else {
                 return redirect()->route('home')->with('error', $booking['message']);
