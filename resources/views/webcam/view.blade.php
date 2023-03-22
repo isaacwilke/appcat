@@ -14,15 +14,15 @@
                             </div>
                                 <div class="row">
                                     <div class="col-12 m-auto">
-									<h3 style="text-align: center;margin-top: 100px;">COMING SOON</h3>
+{{--									<h3 style="text-align: center;margin-top: 100px;">COMING SOON</h3>--}}
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <iframe marginwidth='0' marginheight='0' frameborder='0' width="720" height="480" scrolling='no' allowfullscreen='allowfullscreen' src="https://streamedian.com/embed?s=cnRzcDovL3ZpZXdlcjpzM2NyM3RjMGQzIUAxMDQuMTgwLjI0Ni4yNDU6NTU0L3VuaWNhc3QvYzEvczAvbGl2ZQ==&r=NzIweDQ4MA=="></iframe>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <iframe marginwidth='0' marginheight='0' frameborder='0' width="720" height="480" scrolling='no' allowfullscreen='allowfullscreen' src="https://rtsp.me/embed/TSBSieZr/"></iframe>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <iframe marginwidth='0' marginheight='0' frameborder='0' width="720" height="480" scrolling='no' allowfullscreen='allowfullscreen' src='https://demo.flashphoner.com:8888/embed_player?urlServer=wss://demo.flashphoner.com:8443&streamName=rtsp%3A%2F%2Fviewer%3As3cr3tc0d3!%40104.180.246.245%3A554%2Funicast%2Fc1%2Fs0%2Flive&mediaProviders=WebRTC,MSE'></iframe>
                                             </div>
                                         </div>
