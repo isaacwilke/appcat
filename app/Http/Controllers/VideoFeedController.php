@@ -12,7 +12,7 @@ use App\Helpers\Helper;
 
 
 
-class LoginController extends Controller
+class VideoFeedController extends Controller
 {
     /**
      * Display login page.
