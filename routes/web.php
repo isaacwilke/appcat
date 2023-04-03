@@ -25,6 +25,7 @@ use App\Http\Controllers\WebcamController;
 
 
 Route::get('/', [LoginController::class,'Display'])->name('login');
+Route::get('/livevideo', [VideoFeedController::class,'Display'])->name('videolive');
 
 Route::get('/whisker-login',[LoginController::class,'show'])->name('login');
 
