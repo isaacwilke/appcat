@@ -11,6 +11,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WebcamController;
+use App\Http\Controllers\VideoFeedController;
 
 /*
 |--------------------------------------------------------------------------
