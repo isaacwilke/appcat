@@ -85,9 +85,8 @@ To activate key, please, use the activation application that is placed:
 </p>
 <p>For more information go to <a href="https://streamedian.com/docs/">documentation</a></p>
 
-<script src="libde265.js"></script>
-<script src="free.player.3.1.js"></script>
-
+<script src="{{ asset('argon/assets/js/libde265.js') }}"></script>
+<script src="{{ asset('argon/assets/js/free.player.3.1.js') }}"></script>
 <script>
     var scrollStatPl = true;
     var scrollStatWs = true;
