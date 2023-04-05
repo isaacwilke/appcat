@@ -25025,3 +25025,14 @@ pre[class*=language-] {
                  .ni {
                   color:#043F58;
                }
+               
+        .row.kl_webcam {
+        justify-content: center;
+        }     
+        @media screen and (max-width: 485px) {
+        .row.kl_webcam .col-md-2.col-sm-6 {
+        width: 50%;
+        }
+	
+
+}

@@ -170,7 +170,7 @@
                         href="{{route('griffin.webcam')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-camera-compact  text-sm opacity-10"></i>
+                            <i class="ni ni-tv-2 text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Webcam</span>
                     </a>
@@ -191,7 +191,7 @@
                     <a class="nav-link {{ str_contains(request()->url(), 'griffin-contactus') == true ? 'active' : '' }}" href="{{route('griffin.contactus')}}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-box-2  text-sm opacity-10"></i>
+                            <i class="ni ni-support-16  text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Help</span>
                     </a>
