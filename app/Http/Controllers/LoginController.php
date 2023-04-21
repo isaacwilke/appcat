@@ -183,7 +183,7 @@ class LoginController extends Controller
 		}
 		else
 		{
-			return back()->with('error', "Your IP is blocked due to security reasons. Please contact administrator for assistance.");
+			return back()->with('error', "Your account is blocked due to security reasons. Please contact administrator.");
 		}
         
         $token=$result['data']['token'];
