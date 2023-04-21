@@ -175,9 +175,16 @@ class LoginController extends Controller
         $url =  Config::get('constants.griffin.url.token');
         // Getting token of griffin site
         $result = Helper::PostRequest($data, $method, $url, $token="");
-        if($result['success']==false){
-            return back()->with('error', $result['message']);
-        }
+        if(isset($result['success']))
+		{
+			if($result['success']==false){
+				return back()->with('error', $result['message']);
+			}
+		}
+		else
+		{
+			return back()->with('error', "Your IP is blocked due to security reasons. Please contact administrator for assistance.");
+		}
         
         $token=$result['data']['token'];
         $url =Config::get('constants.griffin.url.token_validate');
