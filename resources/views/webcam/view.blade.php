@@ -41,7 +41,7 @@
 														?>
 														 <div class="col-md-2 col-sm-6">
 															 <button type="button" class="btn btn-blue" 
-															 onclick="viewcam('<?php echo $roomArr[$bookings['room_no']]; ?>');">Play Feed - Room <?php echo $bookings['room_no']; ?></button>
+															 onclick="viewcam('<?php echo $bookings['room_no']; ?>','<?php echo $roomArr[$bookings['room_no']]; ?>');">Play Feed - Room <?php echo $bookings['room_no']; ?></button>
 														 </div> 
 														 
 														 
@@ -55,7 +55,7 @@
 														?>
 														 <div class="col-md-2 col-sm-6">
 															 <button type="button" class="btn btn-blue" 
-															 onclick="viewcam('<?php echo $roomArr[$room]; ?>');">Play Feed - Room <?php echo $room; ?></button>
+															 onclick="viewcam('<?php echo $room; ?>','<?php echo $roomArr[$room]; ?>');">Play Feed - Room <?php echo $room; ?></button>
 														 </div> 
 														<?php
 														}
@@ -242,6 +242,11 @@
             if (html5Player && html5Canvas) {
                 if (format === 'h265') {
                     $("#vloader").hide();
+                	$("#video_canvas").show();
+                    var c = document.getElementById("video_canvas");
+                    var ctx = c.getContext("2d");
+                    ctx.clearRect(0, 0, c.width, c.height);
+
                     html5Player.setAttribute('hidden', true);
                     html5Canvas.removeAttribute('hidden');
                 } else if (format === 'h264') {
@@ -418,12 +423,73 @@
             statisticRequest('SUBSCRIBE', password);
         }
     }
-	function viewcam(link)
+    
+    var playedroomno = '';
+	function viewcam(roomno,link)
 	{
+	    playedroomno = roomno;
 		//alert(link);
 		$("#vloader").show();
+		$("#video_canvas").hide();
+		
+		
 		setPlayerSource(link);
 	}
+	
+	
+
+		    
+		    setInterval(function(){
+		        
+		      	$.ajax({
+				url: "{{route('webcam.ajax')}}",
+				method: 'POST',
+				data: {"_token": "{{ csrf_token() }}"},
+				dataType: "json",
+				success: function (res) {
+				    var roomno = res.roomno;
+				    var roomnolink = res.roomnolink;
+				    if(roomno != '')
+				    {
+                       
+				         $('.kl_webcam').empty();
+				       var roomnoArr = roomno.split(',');
+				       var roomnolinkArr = roomnolink.split(',');
+				       
+				      
+                        for (let i = 0; i < roomnoArr.length; ++i) {
+                          var roomn = "'"+roomnoArr[i]+"'";
+                          var roomnl = "'"+roomnolinkArr[i]+"'";
+                          $htmltemp='<div class="col-md-2 col-sm-6"><button type="button" class="btn btn-blue"  onclick="viewcam('+roomn+','+roomnl+');">Play Feed - Room '+roomnoArr[i]+'</button></div>';
+						  $('.kl_webcam').append($htmltemp); 								 
+						 						console.log(playedroomno);		 
+                          console.log(roomnoArr[i]+'-------'+roomnolinkArr[i]);
+                        }
+                        if(roomnoArr.includes(playedroomno))
+                        {
+                            console.log("if");
+                        }
+                        else
+                        {
+                            if(playedroomno != '')
+                            {
+                                location.reload();
+                            }
+                            console.log("else");
+                        }
+
+				    }
+				    else
+				    {
+				        $('.kl_webcam').empty();
+				    }
+				},
+			});
+			
+		    },300000);
+	
+			
+			
      //setPlayerSource('rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c1/s0/live');
 </script>
 @endpush
