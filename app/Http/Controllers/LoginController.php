@@ -156,6 +156,13 @@ class LoginController extends Controller
     {
         return view('auth.Login1');
     }
+	
+	
+	public function ErrorDisplay()
+    {
+        return view('auth.apierror');
+    }
+	
     public function store(Request $request)
     {
         

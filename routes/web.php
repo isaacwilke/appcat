@@ -26,6 +26,7 @@ use App\Http\Controllers\VideoFeedController;
 
 
 Route::get('/', [LoginController::class,'Display'])->name('login');
+Route::get('/blocked', [LoginController::class,'ErrorDisplay'])->name('apierror');
 Route::get('/livevideo', [VideoFeedController::class,'Display'])->name('videolive');
 
 Route::get('/whisker-login',[LoginController::class,'show'])->name('login');

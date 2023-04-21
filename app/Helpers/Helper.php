@@ -39,6 +39,8 @@ class Helper{
          
         }
          catch (\Throwable $th) {
+			 
+			return redirect()->route('apierror');
             $throw = $th->getResponse();
             
             $responseBodyAsString = $throw->getBody()->getContents();
