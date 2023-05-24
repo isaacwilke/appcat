@@ -96,3 +96,6 @@ Route::post('griffin_cancel_reservation',[HomeController::class,"cancelReservati
 
 Route::get('griffin-webcam',[WebcamController::class,"griffinwebcam"])->name('griffin.webcam');
 
+
+Route::post('webcam-ajax', [WebcamController::class,"griffinwebcamajax"])->name('webcam.ajax');
+
