@@ -82,7 +82,7 @@
                                     <p class="mb-0">Fill below details to set your password</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" method="POST" id="signupForm" action="{{route('griffin.postpassword')}}">
+                                    <form role="form" method="POST" id="signupForm" action="{{route('griffin.postpassword')}}" autocomplete="off">
                                         @csrf
                                             
                                         <div class ="row">
@@ -168,7 +168,7 @@
             if($('.ctick').length ==5 && pass == confirmpass) {
                 $('#submit').removeAttr('disabled',true);
             }else{
-                alert('password and confirm password not matched');
+				
                 $('#submit').attr('disabled',true);
          
             }
@@ -243,6 +243,71 @@
         }
     });
 
-    
+    $("#signupForm").submit(function(){
+		let password = $("#password").val();
+        password_length = password.length;
+        var confirmpass = $('#confirm-password').val();
+        if (password === '') {
+            
+            password_is_valid = false;
+           
+
+        }if(password.length==12){
+             var password1 = true;
+            
+        }
+        if(password.length < 12) {
+            $("#character_length").removeClass('ctick').addClass('ccross');
+            password_is_valid = false;
+             
+        } else {
+            $("#character_length").removeClass('ccross').addClass('ctick');
+            var character = true;
+            
+        }
+        if (!password.match(/[A-Z]/)) {
+            $("#uppercase_latter").removeClass('ctick').addClass('ccross');
+            password_is_valid = false;
+             
+        } else {
+            $("#uppercase_latter").removeClass('ccross').addClass('ctick');
+                var uppercase = true;
+            
+        }
+        if (!password.match(/[a-z]/)) {
+            $("#lowercase_latter").removeClass('ctick').addClass('ccross');
+            password_is_valid = false;
+            
+        } else {
+            $("#lowercase_latter").removeClass('ccross').addClass('ctick');
+            var lowercase= true;
+              
+        }
+        if (!password.match(/[0-9]/)) {
+            $("#one_number").removeClass('ctick').addClass('ccross');
+            password_is_valid = false;
+           
+        } else {
+            $("#one_number").removeClass('ccross').addClass('ctick');
+            var number = true;
+               
+        }
+        if (!password.match(/[!@#$%^&*]/)) {
+            $("#special_character").removeClass('ctick').addClass('ccross');
+            password_is_valid = false;
+            
+        } else {
+            $("#special_character").removeClass('ccross').addClass('ctick');
+            var special_character = true;
+              
+        }
+           
+        if(password != confirmpass) {
+          
+            $('#submit').attr('disabled',true);
+			alert("Your password does'nt meet the requirements.")
+			return false;
+        }
+	});
 </script>
 @endpush
