@@ -80,6 +80,6 @@ class ResetPasswordController extends Controller
         if($resetpassword['data']['status'] != 200){
             return back()->with('error', $resetpassword['message']);
         }
-        return redirect()->route('whisker.set')->with('succes',$resetpassword['message']);
+        return redirect()->route('whisker.set')->with('succes','We have sent the code to your email id for resetting password');
     }
 }
