@@ -238,7 +238,7 @@
         }
            
          if(password != confirmpass) {
-            alert('password and confirm password not matched');
+          
             $('#submit').attr('disabled',true);
         }
     });
