@@ -88,8 +88,8 @@
                                         <div class ="row">
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                                <input type="email" name="email" id ="email"class="form-control" placeholder="Email" required  value="" aria-label="Email">
-                                                @error('email') <p class="text-danger text-xs pt-1" style="border-right:1px solid #d2d6da !important;"> {{$message}} </p>@enderror
+                                                <input type="email" name="email" id ="email"class="form-control" placeholder="Email" required  value="" aria-label="Email" style="border-right:1px solid #d2d6da !important;">
+                                                @error('email') <p class="text-danger text-xs pt-1" > {{$message}} </p>@enderror
                                             </div>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
@@ -108,7 +108,7 @@
                                             
                                             <div class="input-group mb-3 mt-1">
                                                 <span class="input-group-text"><i class="fa fa-lock"></i></span>
-                                                <input type="password" required id="confirm-password" name="confirm-password" class="form-control form-control-lg" placeholder="Confirm-Password" aria-label="Password" style="border-right:1px solid #d2d6da !important;">
+                                                <input type="password" required id="confirm-password" name="confirm-password" class="form-control" placeholder="Confirm-Password" aria-label="Password" style="border-right:1px solid #d2d6da !important;">
                                                 @error('confirm-password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                             </div>
                                             <div class="input-group mb-3 mt-1">
