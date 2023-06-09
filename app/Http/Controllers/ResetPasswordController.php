@@ -43,7 +43,7 @@ class ResetPasswordController extends Controller
             return back()->with('error', $resetpassword['message']);
         }
         
-        return redirect()->route('griffin.set')->with('succes',$resetpassword['message']);      
+        return redirect()->route('griffin.set')->with('succes','We have sent the code to your email id for resetting password');      
       
     }
 
