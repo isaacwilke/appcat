@@ -160,7 +160,7 @@
       
         $('#alert').fadeOut(5000); 
           
-        $("#confirm-password").on('keyup',function (){
+        $("#confirm-password").on('blur',function (){
 
             var pass = $('#password').val();
       
@@ -170,7 +170,7 @@
             }else{
 				
                 $('#submit').attr('disabled',true);
-         
+				 alert('password and confirm password not matched');
             }
    
         });
