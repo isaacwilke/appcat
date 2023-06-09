@@ -160,7 +160,7 @@
       
         $('#alert').fadeOut(5000); 
           
-        $("#confirm-password").on('blur',function (){
+        $("#confirm-password").on('keyup',function (){
 
             var pass = $('#password').val();
       
