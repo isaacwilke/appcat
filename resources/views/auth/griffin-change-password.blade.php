@@ -170,7 +170,7 @@
             }else{
 				
                 $('#submit').attr('disabled',true);
-				 alert('password and confirm password not matched');
+				 alert('Password and Confirm Password fields do not match');
             }
    
         });
