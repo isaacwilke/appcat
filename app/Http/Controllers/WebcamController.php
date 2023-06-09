@@ -44,18 +44,18 @@ class WebcamController extends Controller
         if ($request->session()->has('griffin_user') && $request->session()->has('token')) {
 
             $roomArr=array();
-            $roomArr['1'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c8/s0/live';
-            $roomArr['2'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c9/s0/live';
-            $roomArr['3'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c6/s0/live';
-            $roomArr['4'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c5/s0/live';
-            $roomArr['5'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c4/s0/live';
-            $roomArr['6'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c3/s0/live';
-            $roomArr['7'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c7/s0/live';
-            $roomArr['8'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c10/s0/live';
-            $roomArr['9'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c11/s0/live';
-            $roomArr['10'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c12/s0/live';
-            $roomArr['11'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c13/s0/live';
-            $roomArr['12'] = 'rtsp://viewer:s3cr3tc0d3!@104.180.246.245:554/unicast/c14/s0/live';
+			$roomArr['1'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=01_FFB06_ROOM1&media=video+audio+microphone&micmute=1';
+			$roomArr['2'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=02_FF680_ROOM2&media=video+audio+microphone&micmute=1';
+			$roomArr['3'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=03_FFB6E_ROOM3&media=video+audio+microphone&micmute=1';
+			$roomArr['4'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=04_FFF2D_ROOM4&media=video+audio+microphone&micmute=1';
+			$roomArr['5'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=05_FF96F_ROOM5&media=video+audio+microphone&micmute=1';
+			$roomArr['6'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=06_FFB3D_ROOM6&media=video+audio+microphone&micmute=1';
+			$roomArr['7'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=07_FFF31_ROOM7&media=video+audio+microphone&micmute=1';
+			$roomArr['8'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=08_FFCCD_ROOM8&media=video+audio+microphone&micmute=1';
+			$roomArr['9'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=09_00081_ROOM9&media=video+audio+microphone&micmute=1';
+			$roomArr['10'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=10_FFB78_ROOM10&media=video+audio+microphone&micmute=1';
+			$roomArr['11'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=11_FFF7C_ROOM11&media=video+audio+microphone&micmute=1';
+			$roomArr['12'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=12_CCF346_ROOM12&media=video+audio+microphone&micmute=1';
             $user = Session::get('griffin_user');
             $token = Session::get('token');
             $method = 'GET';
@@ -72,7 +72,6 @@ class WebcamController extends Controller
 					}
 					if($bookings['row_type'] == 'multiple-room')
 					{
-					    $exists = 1;
 					    $roomnoArr = explode(",",$bookings['room_no']);
 						foreach($roomnoArr as $room)
 						{
@@ -86,7 +85,7 @@ class WebcamController extends Controller
         	$roomno = rtrim($roomno,',');
         	$roomnolink = rtrim($roomnolink,',');
         }
-    	echo json_encode(array_map('utf8_encode', array('exists' => $exists,
+    	echo json_encode(array_map('utf8_encode', array(
 			'roomno'=> $roomno,
 			'roomnolink'=> $roomnolink
 			)));
