@@ -27,7 +27,7 @@
     <link id="pagestyle" href="{{ asset('argon/assets/css/argon-dashboard.css') }}" rel="stylesheet" />
 </head>
 
-<body class="{{ $class ?? '' }}">
+<body class="{{ $class ?? '' }}" id="bodytag">
     @if (!(Session::has('user') || Session::has('griffin_user')))
         @yield('content')
     @endif
@@ -83,7 +83,6 @@
 
     <script src="{{ asset('argon/assets/js/plugins/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('argon/assets/js/argon-dashboard.js') }}"></script>
-    <script src="{{ asset('argon/assets/js/custom.js') }}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
