@@ -59,10 +59,7 @@
 }
 </style>
     @include('layouts.navbars.auth.topnav', ['title' => 'Change Password'])
-     <div id="alert">
-        @include('components.alert')
-    </div>
-    
+     @include('components.alert')
 
   
 

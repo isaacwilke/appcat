@@ -3,6 +3,7 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Contact Us'])
     <div class="container-fluid py-4">
+	@include('components.alert')
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -22,15 +23,15 @@
                                     @csrf
                                     <div class="form-group mb-3">
                                        
-                                        <input type="text" required class="form-control" id="exampleFormControlInput1" name ="name" placeholder="name">
+                                        <input type="text" required class="form-control" id="exampleFormControlInput1" name ="name" placeholder="Name">
                                     </div>
                                     <div class="form-group mb-3">
-                                       <input type="email" required class="form-control" id="exampleFormControlInput1" name="email" placeholder="email">
+                                       <input type="email" required class="form-control" id="exampleFormControlInput1" name="email" placeholder="Email">
                                     </div>
                                    
                                     <div class="form-group mb-3">
                                         
-                                        <textarea name="message" required class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                                        <textarea name="message" required class="form-control" id="exampleFormControlTextarea1" rows="4"placeholder="Message" ></textarea>
                                     </div>
 
                                       <div class="form-group text-center">

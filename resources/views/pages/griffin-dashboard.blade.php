@@ -4,9 +4,7 @@
     
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
     <div class="container-fluid py-4">
-        <div id="alert">
-            @include('components.alert')
-        </div>
+        @include('components.alert')
 
 
         <div class="row">

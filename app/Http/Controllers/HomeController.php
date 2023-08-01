@@ -140,7 +140,7 @@ class HomeController extends Controller
                 $message->subject('Contact us');
             });
 
-            return redirect()->back();
+            return redirect()->back()->with('succes', "Message Sent Successfully");
         }
     }
 
