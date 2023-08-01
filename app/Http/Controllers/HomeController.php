@@ -135,9 +135,9 @@ class HomeController extends Controller
                 'Email' => $request->email,
             ];
             Mail::send('mail.contactus', ['contactus' => $data], function ($message) use ($request) {
-                $message->to("admin@griffinrockcatretreat.com");
+                $message->to("info@griffinrockcatretreat.com");
                 $message->from($request->email);
-                $message->subject('Contact us');
+                $message->subject('Need Help');
             });
 
             return redirect()->back()->with('succes', "Message Sent Successfully");
