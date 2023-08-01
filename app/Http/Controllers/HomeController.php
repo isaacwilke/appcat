@@ -136,7 +136,7 @@ class HomeController extends Controller
             ];
             Mail::send('mail.contactus', ['contactus' => $data], function ($message) use ($request) {
                 $message->to("info@griffinrockcatretreat.com");
-                $message->from($request->email);
+                $message->from("info@griffinrockcatretreat.com");
                 $message->subject('Need Help');
             });
 
