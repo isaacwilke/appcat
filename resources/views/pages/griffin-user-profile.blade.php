@@ -60,8 +60,8 @@
 }
 </style>
     <div class="container-fluid py-4">
-      @include('components.alert')
         <div class="row">
+      @include('components.alert')
             <div class="col-md-12">
                 <div class="card">
                    
