@@ -13,7 +13,7 @@
                                 <div class="row">
                                      <div class="col-md-12">
 									 <input type="hidden" id="playedroomno">
-										<div class="row kl_webcam">
+										
 										<?php
 										$roomArr=array();
 										$roomArr['1'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=01_FFB06_ROOM1&media=video+audio+microphone&micmute=1';
@@ -32,6 +32,10 @@
 										
 
 										<?php if (!empty($booking)){ 
+										
+										?>
+										<div class="row kl_webcam">
+										<?php
 										   // dd($booking);
 											$counter = 1;
 											foreach ($booking as $bookings){
@@ -65,10 +69,21 @@
 												}
 												
 											}
+											?>
+											</div>  
+											<?php
 										} 
+										else
+										{
+											?>
+											<div class="col-md-12">
+												 <p>The webcam feature becomes available once you fully check in at Griffin Rock Cat Retreat at the start of your reservation.  If you have not checked in yet, please come back after check-in to view the live webcam feature. </p>
+											 </div> 
+											<?php
+										}
 										?>
                                          
-                                       </div>  
+                                       
                                        </div>  
                                 
 								
