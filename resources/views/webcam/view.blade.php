@@ -78,30 +78,34 @@
 											 </div> 
 											<?php
 										}
-										else
-										{
-										    ?>
-										    <div class="col-md-12">
-												 <p>If you are having issues with the webcam feed, please try the following:  </p>
-												 <ol>
-												     <li>Fully reboot the device that you are using to view the webcam feed and try again.</li>
-												     <li>Try deactivating any VPN's that you have active on your device, as they may impact the feed connection. </li>
-												     <li>If you are on a mobile phone, try turning off wifi and then attempting to view the webcam feed again. </li>
-												 </ol>
-												 <p>If none of these steps help resolve the issue you are facing, please fill out the <a href="{{route('update-griffin-profile')}}">HELP FORM</a> to notify our staff that you need additional support. </p>
-											 </div> 
-										    <?php
-										}
-
+									
 										?>
                                          
                                        	</div> 
                                        </div>  
                                 
 								
-								<video id="video" autoplay controls playsinline muted></video>
-								
-								
+								<video style="margin-bottom:20px" id="video" autoplay controls playsinline muted></video>
+									<div class="row kl_webcamyes">
+								<?php
+									if(!empty($klisbook))
+									{
+    								    	?>
+    									<div class="col-md-12">
+												 <p>If you are having issues with the webcam feed, please try the following:  </p>
+												 <ol>
+												     <li>Fully reboot the device that you are using to view the webcam feed and try again.</li>
+												     <li>Try deactivating any VPN's that you have active on your device, as they may impact the feed connection. </li>
+												     <li>If you are on a mobile phone, try turning off wifi and then attempting to view the webcam feed again. </li>
+												 </ol>
+												 <p>If none of these steps help resolve the issue you are facing, please fill out the <a href="{{route('griffin.contactus')}}">HELP FORM</a> to notify our staff that you need additional support. </p>
+											 </div>
+    									<?php
+    								}
+    							
+    								?>
+								</div>  
+								  
                     </div>
                 </div>
             </div>
@@ -269,21 +273,22 @@ var pc;
 						console.log("else");
 					}
 					
-					var helplink = '{{route('update-griffin-profile')}}';
-					 $('.kl_webcam').append("<div class='col-md-12'><p>If you are having issues with the webcam feed, please try the following:  </p><ol><li>Fully reboot the device that you are using to view the webcam feed and try again.</li><li>Try deactivating any VPN's that you have active on your device, as they may impact the feed connection. </li><li>If you are on a mobile phone, try turning off wifi and then attempting to view the webcam feed again. </li></ol><p>If none of these steps help resolve the issue you are facing, please fill out the <a href='"+helplink+"'>HELP FORM</a> to notify our staff that you need additional support. </p></div> "); 		
-
+					$('.kl_webcamyes').empty();
+                    	var helplink = '{{route('griffin.contactus')}}';
+					 $('.kl_webcamyes').append("<div class='col-md-12'><p>If you are having issues with the webcam feed, please try the following:  </p><ol><li>Fully reboot the device that you are using to view the webcam feed and try again.</li><li>Try deactivating any VPN's that you have active on your device, as they may impact the feed connection. </li><li>If you are on a mobile phone, try turning off wifi and then attempting to view the webcam feed again. </li></ol><p>If none of these steps help resolve the issue you are facing, please fill out the <a href='"+helplink+"'>HELP FORM</a> to notify our staff that you need additional support. </p></div> "); 	
 				}
 				else
 				{
+				    $("#video").hide();
 					$('.kl_webcam').empty();
-					
+					$('.kl_webcamyes').empty();
                     var htmltemp = '<p>The webcam feature becomes available once you fully check in at Griffin Rock Cat Retreat at the start of your reservation.  If you have not checked in yet, please come back after check-in to view the live webcam feature. </p></div> ';
 					 $('.kl_webcam').append(htmltemp); 
 				}
 			},
 		});
 
-	},10000);
+	},300000);
 	
 	// microphone control addition
 	var micmute = 1;
