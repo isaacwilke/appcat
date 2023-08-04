@@ -13,7 +13,7 @@
                                 <div class="row">
                                      <div class="col-md-12">
 									 <input type="hidden" id="playedroomno">
-										
+											<div class="row kl_webcam">
 										<?php
 										$roomArr=array();
 										$roomArr['1'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=01_FFB06_ROOM1&media=video+audio+microphone&micmute=1';
@@ -33,14 +33,13 @@
 
 										<?php if (!empty($booking)){ 
 										
-										?>
-										<div class="row kl_webcam">
-										<?php
 										   // dd($booking);
 											$counter = 1;
+											$klisbook = 0;
 											foreach ($booking as $bookings){
 												if($bookings['status'] == 'confirmed' && strtotime(date('Y-m-d'))  <=  strtotime(date('Y-m-d',strtotime($bookings['check_out']))))
 												{
+												    $klisbook =1;
 													if($bookings['row_type'] == 'single-room')
 													{
 														?>
@@ -69,21 +68,34 @@
 												}
 												
 											}
-											?>
-											</div>  
-											<?php
 										} 
-										else
+										
+										if(empty($klisbook))
 										{
-											?>
+										    	?>
 											<div class="col-md-12">
 												 <p>The webcam feature becomes available once you fully check in at Griffin Rock Cat Retreat at the start of your reservation.  If you have not checked in yet, please come back after check-in to view the live webcam feature. </p>
 											 </div> 
 											<?php
 										}
+										else
+										{
+										    ?>
+										    <div class="col-md-12">
+												 <p>If you are having issues with the webcam feed, please try the following:  </p>
+												 <ol>
+												     <li>Fully reboot the device that you are using to view the webcam feed and try again.</li>
+												     <li>Try deactivating any VPN's that you have active on your device, as they may impact the feed connection. </li>
+												     <li>If you are on a mobile phone, try turning off wifi and then attempting to view the webcam feed again. </li>
+												 </ol>
+												 <p>If none of these steps help resolve the issue you are facing, please fill out the <a href="{{route('update-griffin-profile')}}">HELP FORM</a> to notify our staff that you need additional support. </p>
+											 </div> 
+										    <?php
+										}
+
 										?>
                                          
-                                       
+                                       	</div> 
                                        </div>  
                                 
 								
@@ -256,16 +268,22 @@ var pc;
 						}
 						console.log("else");
 					}
+					
+					var helplink = '{{route('update-griffin-profile')}}';
+					 $('.kl_webcam').append("<div class='col-md-12'><p>If you are having issues with the webcam feed, please try the following:  </p><ol><li>Fully reboot the device that you are using to view the webcam feed and try again.</li><li>Try deactivating any VPN's that you have active on your device, as they may impact the feed connection. </li><li>If you are on a mobile phone, try turning off wifi and then attempting to view the webcam feed again. </li></ol><p>If none of these steps help resolve the issue you are facing, please fill out the <a href='"+helplink+"'>HELP FORM</a> to notify our staff that you need additional support. </p></div> "); 		
 
 				}
 				else
 				{
 					$('.kl_webcam').empty();
+					
+                    var htmltemp = '<p>The webcam feature becomes available once you fully check in at Griffin Rock Cat Retreat at the start of your reservation.  If you have not checked in yet, please come back after check-in to view the live webcam feature. </p></div> ';
+					 $('.kl_webcam').append(htmltemp); 
 				}
 			},
 		});
 
-	},300000);
+	},10000);
 	
 	// microphone control addition
 	var micmute = 1;
