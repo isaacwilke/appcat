@@ -165,6 +165,14 @@
                         <span class="nav-link-text ms-1">Transactions</span>
                     </a>
                 </li> --}}
+                
+                
+                
+                <?php 
+                if(session('webcam_allowed') == '1')
+                {
+                ?>
+                
                   <li class="nav-item">
                     <a class="nav-link {{ str_contains(request()->url(), 'griffin-webcam') == true ? 'active' : '' }}"
                         href="{{route('griffin.webcam')}}">
@@ -175,6 +183,10 @@
                         <span class="nav-link-text ms-1">Webcam</span>
                     </a>
                 </li> 
+                
+                <?php
+                }
+                ?>
 
                 <li class="nav-item">
                     <a class="nav-link {{ str_contains(request()->url(), 'profile') == true ? 'active' : '' }}"
