@@ -218,17 +218,13 @@ class LoginController extends Controller
                 $url = Config::get('constants.griffin.url.get_bookings') . $user['id'];
                 $token = $result['data']['token'];
                 
-                
+                $request->session()->put('webcam_allowed', '0');
                 
                 $booking =  Helper::PostRequest($data = '', $method, $url, $token = $token);
                 foreach ($booking as $bookings) {
                     if (str_contains($bookings['accom_resa'], 'Purradise Penthouse')) { 
                         $request->session()->put('webcam_allowed', '1');
                         break;
-                    }
-                    else
-                    {
-                         $request->session()->put('webcam_allowed', '0');
                     }
                 }
                
