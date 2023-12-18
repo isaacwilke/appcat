@@ -212,7 +212,26 @@ class LoginController extends Controller
                 if ($request->site == "Griffin Rock Cat Retreat - Your Cat's Vacation Oasis") {
                     $request->session()->put('two', $request->site);
                 } 
-            
+                
+                
+                $method = 'GET';
+                $url = Config::get('constants.griffin.url.get_bookings') . $user['id'];
+                $token = $result['data']['token'];
+                
+                
+                
+                $booking =  Helper::PostRequest($data = '', $method, $url, $token = $token);
+                foreach ($booking as $bookings) {
+                    if (str_contains($bookings['accom_resa'], 'Purradise Penthouse')) { 
+                        $request->session()->put('webcam_allowed', '1');
+                        break;
+                    }
+                    else
+                    {
+                         $request->session()->put('webcam_allowed', '0');
+                    }
+                }
+               
                 return redirect()->intended('griffin-dashboard');
             }else{
                 return redirect()->route('griffin')->with('error',  "user is not a customer");
