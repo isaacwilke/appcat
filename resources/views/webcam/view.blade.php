@@ -37,36 +37,38 @@
 											$counter = 1;
 											$klisbook = 0;
 											foreach ($booking as $bookings){
-												if($bookings['status'] == 'confirmed' && strtotime(date('Y-m-d'))  <=  strtotime(date('Y-m-d',strtotime($bookings['check_out']))))
-												{
-												    $klisbook =1;
-													if($bookings['row_type'] == 'single-room')
-													{
-														?>
-														 <div class="col-md-2 col-sm-6">
-															 <button type="button" class="btn btn-blue" 
-															 onclick="viewcam('<?php echo $bookings['room_no']; ?>','<?php echo $roomArr[$bookings['room_no']]; ?>');">Play Feed - Room <?php echo $bookings['room_no']; ?></button>
-														 </div> 
-														 
-														 
-														<?php
-													}
-													if($bookings['row_type'] == 'multiple-room')
-													{
-														$roomnoArr = explode(",",$bookings['room_no']);
-														foreach($roomnoArr as $room)
-														{
-														?>
-														 <div class="col-md-2 col-sm-6">
-															 <button type="button" class="btn btn-blue" 
-															 onclick="viewcam('<?php echo $room; ?>','<?php echo $roomArr[$room]; ?>');">Play Feed - Room <?php echo $room; ?></button>
-														 </div> 
-														<?php
-														}
-													}
-													$counter++;
-												}
-												
+											    
+											    if (str_contains($bookings['accom_resa'], 'Purradise Penthouse')) {
+    												if($bookings['status'] == 'confirmed' && strtotime(date('Y-m-d'))  <=  strtotime(date('Y-m-d',strtotime($bookings['check_out']))))
+    												{
+    												    $klisbook =1;
+    													if($bookings['row_type'] == 'single-room')
+    													{
+    														?>
+    														 <div class="col-md-2 col-sm-6">
+    															 <button type="button" class="btn btn-blue" 
+    															 onclick="viewcam('<?php echo $bookings['room_no']; ?>','<?php echo $roomArr[$bookings['room_no']]; ?>');">Play Feed - Room <?php echo $bookings['room_no']; ?></button>
+    														 </div> 
+    														 
+    														 
+    														<?php
+    													}
+    													if($bookings['row_type'] == 'multiple-room')
+    													{
+    														$roomnoArr = explode(",",$bookings['room_no']);
+    														foreach($roomnoArr as $room)
+    														{
+    														?>
+    														 <div class="col-md-2 col-sm-6">
+    															 <button type="button" class="btn btn-blue" 
+    															 onclick="viewcam('<?php echo $room; ?>','<?php echo $roomArr[$room]; ?>');">Play Feed - Room <?php echo $room; ?></button>
+    														 </div> 
+    														<?php
+    														}
+    													}
+    													$counter++;
+    												}
+											    }
 											}
 										} 
 										
