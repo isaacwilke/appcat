@@ -28,8 +28,26 @@
 										$roomArr['10'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=10_FFB78_ROOM10&media=video+audio+microphone&micmute=1';
 										$roomArr['11'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=11_FFF7C_ROOM11&media=video+audio+microphone&micmute=1';
 										$roomArr['12'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=12_CCF346_ROOM12&media=video+audio+microphone&micmute=1';
-										?>
 										
+										$roomArr['19'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=19_12D3F_ROOM19&media=video+audio+microphone&micmute=1';
+										$roomArr['20'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=20_10B35_ROOM20&media=video+audio+microphone&micmute=1';
+										$roomArr['21'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=21_1113F_ROOM21&media=video+audio+microphone&micmute=1';
+										$roomArr['22'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=22_114A4_ROOM22&media=video+audio+microphone&micmute=1';
+										$roomArr['23'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=23_10EDF_ROOM23&media=video+audio+microphone&micmute=1';
+										$roomArr['24'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=24_12D6E_ROOM24&media=video+audio+microphone&micmute=1';
+										$roomArr['25'] = 'wss://cams.griffinrockcatretreat.com/b/api/ws?src=25_10C23_ROOM25&media=video+audio+microphone&micmute=1';
+										?>
+
+
+
+
+
+
+
+
+
+
+
 
 										<?php if (!empty($booking)){ 
 										
